@@ -2,11 +2,18 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public static InventoryManager instance;
+
     [Header("UI")]
     [SerializeField] private InventorySlot[] inventorySlots;
     [SerializeField] private GameObject inventoryItemPrefab;
 
     [SerializeField] private int maxStackable;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public void AddItem(Items item)
     {
