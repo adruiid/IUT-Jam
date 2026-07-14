@@ -19,8 +19,15 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioClip buttonpressClip;
 
-    private bool isPaused;
+    public bool isPaused;
     private bool onSettingMenu;
+
+    public static PauseMenuManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -46,6 +53,7 @@ public class PauseMenuManager : MonoBehaviour
 
     private void PauseUnpause()
     {
+        InventoryOpenClose.instance.InventoryStatus(false);
         source.PlayOneShot(buttonpressClip);
         isPaused = !isPaused;
         pauseCanvas.SetActive(isPaused);

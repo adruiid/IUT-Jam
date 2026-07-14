@@ -45,12 +45,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
 
     public void OnDrag(PointerEventData eventData)
-    {
+    { 
         transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)
-    {
+    { 
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
     }
