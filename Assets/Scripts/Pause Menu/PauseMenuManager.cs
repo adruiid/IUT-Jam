@@ -48,6 +48,7 @@ public class PauseMenuManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseUnpause();
+            if (onSettingMenu) OnSettingButton();
         }
     }
 
