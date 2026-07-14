@@ -32,7 +32,7 @@ public class MainMenuManager : MonoBehaviour
         optionGroup.SetActive(false);
         creditCanvas.SetActive(false);
 
-        startGameButton.GetComponent<Button>().onClick.AddListener(OnStartGame);
+        startGameButton.GetComponentInChildren<Button>().onClick.AddListener(OnStartGame);
         creditButton.GetComponent<Button>().onClick.AddListener(OnCreditButton);
         returnCreditButton.GetComponent<Button>().onClick.AddListener(OnCreditButton);
         settingButton.GetComponent<Button>().onClick.AddListener(OnSettingButton);
