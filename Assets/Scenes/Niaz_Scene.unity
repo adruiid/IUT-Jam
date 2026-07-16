@@ -1873,7 +1873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed93812841e49a439ac79397837b1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickUpObject
-  item: {fileID: 11400000, guid: 18298496c54a251469495d79b33962f4, type: 2}
+  item: {fileID: 11400000, guid: 1a5581fceb3b69149968c18eec6801d4, type: 2}
 --- !u!65 &847111568
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2433,7 +2433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed93812841e49a439ac79397837b1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickUpObject
-  item: {fileID: 11400000, guid: 18298496c54a251469495d79b33962f4, type: 2}
+  item: {fileID: 11400000, guid: 1a5581fceb3b69149968c18eec6801d4, type: 2}
 --- !u!65 &1162629785
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2559,7 +2559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed93812841e49a439ac79397837b1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickUpObject
-  item: {fileID: 11400000, guid: 18298496c54a251469495d79b33962f4, type: 2}
+  item: {fileID: 11400000, guid: 37943324ff9469b4fa339209c656636e, type: 2}
 --- !u!65 &1190490510
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2867,7 +2867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed93812841e49a439ac79397837b1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickUpObject
-  item: {fileID: 11400000, guid: 18298496c54a251469495d79b33962f4, type: 2}
+  item: {fileID: 11400000, guid: 1a5581fceb3b69149968c18eec6801d4, type: 2}
 --- !u!65 &1260180200
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3442,7 +3442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed93812841e49a439ac79397837b1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickUpObject
-  item: {fileID: 11400000, guid: 18298496c54a251469495d79b33962f4, type: 2}
+  item: {fileID: 11400000, guid: 37943324ff9469b4fa339209c656636e, type: 2}
 --- !u!65 &1636453169
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3609,6 +3609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1766268828}
   - component: {fileID: 1766268829}
+  - component: {fileID: 1766268830}
   m_Layer: 0
   m_Name: CraftingManager
   m_TagString: Untagged
@@ -3646,6 +3647,19 @@ MonoBehaviour:
   craftingSlots:
   - {fileID: 293297846}
   - {fileID: 777618076}
+--- !u!114 &1766268830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766268827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab2efa4b09347943acdb5a35f54dbe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CraftMenuOpenClose
+  craftingCanvas: {fileID: 119813191}
 --- !u!1 &1791187440 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 824375488868858486, guid: ca1d3b88f5064fc45ab79a6b3469aa2b, type: 3}

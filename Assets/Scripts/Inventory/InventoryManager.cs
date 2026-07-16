@@ -53,7 +53,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void AddCraftedItem(CraftableItem item)
-    {
+    {      
         foreach (ResourceRequirement requirement in item.requirements)
         {
             InventoryItem itemInSlot = null;
@@ -71,7 +71,7 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
-        
+        AddItem(item.resultingItem);
     }
 
     public void RemoveItem(Items item, int count)
