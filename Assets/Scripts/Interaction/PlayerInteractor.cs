@@ -1,88 +1,142 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// Sits on the Player. Each frame it finds the nearest interactable in range.
-/// Pressing Interact (E / gamepad) triggers it; left-clicking an in-range
-/// interactable triggers it too. On interact it plays the player's animation +
-/// SFX for that interaction TYPE, then calls the interactable's Interacted().
+/// Single source of truth for interaction + highlight on the Player. Each frame it
+/// tracks TWO targets and outlines both:
+///   - Hovered: the interactable under the mouse cursor (any distance)
+///   - Nearest: the closest interactable within interaction range
 ///
-/// The player never contains per-type behaviour — only the anim/SFX reaction.
-/// All variable behaviour lives in the interactable subclasses.
+/// Input:
+///   - Interact key (E) / gamepad North -> interact with the NEAREST in-range object
+///   - Left click -> interact with the HOVERED object, but only if it's in range
+///
+/// On interact it plays the player's animation + SFX for that interaction TYPE and
+/// raises onInteractionStart (wire this to lock movement). The interactable's
+/// Interacted() runs when the animation ENDS (call OnInteractionAnimationEnd from an
+/// Animation Event; a timed fallback runs it anyway so you can never soft-lock), at
+/// which point onInteractionEnd fires. Shopkeeper (no animation) runs instantly.
+///
+/// Replaces the old HighlightObject — outline settings now live here.
 /// </summary>
 [DisallowMultipleComponent]
 public class PlayerInteractor : MonoBehaviour
 {
     /// <summary>Animation + SFX the player performs for one interaction type.</summary>
-    [Serializable]
+    [System.Serializable]
     public class Reaction
     {
         public InteractionType type;
-        [Tooltip("Animator trigger to fire. Leave empty for none (e.g. Shopkeeper).")]
+        [Tooltip("Animator trigger to fire. Empty = no animation (interacts instantly, e.g. Shopkeeper).")]
         public string animatorTrigger;
-        [Tooltip("Sound to play. Leave empty for none.")]
+        [Tooltip("Sound to play when the interaction starts. Optional.")]
         public AudioClip sfx;
     }
 
     [Header("Detection")]
     [Tooltip("How close (metres) the player must be to interact.")]
     [SerializeField] private float interactionRange = 3f;
-    [Tooltip("Layer(s) your interactables are on (match HighlightObject's interact layer).")]
+    [Tooltip("Layer(s) your interactables' colliders are on.")]
     [SerializeField] private LayerMask interactableMask = ~0;
     [Tooltip("Point used for range checks. Empty = this object's position.")]
     [SerializeField] private Transform originOverride;
 
-    [Header("Input (new Input System)")]
-    [Tooltip("Drag Player/Interact from InputSystem_Actions.")]
-    [SerializeField] private InputActionReference interactAction;
+    [Header("Input")]
+    [SerializeField] private Key interactKey = Key.E;
     [SerializeField] private bool enableClickToInteract = true;
-    [Tooltip("Camera for click rays. Empty = Camera.main.")]
-    [SerializeField] private Camera clickCamera;
-    [SerializeField] private float maxClickDistance = 100f;
+    [Tooltip("Camera for click/hover rays. Empty = Camera.main.")]
+    [SerializeField] private Camera interactionCamera;
+    [Tooltip("Max ray length for mouse hover/click.")]
+    [SerializeField] private float maxRayDistance = 200f;
+    [Tooltip("Optional. If set, clicking an out-of-range interactable walks there first, then interacts.")]
+    [SerializeField] private PlayerAutoInteract autoInteract;
 
     [Header("Player reaction (animation + SFX per type)")]
     [SerializeField] private Animator animator;
     [SerializeField] private AudioSource audioSource;
-    [Tooltip("One entry per interaction type. Omit an entry (e.g. Shopkeeper) for no reaction.")]
+    [Tooltip("One entry per type. Omit a type (e.g. Shopkeeper) for no animation/SFX.")]
     [SerializeField] private Reaction[] reactions;
 
-    /// <summary>Fires when the focused interactable changes (null = nothing in range). Hook UI here.</summary>
-    public event Action<Interactable> FocusChanged;
-    public Interactable Current { get; private set; }
+    [Header("Interaction lifecycle (signals)")]
+    [Tooltip("Fired when an interaction animation STARTS. Wire to lock movement, e.g. " +
+             "ThirdPersonController.SetMovementLocked with the checkbox ON.")]
+    [SerializeField] private UnityEvent onInteractionStart;
+    [Tooltip("Fired when the animation ENDS (or the fallback fires). Wire to unlock movement, " +
+             "e.g. ThirdPersonController.SetMovementLocked with the checkbox OFF.")]
+    [SerializeField] private UnityEvent onInteractionEnd;
+    [Tooltip("Safety timeout that ends the interaction if no Animation Event fires. " +
+             "Set to (about) your longest interaction clip's length.")]
+    [SerializeField] private float interactionFallbackSeconds = 2f;
 
+    [Header("Highlight")]
+    [SerializeField] private Color outlineColor = Color.white;
+    [SerializeField] private float outlineWidth = 7f;
+
+    /// <summary>Interactable under the mouse cursor (any distance). Click target.</summary>
+    public Interactable Hovered { get; private set; }
+    /// <summary>Nearest interactable in range. E / gamepad target.</summary>
+    public Interactable Nearest { get; private set; }
+
+    private Collider _hoveredCollider; // to range-check the hovered object for clicks
     private readonly Collider[] _hits = new Collider[16]; // reused; no per-frame GC
+    private readonly HashSet<Interactable> _outlined = new HashSet<Interactable>();
+    private readonly List<Interactable> _outlineRemovals = new List<Interactable>();
+
+    private bool _isInteracting;
+    private bool _resolved;
+    private Interactable _pendingTarget;
+    private Coroutine _fallback;
+
     private Transform Origin => originOverride != null ? originOverride : transform;
-
-    private void OnEnable()
-    {
-        if (interactAction != null)
-        {
-            interactAction.action.performed += OnInteractInput;
-            interactAction.action.Enable();
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (interactAction != null)
-        {
-            interactAction.action.performed -= OnInteractInput;
-            interactAction.action.Disable();
-        }
-        SetFocus(null);
-    }
+    private Camera Cam => interactionCamera != null ? interactionCamera : Camera.main;
 
     private void Update()
     {
-        RefreshFocus();
-        if (enableClickToInteract) HandleClick();
+        // While the interaction animation plays, ignore detection + input entirely.
+        // The outlines stay put; movement stays locked until it resolves.
+        if (_isInteracting) return;
+
+        RefreshTargets();
+        HandleInput();
     }
 
-    // --- Detection -----------------------------------------------------------
+    // --- Detection + highlight ----------------------------------------------
 
-    private void RefreshFocus()
+    private void RefreshTargets()
+    {
+        UpdateHovered();               // sets Hovered (+ _hoveredCollider), no range gate
+        Nearest = GetNearestInRange(); // range-gated by the overlap sphere
+        UpdateOutlines();              // outline BOTH
+    }
+
+    private void UpdateHovered()
+    {
+        Hovered = null;
+        _hoveredCollider = null;
+
+        if (Mouse.current == null || PointerOverUI()) return;
+
+        var cam = Cam;
+        if (cam == null) return;
+
+        Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (!Physics.Raycast(ray, out RaycastHit hit, maxRayDistance, interactableMask, QueryTriggerInteraction.Collide))
+            return;
+
+        var interactable = hit.collider.GetComponentInParent<Interactable>();
+        if (interactable == null || !interactable.CanInteract(this)) return;
+
+        // No range gate here: hovering highlights at any distance. Range is only
+        // enforced when you actually click (see HandleInput).
+        Hovered = interactable;
+        _hoveredCollider = hit.collider;
+    }
+
+    private Interactable GetNearestInRange()
     {
         Vector3 origin = Origin.position;
         int count = Physics.OverlapSphereNonAlloc(
@@ -95,69 +149,167 @@ public class PlayerInteractor : MonoBehaviour
             var interactable = _hits[i].GetComponentInParent<Interactable>();
             if (interactable == null || !interactable.CanInteract(this)) continue;
 
-            float sqr = (interactable.transform.position - origin).sqrMagnitude;
+            // Distance to the collider's bounds (works for every collider type).
+            float sqr = (_hits[i].bounds.ClosestPoint(origin) - origin).sqrMagnitude;
             if (sqr < bestSqr) { bestSqr = sqr; best = interactable; }
         }
-        SetFocus(best);
+        return best;
     }
 
-    private void SetFocus(Interactable next)
+    private bool HoveredInRange()
     {
-        if (next == Current) return;
-        Current = next;
-        FocusChanged?.Invoke(Current);
+        if (Hovered == null) return false;
+        Vector3 origin = Origin.position;
+        Vector3 point = _hoveredCollider != null
+            ? _hoveredCollider.bounds.ClosestPoint(origin)
+            : Hovered.transform.position;
+        return (point - origin).sqrMagnitude <= interactionRange * interactionRange;
+    }
+
+    // Outline both Hovered and Nearest; clear anything that's neither.
+    private void UpdateOutlines()
+    {
+        _outlineRemovals.Clear();
+        foreach (var it in _outlined)
+            if (it == null || (it != Hovered && it != Nearest))
+                _outlineRemovals.Add(it);
+
+        for (int i = 0; i < _outlineRemovals.Count; i++)
+        {
+            var it = _outlineRemovals[i];
+            if (it != null) SetOutline(it.gameObject, false);
+            _outlined.Remove(it);
+        }
+
+        AddOutline(Hovered);
+        AddOutline(Nearest);
+    }
+
+    private void AddOutline(Interactable it)
+    {
+        if (it == null || _outlined.Contains(it)) return;
+        SetOutline(it.gameObject, true);
+        _outlined.Add(it);
+    }
+
+    private void SetOutline(GameObject go, bool on)
+    {
+        var outline = go.GetComponent<Outline>();
+        if (outline == null)
+        {
+            if (!on) return;
+            outline = go.AddComponent<Outline>();
+            outline.OutlineColor = outlineColor;
+            outline.OutlineWidth = outlineWidth;
+        }
+        outline.enabled = on;
     }
 
     // --- Input ---------------------------------------------------------------
 
-    private void OnInteractInput(InputAction.CallbackContext ctx)
+    private void HandleInput()
     {
-        if (Current != null) TryInteract(Current);
+        // E / gamepad: interact with the nearest in-range object (no hover needed).
+        if (InteractPressed())
+        {
+            TryBeginInteract(Nearest);
+        }
+        // Click: interact with the hovered object if close enough; otherwise walk to it.
+        else if (enableClickToInteract && ClickPressed() && !PointerOverUI())
+        {
+            if (Hovered != null)
+            {
+                if (HoveredInRange()) TryBeginInteract(Hovered);
+                else if (autoInteract != null) autoInteract.GoTo(Hovered); // walks there, then interacts (no-op if unreachable)
+            }
+        }
     }
 
-    private void HandleClick()
+    /// <summary>Public entry point so PlayerAutoInteract can trigger the interaction on arrival.</summary>
+    public void InteractWith(Interactable target) => TryBeginInteract(target);
+
+    private bool InteractPressed()
     {
-        var mouse = Mouse.current;
-        if (mouse == null || !mouse.leftButton.wasPressedThisFrame) return;
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return; // over UI
+        bool kb = Keyboard.current != null && Keyboard.current[interactKey].wasPressedThisFrame;
+        bool gp = Gamepad.current != null && Gamepad.current.buttonNorth.wasPressedThisFrame;
+        return kb || gp;
+    }
 
-        var cam = clickCamera != null ? clickCamera : Camera.main;
-        if (cam == null) return;
+    private bool ClickPressed() => Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame;
 
-        Ray ray = cam.ScreenPointToRay(mouse.position.ReadValue());
-        if (!Physics.Raycast(ray, out RaycastHit hit, maxClickDistance, interactableMask, QueryTriggerInteraction.Collide))
+    private bool PointerOverUI() => EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+
+    // --- Interaction lifecycle ----------------------------------------------
+
+    private void TryBeginInteract(Interactable target)
+    {
+        if (target == null || _isInteracting || !target.CanInteract(this)) return;
+
+        Reaction r = GetReaction(target.Type);
+
+        if (r != null && r.sfx != null && audioSource != null)
+            audioSource.PlayOneShot(r.sfx);
+
+        bool hasAnim = r != null && animator != null && !string.IsNullOrEmpty(r.animatorTrigger);
+        if (!hasAnim)
+        {
+            // No animation (e.g. Shopkeeper): resolve immediately, no movement lock.
+            target.Interacted(this);
             return;
+        }
 
-        var interactable = hit.collider.GetComponentInParent<Interactable>();
-        if (interactable == null) return;
+        _isInteracting = true;
+        _resolved = false;
+        _pendingTarget = target;
 
-        // Clicks still respect range so you can't interact across the map.
-        if ((interactable.transform.position - Origin.position).sqrMagnitude > interactionRange * interactionRange)
-            return;
+        onInteractionStart?.Invoke(); // signal: lock movement
+        animator.SetTrigger(r.animatorTrigger);
 
-        TryInteract(interactable);
+        if (_fallback != null) StopCoroutine(_fallback);
+        _fallback = StartCoroutine(InteractionFallback(interactionFallbackSeconds));
     }
 
-    // --- Dispatch ------------------------------------------------------------
+    /// <summary>
+    /// Call this from an Animation Event on the LAST frame of each interaction clip
+    /// (chop / mine / repair). It runs the interactable's effect and unlocks movement.
+    /// </summary>
+    public void OnInteractionAnimationEnd() => ResolveInteraction();
 
-    private void TryInteract(Interactable target)
+    private void ResolveInteraction()
     {
-        if (target == null || !target.CanInteract(this)) return;
+        if (!_isInteracting || _resolved) return;
+        _resolved = true;
 
-        PlayReaction(target.Type); // player animation + SFX (may be nothing, e.g. Shopkeeper)
-        target.Interacted(this);   // the interactable does its own job
+        if (_fallback != null) { StopCoroutine(_fallback); _fallback = null; }
+
+        onInteractionEnd?.Invoke(); // signal: unlock movement
+        _isInteracting = false;
+
+        Interactable target = _pendingTarget;
+        _pendingTarget = null;
+        if (target != null) target.Interacted(this);
     }
 
-    /// <summary>Plays the player's animation + SFX for a type. No entry = no reaction.</summary>
-    private void PlayReaction(InteractionType interactionType)
+    private IEnumerator InteractionFallback(float seconds)
     {
-        Reaction r = null;
+        yield return new WaitForSeconds(seconds);
+        ResolveInteraction(); // safety net if no Animation Event was added
+    }
+
+    private Reaction GetReaction(InteractionType interactionType)
+    {
+        if (reactions == null) return null;
         foreach (var entry in reactions)
-            if (entry != null && entry.type == interactionType) { r = entry; break; }
-        if (r == null) return;
+            if (entry != null && entry.type == interactionType) return entry;
+        return null;
+    }
 
-        if (animator != null && !string.IsNullOrEmpty(r.animatorTrigger)) animator.SetTrigger(r.animatorTrigger);
-        if (audioSource != null && r.sfx != null) audioSource.PlayOneShot(r.sfx);
+    private void OnDisable()
+    {
+        // If disabled mid-interaction, don't leave movement locked forever.
+        if (_isInteracting) onInteractionEnd?.Invoke();
+        _isInteracting = false;
+        if (_fallback != null) { StopCoroutine(_fallback); _fallback = null; }
     }
 
     private void OnDrawGizmosSelected()
