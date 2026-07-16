@@ -8,66 +8,39 @@ public class HighlightObject : MonoBehaviour
     private RaycastHit raycastHit;
 
 
-    [SerializeField]private Transform playerTransform;
+    [SerializeField] private Transform playerTransform;
     [SerializeField] private LayerMask interactLayer;
     [SerializeField] private float maxCircleDist;
 
     private void Update()
     {
-        if (highlight != null)
-        {
-            highlight.gameObject.GetComponent<Outline>().enabled = false;
-            highlight = null;
-        }
+        ClearHighlight();
 
-        checkMouseHover();
-        checkCloseHover();
+        bool mouseHighlighted = checkMouseHover();
+
+        if (!mouseHighlighted)
+        {
+            checkCloseHover();
+        }
 
     }
 
-    private void checkMouseHover()
+    private bool checkMouseHover()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (!EventSystem.current.IsPointerOverGameObject() && Physics.Raycast(ray, out raycastHit, 200f, interactLayer))
+        if (!EventSystem.current.IsPointerOverGameObject() &&
+            Physics.Raycast(ray, out raycastHit, 200f, interactLayer))
         {
             highlight = raycastHit.transform;
-
-            if (highlight.gameObject.GetComponent<Outline>() != null)
-            {
-                highlight.gameObject.GetComponent<Outline>().enabled = true;
-            }
-            else
-            {
-                Outline outline = highlight.gameObject.AddComponent<Outline>();
-                outline.enabled = true;
-                highlight.gameObject.GetComponent<Outline>().OutlineColor = Color.white;
-                highlight.gameObject.GetComponent<Outline>().OutlineWidth = 7.0f;
-            }
+            EnableOutline(highlight);
+            return true;
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (highlight)
-            {
-                if (selection != null)
-                {
-                    selection.gameObject.GetComponent<Outline>().enabled = false;
-                }
-                selection = raycastHit.transform;
-                selection.gameObject.GetComponent<Outline>().enabled = true;
-                highlight = null;
-            }
-            else
-            {
-                if (selection)
-                {
-                    selection.gameObject.GetComponent<Outline>().enabled = false;
-                    selection = null;
-                }
-            }
-        }
+        return false;
     }
+
+
 
     private void checkCloseHover()
     {
@@ -76,7 +49,7 @@ public class HighlightObject : MonoBehaviour
         Collider nearestCollider = null;
         float closestDist = float.MaxValue;
 
-        foreach(Collider hit in hits)
+        foreach (Collider hit in hits)
         {
             float distance = Vector3.Distance(playerTransform.position, hit.transform.position);
 
@@ -90,20 +63,34 @@ public class HighlightObject : MonoBehaviour
         if (nearestCollider != null)
         {
             highlight = nearestCollider.gameObject.transform;
+            EnableOutline(highlight);
+        }
+    }
 
-            if (highlight.gameObject.GetComponent<Outline>() != null)
-            {
-                highlight.gameObject.GetComponent<Outline>().enabled = true;
-            }
-            else
-            {
-                Outline outline = highlight.gameObject.AddComponent<Outline>();
-                outline.enabled = true;
-                highlight.gameObject.GetComponent<Outline>().OutlineColor = Color.white;
-                highlight.gameObject.GetComponent<Outline>().OutlineWidth = 7.0f;
-            }
+    private void EnableOutline(Transform obj)
+    {
+        Outline outline = obj.GetComponent<Outline>();
+
+        if (outline == null)
+        {
+            outline = obj.gameObject.AddComponent<Outline>();
+            outline.OutlineColor = Color.white;
+            outline.OutlineWidth = 7f;
         }
 
+        outline.enabled = true;
     }
- 
+
+    private void ClearHighlight()
+    {
+        if (highlight != null)
+        {
+            Outline outline = highlight.GetComponent<Outline>();
+            if (outline != null)
+                outline.enabled = false;
+
+            highlight = null;
+        }
+    }
 }
+
