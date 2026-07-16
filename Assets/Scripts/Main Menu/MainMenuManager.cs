@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
@@ -46,6 +47,7 @@ public class MainMenuManager : MonoBehaviour
         source.PlayOneShot(buttonpressClip);
         startGameButton.SetActive(false);
         optionGroup.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     private void OnCreditButton()
@@ -54,6 +56,7 @@ public class MainMenuManager : MonoBehaviour
         source.PlayOneShot(buttonpressClip);
         mainCanvas.SetActive(onMainCanvas);
         creditCanvas.SetActive(!onMainCanvas);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     private void OnSettingButton()
@@ -62,5 +65,6 @@ public class MainMenuManager : MonoBehaviour
         source.PlayOneShot(buttonpressClip);
         mainCanvas.SetActive(onMainCanvas);
         settingCanvas.SetActive(!onMainCanvas);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

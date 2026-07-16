@@ -8,6 +8,7 @@ public class Items : ScriptableObject
     public Sprite sprite;
     public ItemType type;
     public bool stackable;
+
 }
 
 public enum ItemType

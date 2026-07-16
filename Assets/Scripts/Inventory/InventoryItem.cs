@@ -9,13 +9,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Items holdingItem;
 
     [Header("UI")]
-    [SerializeField]private Image image;
+    [SerializeField] private Image image;
     [SerializeField] private TextMeshProUGUI countText;
 
     [HideInInspector] public Transform parentAfterDrag;
 
     public int count = 1;
-
     private void Awake()
     {
         image = GetComponent<Image>();

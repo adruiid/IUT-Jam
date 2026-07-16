@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Unity.VisualScripting.Member;
 
@@ -55,13 +56,13 @@ public class PauseMenuManager : MonoBehaviour
     private void PauseUnpause()
     {
         InventoryOpenClose.instance.InventoryStatus(false);
+        CraftMenuOpenClose.instance.CraftMenuStatus(false);
         source.PlayOneShot(buttonpressClip);
         isPaused = !isPaused;
         pauseCanvas.SetActive(isPaused);
         pauseGroup.SetActive(!onSettingMenu);
         Time.timeScale = isPaused ? 0f : 1f;
-        Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = isPaused;
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     private void OnSettingButton()
@@ -70,6 +71,7 @@ public class PauseMenuManager : MonoBehaviour
         source.PlayOneShot(buttonpressClip);
         pauseGroup.SetActive(!onSettingMenu);
         settingCanvas.SetActive(onSettingMenu);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     private void OnExitButton()

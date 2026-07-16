@@ -27,15 +27,11 @@ public class InventoryOpenClose : MonoBehaviour
     {
         inventoryActive = !inventoryActive;
         inventoryCanvas.GetComponent<Canvas>().enabled=inventoryActive;
-        Cursor.lockState = inventoryActive ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = inventoryActive;
     }
 
     public void InventoryStatus(bool status)
     {
         inventoryActive = status;
         inventoryCanvas.GetComponent<Canvas>().enabled = inventoryActive;
-        Cursor.lockState = inventoryActive ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = inventoryActive;
     }
 }
