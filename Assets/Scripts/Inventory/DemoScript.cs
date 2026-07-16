@@ -51,3 +51,12 @@ public class DemoScript : MonoBehaviour
         inventoryManager.RemoveItem(woodItem, 2);
     }
 }
+
+
+public class Sample: MonoBehaviour
+{
+    public void TestFunc()
+    {
+        Debug.Log("Test works!");
+    }
+}

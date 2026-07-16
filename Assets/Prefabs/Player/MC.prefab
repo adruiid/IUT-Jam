@@ -727,7 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82428b5ae44c9f446a0dbe39445db9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
-  interactionRange: 1.53
+  interactionRange: 1
   interactableMask:
     serializedVersion: 2
     m_Bits: 128
@@ -741,7 +741,10 @@ MonoBehaviour:
   audioSource: {fileID: 3868897824163370637}
   reactions:
   - type: 0
-    animatorTrigger: Dig
+    animatorTrigger: Log
+    sfx: {fileID: 0}
+  - type: 2
+    animatorTrigger: Repair
     sfx: {fileID: 0}
   onInteractionStart:
     m_PersistentCalls:
@@ -749,7 +752,7 @@ MonoBehaviour:
   onInteractionEnd:
     m_PersistentCalls:
       m_Calls: []
-  interactionFallbackSeconds: 2
+  interactionFallbackSeconds: 0.7
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 7
 --- !u!95 &6036569528926570061 stripped
