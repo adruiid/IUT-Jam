@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InventoryOpenClose : MonoBehaviour
 {
@@ -26,12 +27,15 @@ public class InventoryOpenClose : MonoBehaviour
     public void InventoryStatus()
     {
         inventoryActive = !inventoryActive;
-        inventoryCanvas.GetComponent<Canvas>().enabled=inventoryActive;
+        inventoryCanvas.GetComponent<Canvas>().enabled = inventoryActive;
+        EventSystem.current.SetSelectedGameObject(null);
+        
     }
 
     public void InventoryStatus(bool status)
     {
         inventoryActive = status;
         inventoryCanvas.GetComponent<Canvas>().enabled = inventoryActive;
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

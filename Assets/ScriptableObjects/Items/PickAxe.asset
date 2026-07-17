@@ -16,3 +16,4 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 3230fe50d2740114680ee784529cdc48, type: 3}
   type: 3
   stackable: 0
+  description: Used for mining rocks to gather resources.

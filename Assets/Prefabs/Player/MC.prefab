@@ -412,6 +412,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1369483648140206388}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7626407544286556538}
   m_SourcePrefab: {fileID: 100100000, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
 --- !u!4 &371011319809203255 stripped
 Transform:
@@ -755,6 +758,19 @@ MonoBehaviour:
   interactionFallbackSeconds: 0.7
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 7
+--- !u!114 &7626407544286556538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039707510980740749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa43837ec9a07804190c292b492f90ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerEmote
+  animator: {fileID: 6036569528926570061}
 --- !u!95 &6036569528926570061 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
