@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f20566b1903c74893e55f0bbfb5b73, type: 3}
+  m_Name: Pickaxe_Craftable
+  m_EditorClassIdentifier: Assembly-CSharp::CraftableItem
+  itemName: Pickaxe
+  sprite: {fileID: 21300000, guid: 3230fe50d2740114680ee784529cdc48, type: 3}
+  type: 3
+  stackable: 0
+  requirements:
+  - resourceType: 0
+    amount: 2
+  - resourceType: 1
+    amount: 3
+  resultingItem: {fileID: 11400000, guid: 950c977f54c5249418f25fb8b4991c64, type: 2}
