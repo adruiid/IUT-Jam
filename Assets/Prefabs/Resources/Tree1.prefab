@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1270942667485046
+--- !u!1 &2474369357289341596
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4699967739435152}
-  - component: {fileID: 33652085307817142}
-  - component: {fileID: 23968705409988316}
+  - component: {fileID: 3317382859168763641}
+  - component: {fileID: 5708017952693132365}
+  - component: {fileID: 723003606627043021}
   m_Layer: 7
-  m_Name: Conifer Small BOTD LOD1
+  m_Name: Conifer Bare BOTD LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4699967739435152
+--- !u!4 &3317382859168763641
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1270942667485046}
+  m_GameObject: {fileID: 2474369357289341596}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4689083990643298}
+  m_Father: {fileID: 3491086722150959662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &33652085307817142
+--- !u!33 &5708017952693132365
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1270942667485046}
-  m_Mesh: {fileID: 4300000, guid: f048d29a147474044b8fa98675c66ced, type: 2}
---- !u!23 &23968705409988316
+  m_GameObject: {fileID: 2474369357289341596}
+  m_Mesh: {fileID: 4300000, guid: e35c83466d09544088eaf0d3fa826b0c, type: 2}
+--- !u!23 &723003606627043021
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1270942667485046}
+  m_GameObject: {fileID: 2474369357289341596}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1186544d3cb19e041b13d63e53ab4ecd, type: 2}
+  - {fileID: 2100000, guid: 9e3644d06febbfc45993a332369887e2, type: 2}
   - {fileID: 2100000, guid: 3502a534e4e95374684d762f0f301b65, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -91,7 +91,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1301127155260102
+--- !u!1 &6132395291720604865
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,37 +99,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4454104241866706}
-  - component: {fileID: 227092337440914680}
+  - component: {fileID: 233101571885826613}
+  - component: {fileID: 316841026644135845}
   m_Layer: 7
-  m_Name: Conifer Small BOTD Billboard
+  m_Name: Conifer Bare BOTD Billboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4454104241866706
+--- !u!4 &233101571885826613
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301127155260102}
+  m_GameObject: {fileID: 6132395291720604865}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4689083990643298}
+  m_Father: {fileID: 3491086722150959662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!227 &227092337440914680
+--- !u!227 &316841026644135845
 BillboardRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301127155260102}
+  m_GameObject: {fileID: 6132395291720604865}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
@@ -171,8 +171,8 @@ BillboardRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Billboard: {fileID: 22600000, guid: 234e107afda138b4f9ea67290d8f598e, type: 2}
---- !u!1 &1364922359172550
+  m_Billboard: {fileID: 22600000, guid: 058bed1a2edddb74680c6b17a2543505, type: 2}
+--- !u!1 &6817265206203760128
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,70 +180,70 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4689083990643298}
-  - component: {fileID: 205709636835153214}
-  - component: {fileID: 136614995598757014}
-  - component: {fileID: 1392944799282453908}
+  - component: {fileID: 3491086722150959662}
+  - component: {fileID: 1237282518993636990}
+  - component: {fileID: 6996772648770163920}
+  - component: {fileID: 2041616808252748577}
   m_Layer: 7
-  m_Name: PF Conifer Small BOTD URP
+  m_Name: Tree1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4689083990643298
+--- !u!4 &3491086722150959662
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1364922359172550}
+  m_GameObject: {fileID: 6817265206203760128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -10.911998, y: 0.9321618, z: -25.97229}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4591230394645006}
-  - {fileID: 4699967739435152}
-  - {fileID: 4454104241866706}
+  - {fileID: 3317382859168763641}
+  - {fileID: 6577283418816246624}
+  - {fileID: 233101571885826613}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!205 &205709636835153214
+--- !u!205 &1237282518993636990
 LODGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1364922359172550}
+  m_GameObject: {fileID: 6817265206203760128}
   serializedVersion: 3
-  m_LocalReferencePoint: {x: 0, y: 3.9011207, z: 0}
-  m_Size: 8.227437
+  m_LocalReferencePoint: {x: 0, y: 12.857846, z: 0}
+  m_Size: 27.696539
   m_FadeMode: 2
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.7567765
+  - screenRelativeHeight: 0.8602908
     fadeTransitionWidth: 0
     renderers:
-    - renderer: {fileID: 23713938712392732}
-  - screenRelativeHeight: 0.15
+    - renderer: {fileID: 723003606627043021}
+  - screenRelativeHeight: 0.302975
     fadeTransitionWidth: 0.1
     renderers:
-    - renderer: {fileID: 23968705409988316}
+    - renderer: {fileID: 6109074856349606461}
   - screenRelativeHeight: 0.02
     fadeTransitionWidth: 0
     renderers:
-    - renderer: {fileID: 227092337440914680}
+    - renderer: {fileID: 316841026644135845}
   m_Enabled: 1
   m_GlobalIlluminationLOD: 0
---- !u!136 &136614995598757014
+--- !u!136 &6996772648770163920
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1364922359172550}
+  m_GameObject: {fileID: 6817265206203760128}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -256,17 +256,17 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.15
-  m_Height: 2
+  m_Radius: 0.25
+  m_Height: 6
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &1392944799282453908
+  m_Center: {x: 0, y: 2.5, z: 0}
+--- !u!114 &2041616808252748577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1364922359172550}
+  m_GameObject: {fileID: 6817265206203760128}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fd86e535fc3e8d46a074b657b92da78, type: 3}
@@ -283,7 +283,7 @@ MonoBehaviour:
   onBroken:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &1500231203828324
+--- !u!1 &6933871681358190128
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -291,46 +291,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4591230394645006}
-  - component: {fileID: 33710429429353474}
-  - component: {fileID: 23713938712392732}
+  - component: {fileID: 6577283418816246624}
+  - component: {fileID: 6191840507279267321}
+  - component: {fileID: 6109074856349606461}
   m_Layer: 7
-  m_Name: Conifer Small BOTD LOD0
+  m_Name: Conifer Bare BOTD LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4591230394645006
+--- !u!4 &6577283418816246624
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500231203828324}
+  m_GameObject: {fileID: 6933871681358190128}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4689083990643298}
+  m_Father: {fileID: 3491086722150959662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &33710429429353474
+--- !u!33 &6191840507279267321
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500231203828324}
-  m_Mesh: {fileID: 4300000, guid: aaf76b55071db41b0bde5e2ebb830601, type: 2}
---- !u!23 &23713938712392732
+  m_GameObject: {fileID: 6933871681358190128}
+  m_Mesh: {fileID: 4300000, guid: c6029981137bd4653b2149d26518cf28, type: 2}
+--- !u!23 &6109074856349606461
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500231203828324}
+  m_GameObject: {fileID: 6933871681358190128}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -349,7 +349,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1186544d3cb19e041b13d63e53ab4ecd, type: 2}
+  - {fileID: 2100000, guid: 9e3644d06febbfc45993a332369887e2, type: 2}
   - {fileID: 2100000, guid: 3502a534e4e95374684d762f0f301b65, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0

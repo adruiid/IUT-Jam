@@ -746,9 +746,18 @@ MonoBehaviour:
   - type: 0
     animatorTrigger: Log
     sfx: {fileID: 0}
+    requiredTool: {fileID: 11400000, guid: 2399de4b62c547c41972c7b796f70b9a, type: 2}
   - type: 2
     animatorTrigger: Repair
     sfx: {fileID: 0}
+    requiredTool: {fileID: 0}
+  - type: 1
+    animatorTrigger: Repair
+    sfx: {fileID: 0}
+    requiredTool: {fileID: 11400000, guid: 950c977f54c5249418f25fb8b4991c64, type: 2}
+  onMissingTool:
+    m_PersistentCalls:
+      m_Calls: []
   onInteractionStart:
     m_PersistentCalls:
       m_Calls: []
