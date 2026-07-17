@@ -1,5 +1,7 @@
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -9,6 +11,11 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InventorySlot[] inventorySlots;
     [SerializeField] private GameObject inventoryItemPrefab;
 
+    [Header("Description")]
+    [SerializeField] private GameObject descriptionBox;
+    [SerializeField] private TextMeshProUGUI itemName;
+    [SerializeField] private TextMeshProUGUI descriptionText;
+
     [SerializeField] private int maxStackable;
 
     public event Action OnInventoryChanged;
@@ -16,6 +23,7 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        descriptionBox.SetActive(false);
     }
 
     public void AddItem(Items item)
@@ -174,5 +182,17 @@ public class InventoryManager : MonoBehaviour
     {
         GameObject newItem = Instantiate(inventoryItemPrefab, slot.transform);
         newItem.GetComponent<InventoryItem>().InitialiseItem(item);
+    }
+
+    public void DisplayDescription(Items item)
+    {
+        descriptionBox.SetActive(true);
+        itemName.text = $"{item.itemName} <size=24><i>{item.type.ToString()}</i></size>" ;
+        descriptionText.text = item.description;
+    }
+
+    public void HideDescription()
+    {
+        descriptionBox.SetActive(false);
     }
 }

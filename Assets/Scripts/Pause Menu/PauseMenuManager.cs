@@ -15,6 +15,7 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private GameObject pauseCanvas;
     [SerializeField] private GameObject pauseGroup;
     [SerializeField] private GameObject settingCanvas;
+    [SerializeField] private GameObject worldcanvas;
 
     [Header("Audio")]
     [SerializeField] private AudioSource source;
@@ -48,6 +49,7 @@ public class PauseMenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            isPaused = !isPaused;
             PauseUnpause();
             if (onSettingMenu) OnSettingButton();
         }
@@ -58,9 +60,9 @@ public class PauseMenuManager : MonoBehaviour
         InventoryOpenClose.instance.InventoryStatus(false);
         CraftMenuOpenClose.instance.CraftMenuStatus(false);
         source.PlayOneShot(buttonpressClip);
-        isPaused = !isPaused;
         pauseCanvas.SetActive(isPaused);
         pauseGroup.SetActive(!onSettingMenu);
+        worldcanvas.SetActive(!isPaused);
         Time.timeScale = isPaused ? 0f : 1f;
         EventSystem.current.SetSelectedGameObject(null);
     }
@@ -70,6 +72,7 @@ public class PauseMenuManager : MonoBehaviour
         onSettingMenu = !onSettingMenu;
         source.PlayOneShot(buttonpressClip);
         pauseGroup.SetActive(!onSettingMenu);
+        worldcanvas.SetActive(!isPaused);
         settingCanvas.SetActive(onSettingMenu);
         EventSystem.current.SetSelectedGameObject(null);
     }

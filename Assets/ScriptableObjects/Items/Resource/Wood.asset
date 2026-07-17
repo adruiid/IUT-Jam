@@ -16,4 +16,5 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: cf7a67f6f7520e644955d392d18f39c7, type: 3}
   type: 2
   stackable: 1
+  description: Standard Crafting Material.
   resourceType: 0
