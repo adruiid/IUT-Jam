@@ -87,6 +87,9 @@ public class PlayerInteractor : MonoBehaviour
     /// <summary>Nearest interactable in range. E / gamepad target.</summary>
     public Interactable Nearest { get; private set; }
 
+    /// <summary>True while an interaction animation is playing (chop/mine/repair).</summary>
+    public bool IsInteracting => _isInteracting;
+
     private Collider _hoveredCollider; // to range-check the hovered object for clicks
     private readonly Collider[] _hits = new Collider[16]; // reused; no per-frame GC
     private readonly HashSet<Interactable> _outlined = new HashSet<Interactable>();
