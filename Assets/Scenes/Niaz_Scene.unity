@@ -176,6 +176,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: reactions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: reactions.Array.data[2].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: reactions.Array.data[0].requiredTool
+      value: 
+      objectReference: {fileID: 11400000, guid: 2399de4b62c547c41972c7b796f70b9a, type: 2}
+    - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: reactions.Array.data[2].requiredTool
+      value: 
+      objectReference: {fileID: 11400000, guid: 950c977f54c5249418f25fb8b4991c64, type: 2}
+    - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: reactions.Array.data[2].animatorTrigger
+      value: Repair
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2595,7 +2615,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 912899.44}
+  m_AnchoredPosition: {x: 0, y: 1109684}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1526643430
