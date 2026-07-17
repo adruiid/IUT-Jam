@@ -127,6 +127,9 @@ namespace StarterAssets
             }
         }
 
+        //Added by Niaz
+        public bool playerIsMoving;
+
 
         private void Awake()
         {
@@ -290,6 +293,8 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
+
+            playerIsMoving = _speed > 0 ? true : false;
         }
 
         private void JumpAndGravity()

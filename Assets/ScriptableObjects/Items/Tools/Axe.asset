@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 363f1f4a3e4fe354cb6f49a533f2c4b2, type: 3}
-  m_Name: PickAxe
+  m_Name: Axe
   m_EditorClassIdentifier: Assembly-CSharp::Items
-  itemName: Pickaxe
-  sprite: {fileID: 21300000, guid: 3230fe50d2740114680ee784529cdc48, type: 3}
+  itemName: Axe
+  sprite: {fileID: 21300000, guid: 01888eba86a4e3b4abe629fac76aaf84, type: 3}
   type: 3
   stackable: 0
-  description: Used for mining rocks to gather resources.
+  description: Used for cutting down trees to gather resources.
