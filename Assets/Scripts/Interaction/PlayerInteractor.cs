@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using StarterAssets;
 
 /// <summary>
 /// Single source of truth for interaction + highlight on the Player. Each frame it
@@ -35,6 +36,9 @@ public class PlayerInteractor : MonoBehaviour
         public string animatorTrigger;
         [Tooltip("Sound to play when the interaction starts. Optional.")]
         public AudioClip sfx;
+        [Tooltip("Item required in the inventory to do this (e.g. Axe for Logging, Pickaxe for Mining). " +
+                 "Assign the same Items asset the crafted tool uses. Leave empty for no requirement.")]
+        public Items requiredTool;
     }
 
     [Header("Detection")]
@@ -60,6 +64,8 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [Tooltip("One entry per type. Omit a type (e.g. Shopkeeper) for no animation/SFX.")]
     [SerializeField] private Reaction[] reactions;
+    [Tooltip("Fired when an interaction is blocked because the required tool isn't in the inventory.")]
+    [SerializeField] private UnityEvent onMissingTool;
 
     [Header("Interaction lifecycle (signals)")]
     [Tooltip("Fired when an interaction animation STARTS. Wire to lock movement, e.g. " +
@@ -81,6 +87,9 @@ public class PlayerInteractor : MonoBehaviour
     /// <summary>Nearest interactable in range. E / gamepad target.</summary>
     public Interactable Nearest { get; private set; }
 
+    /// <summary>True while an interaction animation is playing (chop/mine/repair).</summary>
+    public bool IsInteracting => _isInteracting;
+
     private Collider _hoveredCollider; // to range-check the hovered object for clicks
     private readonly Collider[] _hits = new Collider[16]; // reused; no per-frame GC
     private readonly HashSet<Interactable> _outlined = new HashSet<Interactable>();
@@ -90,9 +99,21 @@ public class PlayerInteractor : MonoBehaviour
     private bool _resolved;
     private Interactable _pendingTarget;
     private Coroutine _fallback;
+    private ThirdPersonController _movementController; // locked directly during interactions
 
     private Transform Origin => originOverride != null ? originOverride : transform;
     private Camera Cam => interactionCamera != null ? interactionCamera : Camera.main;
+
+    private void Awake()
+    {
+        _movementController = GetComponentInParent<ThirdPersonController>();
+        if (_movementController == null) _movementController = FindFirstObjectByType<ThirdPersonController>();
+    }
+
+    private void SetMovementLocked(bool locked)
+    {
+        if (_movementController != null) _movementController.MovementLocked = locked;
+    }
 
     private void Update()
     {
@@ -247,6 +268,19 @@ public class PlayerInteractor : MonoBehaviour
 
         Reaction r = GetReaction(target.Type);
 
+        // Tool gate: some interactions need a tool in the inventory (axe/pickaxe).
+        // Checked here (not in CanInteract) so auto-walk still runs you up to the target;
+        // the interaction only fails to START if you lack the tool.
+        if (r != null && r.requiredTool != null)
+        {
+            int owned = InventoryManager.instance != null ? InventoryManager.instance.SearchItemCount(r.requiredTool) : 0;
+            if (owned <= 0)
+            {
+                onMissingTool?.Invoke();
+                return;
+            }
+        }
+
         if (r != null && r.sfx != null && audioSource != null)
             audioSource.PlayOneShot(r.sfx);
 
@@ -262,7 +296,8 @@ public class PlayerInteractor : MonoBehaviour
         _resolved = false;
         _pendingTarget = target;
 
-        onInteractionStart?.Invoke(); // signal: lock movement
+        SetMovementLocked(true);      // lock the controller directly
+        onInteractionStart?.Invoke(); // + signal for anything else
         animator.SetTrigger(r.animatorTrigger);
 
         if (_fallback != null) StopCoroutine(_fallback);
@@ -282,7 +317,8 @@ public class PlayerInteractor : MonoBehaviour
 
         if (_fallback != null) { StopCoroutine(_fallback); _fallback = null; }
 
-        onInteractionEnd?.Invoke(); // signal: unlock movement
+        SetMovementLocked(false);   // unlock the controller directly
+        onInteractionEnd?.Invoke(); // + signal for anything else
         _isInteracting = false;
 
         Interactable target = _pendingTarget;
@@ -307,7 +343,7 @@ public class PlayerInteractor : MonoBehaviour
     private void OnDisable()
     {
         // If disabled mid-interaction, don't leave movement locked forever.
-        if (_isInteracting) onInteractionEnd?.Invoke();
+        if (_isInteracting) { SetMovementLocked(false); onInteractionEnd?.Invoke(); }
         _isInteracting = false;
         if (_fallback != null) { StopCoroutine(_fallback); _fallback = null; }
     }
