@@ -26,11 +26,42 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.33218467, y: 0.60552484, z: 0.53707355, w: -0.48429847}
   m_LocalPosition: {x: -15, y: 38.6, z: -9}
-  m_LocalScale: {x: 0.76894563, y: 0.76894563, z: 0.76894563}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8434915355703243046}
   m_LocalEulerAnglesHint: {x: -76.452, y: -78.679, z: -390.223}
+--- !u!1 &6267902611254639382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3178933265958780331}
+  m_Layer: 6
+  m_Name: Shoot_Equip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3178933265958780331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6267902611254639382}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.14542304, y: 0.09583835, z: 0.6752988, w: -0.7166859}
+  m_LocalPosition: {x: 7.97, y: 32.85, z: 46.72}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8434915355703243046}
+  m_LocalEulerAnglesHint: {x: -19.748, y: 3.596, z: -447.22}
 --- !u!1 &8761400295691910083
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,6 +446,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8620584004580592378, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7968165856201372938}
+    - targetCorrespondingSourceObject: {fileID: 8620584004580592378, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3178933265958780331}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       insertIndex: -1
@@ -843,6 +877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
   weaponPrefab: {fileID: 7001555617241222686, guid: b6da7e134a53ada41ac595176461d82d, type: 3}
   weaponMount: {fileID: 7968165856201372938}
+  shootMount: {fileID: 3178933265958780331}
   weaponWorldScale: {x: 0.1, y: 0.1, z: 0.1}
   aimCamera: {fileID: 0}
   aimMask:
@@ -851,7 +886,7 @@ MonoBehaviour:
   aimRayDistance: 200
   aimTurnSpeed: 2000
   fullAuto: 0
-  shootMovementLockDuration: 0.3
+  shootDuration: 0.5
   animator: {fileID: 6036569528926570061}
   fireTrigger: Fire
   reloadTrigger: Reload

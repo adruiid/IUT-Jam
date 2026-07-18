@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -34,6 +35,8 @@ public class Weapon : MonoBehaviour
 
     [Tooltip("Fires whenever ammo changes (fire/reload) — hook your ammo UI here.")]
     public UnityEvent onAmmoChanged;
+
+    [SerializeField] private CinemachineImpulseSource impulseSource;
 
     public int CurrentAmmo { get; private set; }
     public int MagSize => magSize;
@@ -84,6 +87,8 @@ public class Weapon : MonoBehaviour
         GameObject b = Instantiate(bulletPrefab, origin, Quaternion.LookRotation(dir));
         var bullet = b.GetComponent<Bullet>();
         if (bullet != null) bullet.Init(dir, bulletDamage);
+
+        impulseSource.GenerateImpulse();
     }
 
     /// <summary>Refill the magazine (infinite reserve).</summary>
