@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using System.Threading;
 using TMPro;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     private Items holdingItem;
 
@@ -15,6 +15,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [HideInInspector] public Transform parentAfterDrag;
 
     public int count = 1;
+
+    [SerializeField] private float _doubleClickDelay = 0.25f;
+    private float _lastClickTime;
+
     private void Awake()
     {
         image = GetComponent<Image>();
@@ -57,5 +61,26 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Items GetItem()
     {
         return holdingItem;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (holdingItem.type != ItemType.Consumable) return;
+
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
+
+        if (Time.time - _lastClickTime <= _doubleClickDelay)
+        {
+            bool consumed = ConsumableRestore.instance.ConsumeItem((ConsumableItems)holdingItem);
+            if (consumed) InventoryManager.instance.RemoveItem(holdingItem, 1);
+        }
+        else
+        {
+            
+            _lastClickTime = Time.time;
+        }
+
+
     }
 }

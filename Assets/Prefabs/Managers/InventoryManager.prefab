@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6161512735969128656}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 27.875122, y: 201, z: -306.8646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -64,6 +64,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   inventoryItemPrefab: {fileID: 735341651187481150, guid: 318995a45a671184c95171336031231a, type: 3}
+  descriptionBox: {fileID: 0}
+  itemName: {fileID: 0}
+  descriptionText: {fileID: 0}
   maxStackable: 99
 --- !u!114 &209712032681340768
 MonoBehaviour:
@@ -95,3 +98,4 @@ MonoBehaviour:
   axeItem: {fileID: 11400000, guid: 2399de4b62c547c41972c7b796f70b9a, type: 2}
   woodItem: {fileID: 11400000, guid: 37943324ff9469b4fa339209c656636e, type: 2}
   stoneItem: {fileID: 11400000, guid: 1a5581fceb3b69149968c18eec6801d4, type: 2}
+  appleItem: {fileID: 11400000, guid: 68487abb86ced3d46b1b64b055134409, type: 2}

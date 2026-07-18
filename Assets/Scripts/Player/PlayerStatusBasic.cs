@@ -41,7 +41,7 @@ public class PlayerStatusBasic : MonoBehaviour
 
     public int GetCurrentHunger()
     {
-        return currentHealth;
+        return currentHunger;
     }
 
     public int GetMaxHunger()

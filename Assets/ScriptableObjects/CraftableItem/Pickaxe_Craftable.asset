@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Pickaxe_Craftable
   m_EditorClassIdentifier: Assembly-CSharp::CraftableItem
   itemName: Pickaxe
-  sprite: {fileID: 21300000, guid: 3230fe50d2740114680ee784529cdc48, type: 3}
+  sprite: {fileID: 21300000, guid: ea4d53c8bc9604943a41a5106261e0cb, type: 3}
   type: 3
   stackable: 0
+  description: 
   requirements:
   - resourceType: 0
     amount: 2

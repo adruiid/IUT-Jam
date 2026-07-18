@@ -21,6 +21,9 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioClip buttonpressClip;
 
+    [Header("Reference")]
+    [SerializeField] private PlayerInteractor playerInteractor;
+
     public bool isPaused;
     private bool onSettingMenu;
 
@@ -39,7 +42,7 @@ public class PauseMenuManager : MonoBehaviour
         settingCanvas.SetActive(false);
 
 
-        resumeGameButton.GetComponent<Button>().onClick.AddListener(PauseUnpause);
+        resumeGameButton.GetComponent<Button>().onClick.AddListener(ResumeButton);
         settingButton.GetComponent<Button>().onClick.AddListener(OnSettingButton);
         returnSettingButton.GetComponent<Button>().onClick.AddListener(OnSettingButton);
         exitToMenuButton.GetComponent<Button>().onClick.AddListener(OnExitButton);
@@ -53,6 +56,14 @@ public class PauseMenuManager : MonoBehaviour
             PauseUnpause();
             if (onSettingMenu) OnSettingButton();
         }
+
+        playerInteractor.enabled = !isPaused;
+    }
+
+    private void ResumeButton()
+    {
+        isPaused = !isPaused;
+        PauseUnpause();
     }
 
     private void PauseUnpause()
