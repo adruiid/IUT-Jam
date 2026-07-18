@@ -4,12 +4,21 @@ using UnityEngine.AI;
 /// <summary>
 /// Survival horde spawner. Continuously spawns enemies on the NavMesh in a ring around
 /// the player, capped at a max alive count, with the spawn rate ramping up over time.
+/// Enemy type is chosen by weighted random — higher weight = spawns more often.
 /// </summary>
 [DisallowMultipleComponent]
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Spawning")]
-    [SerializeField] private GameObject enemyPrefab;
+    [System.Serializable]
+    public class EnemyType
+    {
+        public GameObject prefab;
+        [Tooltip("Relative spawn chance. Weight 2 spawns twice as often as weight 1. 0 = never.")]
+        [Min(0f)] public float weight = 1f;
+    }
+
+    [Header("Enemies (weighted random)")]
+    [SerializeField] private EnemyType[] enemyTypes;
     [SerializeField] private string playerTag = "Player";
     [Tooltip("Maximum enemies alive at once.")]
     [SerializeField] private int maxAlive = 30;
@@ -43,11 +52,12 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (_player == null || enemyPrefab == null) return;
+        if (_player == null || enemyTypes == null || enemyTypes.Length == 0) return;
         if (Time.time < _nextSpawn || _alive >= maxAlive) return;
 
-        if (TryGetSpawnPoint(out Vector3 pos))
-            SpawnAt(pos);
+        GameObject prefab = PickEnemy();
+        if (prefab != null && TryGetSpawnPoint(out Vector3 pos))
+            SpawnAt(prefab, pos);
 
         _nextSpawn = Time.time + CurrentInterval();
     }
@@ -56,6 +66,30 @@ public class EnemySpawner : MonoBehaviour
     {
         float t = rampDuration <= 0f ? 1f : Mathf.Clamp01((Time.time - _startTime) / rampDuration);
         return Mathf.Lerp(startInterval, minInterval, t);
+    }
+
+    // Weighted random pick across the enemy types.
+    private GameObject PickEnemy()
+    {
+        float total = 0f;
+        for (int i = 0; i < enemyTypes.Length; i++)
+        {
+            var e = enemyTypes[i];
+            if (e != null && e.prefab != null) total += Mathf.Max(0f, e.weight);
+        }
+        if (total <= 0f) return null;
+
+        float roll = Random.value * total;
+        for (int i = 0; i < enemyTypes.Length; i++)
+        {
+            var e = enemyTypes[i];
+            if (e == null || e.prefab == null) continue;
+
+            float w = Mathf.Max(0f, e.weight);
+            if (roll < w) return e.prefab;
+            roll -= w;
+        }
+        return null; // shouldn't happen, but safe
     }
 
     private bool TryGetSpawnPoint(out Vector3 result)
@@ -76,9 +110,9 @@ public class EnemySpawner : MonoBehaviour
         return false;
     }
 
-    private void SpawnAt(Vector3 pos)
+    private void SpawnAt(GameObject prefab, Vector3 pos)
     {
-        GameObject enemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
+        GameObject enemy = Instantiate(prefab, pos, Quaternion.identity);
         _alive++;
 
         var health = enemy.GetComponent<EnemyHealth>();
