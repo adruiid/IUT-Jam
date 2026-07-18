@@ -24,13 +24,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040546364365878111}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.8, z: -1.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0.03892249, y: 0.74464685, z: 0.4999769, w: -0.44046485}
+  m_LocalPosition: {x: -16.37, y: 16.58, z: -9.48}
+  m_LocalScale: {x: 0.92, y: 0.92, z: 0.92}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8434915355703243046}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -51.16, y: -100.29, z: -397.58}
 --- !u!1 &8761400295691910083
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,14 +849,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 896
   aimRayDistance: 200
-  aimTurnSpeed: 720
+  aimTurnSpeed: 2000
   fullAuto: 0
+  shootMovementLockDuration: 0.3
   animator: {fileID: 6036569528926570061}
   fireTrigger: Fire
   reloadTrigger: Reload
   reloadKey: 32
   reloadTime: 1.2
-  autoReload: 0
   interactor: {fileID: 1369483648140206388}
   autoInteract: {fileID: 6088979904313599063}
 --- !u!95 &6036569528926570061 stripped

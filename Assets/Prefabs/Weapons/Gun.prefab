@@ -414,7 +414,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 160388, guid: 3d7a26518505d994eb37dbb785efb732, type: 3}
   bulletDamage: 10
   fireRate: 8
-  spawnYOffset: 2
+  spawnYOffset: 0.5
   magSize: 2
   audioSource: {fileID: 580166198859119120}
   fireSfx: {fileID: 8300000, guid: 2b38d837bfe30e045bfd50e02367abfa, type: 3}
