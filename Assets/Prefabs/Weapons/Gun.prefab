@@ -411,9 +411,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   muzzle: {fileID: 7555289331694661991}
-  bulletPrefab: {fileID: 2400766464865454364, guid: 530a33338ae8c8c45898371005258b8c, type: 3}
+  bulletPrefab: {fileID: 0}
   bulletDamage: 10
   fireRate: 8
+  spawnYOffset: 5
   magSize: 10
   audioSource: {fileID: 580166198859119120}
   fireSfx: {fileID: 0}

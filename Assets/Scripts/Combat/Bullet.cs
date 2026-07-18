@@ -19,6 +19,11 @@ public class Bullet : MonoBehaviour
     [Tooltip("What the bullet can hit. Exclude the Player and Bullet layers.")]
     [SerializeField] private LayerMask hitMask = ~0;
 
+    [Header("Model")]
+    [Tooltip("Euler offset to correct the model's facing (e.g. Y=180 if it flies backwards). " +
+             "Visual only — does not change travel direction.")]
+    [SerializeField] private Vector3 rotationOffset;
+
     [Header("FX")]
     [Tooltip("Optional VFX spawned at the impact point.")]
     [SerializeField] private GameObject hitVfxPrefab;
@@ -32,6 +37,14 @@ public class Bullet : MonoBehaviour
         _startPos = transform.position;
         _spawnTime = Time.time;
         _direction = transform.forward;
+
+        // Movement is script/raycast-based. If the prefab has a Rigidbody, stop physics
+        // (gravity) from dragging the bullet to the floor.
+        if (TryGetComponent(out Rigidbody rb))
+        {
+            rb.useGravity = false;
+            rb.isKinematic = true;
+        }
     }
 
     /// <summary>Called by the Weapon right after spawning. Sets direction (and optional damage).</summary>
@@ -39,7 +52,7 @@ public class Bullet : MonoBehaviour
     {
         _direction = direction.normalized;
         if (damageOverride >= 0f) damage = damageOverride;
-        transform.rotation = Quaternion.LookRotation(_direction);
+        transform.rotation = Quaternion.LookRotation(_direction) * Quaternion.Euler(rotationOffset);
     }
 
     private void Update()

@@ -16,6 +16,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float bulletDamage = 10f;
     [Tooltip("Rounds per second.")]
     [SerializeField] private float fireRate = 8f;
+    [Tooltip("Extra world height added to the bullet spawn point. Raise this if the muzzle " +
+             "sits too low (e.g. bullets coming out at the feet). Bullets fly flat at this height.")]
+    [SerializeField] private float spawnYOffset = 0f;
 
     [Header("Ammo")]
     [Tooltip("Rounds per magazine. 1 for a bolt-action (reload after every shot); 2 for a double.")]
@@ -70,6 +73,7 @@ public class Weapon : MonoBehaviour
         if (bulletPrefab == null) return;
 
         Vector3 origin = muzzle != null ? muzzle.position : transform.position;
+        origin.y += spawnYOffset; // raise the spawn height (muzzle may sit low)
         Vector3 dir = aimPoint - origin;
         dir.y = 0f; // isometric: bullets fly flat, staying at the muzzle's height
         if (dir.sqrMagnitude < 0.0001f)
