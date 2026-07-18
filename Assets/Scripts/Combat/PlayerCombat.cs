@@ -16,8 +16,11 @@ public class PlayerCombat : MonoBehaviour
     [Header("Weapon")]
     [Tooltip("Prefab with the Weapon (script 2) on it. Instantiated once at the mount, always visible.")]
     [SerializeField] private GameObject weaponPrefab;
-    [Tooltip("Where the weapon is held (e.g. right-hand bone).")]
+    [Tooltip("Default mount where the weapon rests (e.g. right-hand/hip bone).")]
     [SerializeField] private Transform weaponMount;
+    [Tooltip("Mount the weapon moves to WHILE shooting (raised/aim pose). Returns to Weapon Mount " +
+             "when the shot ends. Leave empty to keep it on the default mount.")]
+    [SerializeField] private Transform shootMount;
     [Tooltip("Desired WORLD scale of the weapon. Compensates for a scaled hand bone " +
              "(Mixamo rigs often have near-zero bone scale). Tweak if the gun looks too big/small.")]
     [SerializeField] private Vector3 weaponWorldScale = Vector3.one;
@@ -33,8 +36,9 @@ public class PlayerCombat : MonoBehaviour
     [Header("Firing")]
     [Tooltip("Off = one shot per click (bolt-action). On = hold to fire.")]
     [SerializeField] private bool fullAuto = false;
-    [Tooltip("Movement is paused for this long after each shot (0 = never pause). Reload never pauses.")]
-    [SerializeField] private float shootMovementLockDuration = 0.3f;
+    [Tooltip("Duration of the shoot action: the weapon stays at the Shoot Mount and movement is " +
+             "paused for this long. Set to your fire animation length. Reload never pauses movement.")]
+    [SerializeField] private float shootDuration = 0.5f;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -55,7 +59,8 @@ public class PlayerCombat : MonoBehaviour
     private bool _weaponVisible = true;
     private bool _reloading;
     private float _reloadEndTime;
-    private float _shootLockUntil;
+    private float _shootUntil;
+    private Transform _currentMount;
     private ThirdPersonController _movementController;
 
     private Camera Cam => aimCamera != null ? aimCamera : Camera.main;
@@ -78,6 +83,7 @@ public class PlayerCombat : MonoBehaviour
             _weaponInstance.SetActive(true); // ensure visible even if the prefab root was inactive
             _weaponVisible = true;
             _weapon = _weaponInstance.GetComponent<Weapon>();
+            _currentMount = weaponMount;
             if (_weapon == null)
                 Debug.LogWarning("PlayerCombat: weapon prefab has no Weapon component — it won't fire.", this);
         }
@@ -96,8 +102,11 @@ public class PlayerCombat : MonoBehaviour
         if (interacting) return;                                     // interaction owns movement lock
         if (autoInteract != null && autoInteract.IsWalking) return;  // autopath owns movement
 
-        // Pause movement briefly while shooting (never during reload).
-        SetMovementLocked(Time.time < _shootLockUntil);
+        // While shooting: pause movement (never during reload) and raise the weapon to
+        // the shoot mount; otherwise keep it on the default mount.
+        bool shooting = Time.time < _shootUntil;
+        SetMovementLocked(shooting);
+        UpdateWeaponMount(shooting && shootMount != null ? shootMount : weaponMount);
 
         HandleReload();
         HandleFire();
@@ -106,6 +115,19 @@ public class PlayerCombat : MonoBehaviour
     private void SetMovementLocked(bool locked)
     {
         if (_movementController != null) _movementController.MovementLocked = locked;
+    }
+
+    // Reparents the weapon to the given mount (zeroing local offset, compensating scale).
+    private void UpdateWeaponMount(Transform mount)
+    {
+        if (_weaponInstance == null || mount == null || _currentMount == mount) return;
+        _currentMount = mount;
+
+        Transform t = _weaponInstance.transform;
+        t.SetParent(mount, worldPositionStays: false);
+        t.localPosition = Vector3.zero;
+        t.localRotation = Quaternion.identity;
+        t.localScale = CompensateScale(mount, weaponWorldScale);
     }
 
     private void SetWeaponVisible(bool visible)
@@ -144,7 +166,7 @@ public class PlayerCombat : MonoBehaviour
         if (_weapon.TryFire(aimPoint))
         {
             if (animator != null && !string.IsNullOrEmpty(fireTrigger)) animator.SetTrigger(fireTrigger);
-            _shootLockUntil = Time.time + shootMovementLockDuration; // pause movement briefly
+            _shootUntil = Time.time + shootDuration; // raise weapon to shoot mount + pause movement
         }
     }
 
