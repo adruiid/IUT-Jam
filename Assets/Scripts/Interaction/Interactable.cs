@@ -1,52 +1,51 @@
 using UnityEngine;
 
 /// <summary>
-/// Anything the player can interact with implements this.
-/// The Interactor only ever talks to objects through this contract.
+/// The kind of interaction. Drives which player animation + SFX plays.
+/// Add a new value here + a matching subclass to introduce a new interaction.
 /// </summary>
+public enum InteractionType
+{
+    Logging,
+    Mining,
+    Repairing,
+    Shopkeeper,
+    Digging,
+}
+
+/// <summary>Contract the PlayerInteractor talks to.</summary>
 public interface IInteractable
 {
-    /// <summary>Short verb shown in the UI prompt, e.g. "Chop", "Mine", "Talk", "Repair".</summary>
-    string InteractionPrompt { get; }
-
-    /// <summary>Whether this can be interacted with right now (out of stock, already repaired, etc.).</summary>
-    bool CanInteract(Interactor interactor);
-
-    /// <summary>Do the thing. Called when the player presses Interact / clicks in range.</summary>
-    void Interact(Interactor interactor);
+    InteractionType Type { get; }
+    string Prompt { get; }
+    bool CanInteract(PlayerInteractor player);
+    void Interacted(PlayerInteractor player);
 }
 
 /// <summary>
-/// Base class for every interactable in the game. To make a new variant
-/// (Tree, Stone, Shopkeeper, RepairableBuilding, ...) just:
+/// Base for every interactable. To add a new interaction type, subclass this and
+/// implement Interacted() with the behaviour — that's the ONLY place per-type logic
+/// lives. The player side (animation + SFX) is data-driven by <see cref="Type"/>.
 ///
-///     public class Tree : Interactable
-///     {
-///         public override void Interact(Interactor interactor) { /* give log */ }
-///     }
-///
-/// Override CanInteract / OnFocused / OnUnfocused only when you need them.
-/// Requires a Collider on this object (or a child) so it can be detected.
+/// Needs a Collider on this object (or a child) so the player can detect it, on the
+/// same layer the PlayerInteractor scans.
 /// </summary>
 [DisallowMultipleComponent]
 public abstract class Interactable : MonoBehaviour, IInteractable
 {
     [Header("Interactable")]
-    [Tooltip("Verb shown in the interaction prompt.")]
-    [SerializeField] protected string interactionPrompt = "Interact";
+    [Tooltip("Chooses the player's animation + SFX. Usually fixed per type (set by Reset).")]
+    [SerializeField] protected InteractionType type;
 
-    public virtual string InteractionPrompt => interactionPrompt;
+    [Tooltip("Optional label for UI prompts.")]
+    [SerializeField] protected string prompt = "Interact";
 
-    // Default: interactable whenever the component is enabled. Variants can add
-    // conditions (has materials, in stock, not already full HP, etc.).
-    public virtual bool CanInteract(Interactor interactor) => isActiveAndEnabled;
+    public InteractionType Type => type;
+    public virtual string Prompt => prompt;
 
-    // The one thing every variant must define.
-    public abstract void Interact(Interactor interactor);
+    /// <summary>Whether this can be interacted with right now (depleted, already repaired, etc.).</summary>
+    public virtual bool CanInteract(PlayerInteractor player) => isActiveAndEnabled;
 
-    // Optional hooks for feedback while the player is looking at / in range of this.
-    // Good place to toggle an outline (you have the DOTween EPOOutline module), a
-    // glow, or a floating icon. No-ops by default.
-    public virtual void OnFocused(Interactor interactor) { }
-    public virtual void OnUnfocused(Interactor interactor) { }
+    /// <summary>The per-type job. Implement in each subclass.</summary>
+    public abstract void Interacted(PlayerInteractor player);
 }

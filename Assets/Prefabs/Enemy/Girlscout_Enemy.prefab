@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7814997579396428288
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.3581913
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -18.328651
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_Name
+      value: Girlscout_Enemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8236238129742418734}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1727079967093137189}
+  m_SourcePrefab: {fileID: 100100000, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+--- !u!1 &6968505914827149137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+  m_PrefabInstance: {fileID: 7814997579396428288}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8236238129742418734
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6968505914827149137}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+  m_Controller: {fileID: 9100000, guid: c11f95c9ec6cfb843a8f8da409e7c1ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1727079967093137189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6968505914827149137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 048211bef6d762e438c3b8a067da908c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
+  anim: {fileID: 0}

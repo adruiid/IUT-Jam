@@ -8,6 +8,11 @@ public class Items : ScriptableObject
     public Sprite sprite;
     public ItemType type;
     public bool stackable;
+    [TextArea(2, 4)]
+    public string description;
+
+    [Header("For tools only")]
+    public float durabillity;
 
 }
 

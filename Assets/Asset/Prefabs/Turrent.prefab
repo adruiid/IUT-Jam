@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6284280951254877060}
   - component: {fileID: 3861771541244327346}
   - component: {fileID: 8234269977251118085}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2709062825474512923}
-  m_Layer: 0
+  - component: {fileID: 8204176166287957353}
+  m_Layer: 7
   m_Name: Turrent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,6 +123,32 @@ Transform:
   - {fileID: 5864795685955089837}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8204176166287957353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2381230047929648253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 388dbd28f5978f4418d99b6295b1a180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RepairableStructure
+  type: 2
+  prompt: Repair
+  costs:
+  - resource: {fileID: 11400000, guid: 1a5581fceb3b69149968c18eec6801d4, type: 2}
+    amount: 2
+  - resource: {fileID: 11400000, guid: 37943324ff9469b4fa339209c656636e, type: 2}
+    amount: 2
+  needsRepair: 1
+  onRepaired:
+    m_PersistentCalls:
+      m_Calls: []
+  onNotEnoughResources:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2687325578665169432
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5864795685955089837}
   - component: {fileID: 779086668513883169}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MG_turret_portable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +216,7 @@ GameObject:
   - component: {fileID: 8425526018779442118}
   - component: {fileID: 8360657678049072896}
   - component: {fileID: 1434883108759078389}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MGMain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,13 +231,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3470863930626081326}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000049274723, y: 7.4200683, z: -0.44090742}
+  m_LocalRotation: {x: -0, y: -0.06243875, z: -0, w: 0.99804884}
+  m_LocalPosition: {x: 0.5368521, y: 7.4200726, z: -0.40603462}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5864795685955089837}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -7.16, z: 0}
 --- !u!33 &8360657678049072896
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -279,7 +306,7 @@ GameObject:
   - component: {fileID: 2955786540598101571}
   - component: {fileID: 8168723720461324654}
   - component: {fileID: 3126202448175403681}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Swivel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,6 +436,34 @@ PrefabInstance:
     - target: {fileID: 3143640901401561413, guid: 807ca6ba6122f6046910f0ea55a2f625, type: 3}
       propertyPath: m_Name
       value: MG_turret_portable
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090035612119568313, guid: 807ca6ba6122f6046910f0ea55a2f625, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5368521
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090035612119568313, guid: 807ca6ba6122f6046910f0ea55a2f625, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.4200726
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090035612119568313, guid: 807ca6ba6122f6046910f0ea55a2f625, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.40603462
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090035612119568313, guid: 807ca6ba6122f6046910f0ea55a2f625, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99804884
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090035612119568313, guid: 807ca6ba6122f6046910f0ea55a2f625, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090035612119568313, guid: 807ca6ba6122f6046910f0ea55a2f625, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.06243875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090035612119568313, guid: 807ca6ba6122f6046910f0ea55a2f625, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -7.16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

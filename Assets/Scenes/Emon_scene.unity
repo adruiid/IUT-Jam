@@ -7508,6 +7508,7 @@ MonoBehaviour:
   GroundLayers:
     serializedVersion: 2
     m_Bits: 1
+  MovementLocked: 0
   CinemachineCameraTarget: {fileID: 393585090}
   TopClamp: 70
   BottomClamp: -30

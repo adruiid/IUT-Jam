@@ -7,11 +7,17 @@ public class DemoScript : MonoBehaviour
     public Items axeItem;
     public Items woodItem;
     public Items stoneItem;
+    public Items appleItem;
 
     [ContextMenu("Add Axe")]
     public void AddAxe()
     {
         inventoryManager.AddItem(axeItem);
+    }
+    [ContextMenu("Add Apple")]
+    public void AddApple()
+    {
+        inventoryManager.AddItem(appleItem);
     }
 
     [ContextMenu("Add PickAxe")]
@@ -49,5 +55,14 @@ public class DemoScript : MonoBehaviour
     public void RemoveWoodCount()
     {
         inventoryManager.RemoveItem(woodItem, 2);
+    }
+}
+
+
+public class Sample: MonoBehaviour
+{
+    public void TestFunc()
+    {
+        Debug.Log("Test works!");
     }
 }
