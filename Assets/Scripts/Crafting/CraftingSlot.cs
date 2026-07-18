@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class CraftingSlot : MonoBehaviour
 {
@@ -15,12 +16,18 @@ public class CraftingSlot : MonoBehaviour
 
     public Button button { get; private set; }
 
+    RectTransform rect;
+
+    private Vector2 originalPos;
+
     private void Awake()
     {
         button = GetComponent<Button>();
         image.sprite = holdingItem.sprite;
         nameText.text = holdingItem.itemName;
-        typeText.text = holdingItem.type.ToString();   
+        typeText.text = holdingItem.type.ToString();
+        rect = GetComponent<RectTransform>();
+        originalPos = rect.anchoredPosition;
     }
 
     private void Start()
@@ -43,5 +50,28 @@ public class CraftingSlot : MonoBehaviour
     public CraftableItem GetHoldingItem()
     {
         return holdingItem;
+    }
+
+    public void NotPresent()
+    {
+        StartCoroutine(Shake());
+    }
+
+    private IEnumerator Shake()
+    {
+        float duration = 0.3f;
+        float strength = 5f;
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            rect.anchoredPosition = originalPos + Random.insideUnitCircle * strength;
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localPosition = originalPos;
     }
 }

@@ -1,10 +1,11 @@
+using StarterAssets;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using StarterAssets;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Single source of truth for interaction + highlight on the Player. Each frame it
@@ -66,6 +67,7 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private Reaction[] reactions;
     [Tooltip("Fired when an interaction is blocked because the required tool isn't in the inventory.")]
     [SerializeField] private UnityEvent onMissingTool;
+    public static event Action<Items, Interactable> OnMissingToolEvent; //Addded by Niaz
 
     [Header("Interaction lifecycle (signals)")]
     [Tooltip("Fired when an interaction animation STARTS. Wire to lock movement, e.g. " +
@@ -277,6 +279,7 @@ public class PlayerInteractor : MonoBehaviour
             if (owned <= 0)
             {
                 onMissingTool?.Invoke();
+                OnMissingToolEvent?.Invoke(r.requiredTool, target);
                 return;
             }
         }
