@@ -11,6 +11,8 @@ public class CraftableItem : Items
     public List<ResourceRequirement> requirements;
 
     public Items resultingItem;
+
+    public ResourceType resourceType;
 }
 
 [Serializable]

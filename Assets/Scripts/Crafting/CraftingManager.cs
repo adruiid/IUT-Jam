@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class CraftingManager : MonoBehaviour
 {
-    public static InventoryManager instance;
-
     [Header("UI")]
     [SerializeField]private CraftingSlot[] craftingSlots;
 

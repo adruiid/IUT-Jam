@@ -72,8 +72,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         if (Time.time - _lastClickTime <= _doubleClickDelay)
         {
-            bool consumed = ConsumableRestore.instance.ConsumeItem((ConsumableItems)holdingItem);
-            if (consumed) InventoryManager.instance.RemoveItem(holdingItem, 1);
+            ConsumableItemBehaviour();
         }
         else
         {
@@ -82,5 +81,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
 
 
+    }
+
+    private void ConsumableItemBehaviour()
+    {
+        bool consumed = ConsumableRestore.instance.ConsumeItem((ConsumableItems)holdingItem);
+        if (consumed) InventoryManager.instance.RemoveItem(holdingItem, 1);
     }
 }
