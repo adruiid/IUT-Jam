@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5185788418067397030}
   - component: {fileID: 5026249701426229370}
   - component: {fileID: 2875794636223114811}
+  - component: {fileID: 2076316946146150293}
   m_Layer: 0
   m_Name: PlayerUICommunication
   m_TagString: Untagged
@@ -75,3 +76,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableRestore
   playerStatus: {fileID: 0}
+--- !u!114 &2076316946146150293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4238375850467553287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70eba0e3b64fd884fb98c142f7462396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissingItemCheck
+  worldCanvas: {fileID: 0}
+  textPrefab: {fileID: 8442128364319929618, guid: 59d1a4ce5c87f2b448434aed888ab5c5, type: 3}

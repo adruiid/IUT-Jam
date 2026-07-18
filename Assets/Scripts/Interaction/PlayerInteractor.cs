@@ -1,10 +1,11 @@
+using StarterAssets;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using StarterAssets;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Single source of truth for interaction + highlight on the Player. Each frame it
@@ -73,6 +74,7 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private Transform toolMount;
     [Tooltip("Desired WORLD scale of tools. Compensates for a scaled hand bone (Mixamo rigs).")]
     [SerializeField] private Vector3 toolWorldScale = Vector3.one;
+    public static event Action<Items, Interactable> OnMissingToolEvent; //Addded by Niaz
 
     [Header("Interaction lifecycle (signals)")]
     [Tooltip("Fired when an interaction animation STARTS. Wire to lock movement, e.g. " +
@@ -311,6 +313,7 @@ public class PlayerInteractor : MonoBehaviour
             if (owned <= 0)
             {
                 onMissingTool?.Invoke();
+                OnMissingToolEvent?.Invoke(r.requiredTool, target);
                 return;
             }
         }
