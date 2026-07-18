@@ -176,14 +176,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-      propertyPath: reactions.Array.data[0].requiredTool
-      value: 
-      objectReference: {fileID: 11400000, guid: 2399de4b62c547c41972c7b796f70b9a, type: 2}
-    - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-      propertyPath: reactions.Array.data[1].requiredTool
-      value: 
-      objectReference: {fileID: 11400000, guid: 1e8371d1413cca0489fce9496b927f67, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -760,11 +752,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
---- !u!1 &616466442 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4238375850467553287, guid: 4678c5dc21ed15a4eb55d4d3fc54a018, type: 3}
-  m_PrefabInstance: {fileID: 1950845665764877874}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &641479965 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3455475780150930592, guid: 558382ec0ca2a4f40b33ef28da60d49f, type: 3}
@@ -2561,20 +2548,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4825499894719584204, guid: 4678c5dc21ed15a4eb55d4d3fc54a018, type: 3}
   m_PrefabInstance: {fileID: 1950845665764877874}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1889250752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616466442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70eba0e3b64fd884fb98c142f7462396, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MissingItemCheck
-  worldCanvas: {fileID: 1442858266}
-  textPrefab: {fileID: 8442128364319929618, guid: 59d1a4ce5c87f2b448434aed888ab5c5, type: 3}
 --- !u!1001 &1900578514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3239,6 +3212,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 574166629}
     m_Modifications:
+    - target: {fileID: 2076316946146150293, guid: 4678c5dc21ed15a4eb55d4d3fc54a018, type: 3}
+      propertyPath: worldCanvas
+      value: 
+      objectReference: {fileID: 1442858266}
     - target: {fileID: 2875794636223114811, guid: 4678c5dc21ed15a4eb55d4d3fc54a018, type: 3}
       propertyPath: playerStatus
       value: 
@@ -3306,10 +3283,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4238375850467553287, guid: 4678c5dc21ed15a4eb55d4d3fc54a018, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1889250752}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4678c5dc21ed15a4eb55d4d3fc54a018, type: 3}
 --- !u!1001 &2906354741869967005
 PrefabInstance:
@@ -3662,10 +3636,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 903104136440549225, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
-      propertyPath: m_margin.z
-      value: -22.293283
-      objectReference: {fileID: 0}
     - target: {fileID: 1600562279080956640, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_Name
       value: CraftingCanvas
@@ -3818,14 +3788,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7592225090798222359, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
-      propertyPath: m_margin.z
-      value: -15.901206
-      objectReference: {fileID: 0}
-    - target: {fileID: 8566040012735002895, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
-      propertyPath: m_margin.z
-      value: -22.279135
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3839,10 +3801,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 574166629}
     m_Modifications:
-    - target: {fileID: 283814588829345514, guid: 2d750145c4e189949b02326d3571b083, type: 3}
-      propertyPath: craftingSlots.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 283814588829345514, guid: 2d750145c4e189949b02326d3571b083, type: 3}
       propertyPath: 'craftingSlots.Array.data[0]'
       value: 
@@ -4003,10 +3961,6 @@ PrefabInstance:
     - target: {fileID: 2754259368340812050, guid: 7499877f5a3e1e2428ba514eb204e160, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5294815482744322361, guid: 7499877f5a3e1e2428ba514eb204e160, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7160336673492112133, guid: 7499877f5a3e1e2428ba514eb204e160, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
