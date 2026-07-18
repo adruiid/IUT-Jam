@@ -64,6 +64,7 @@ public class Bullet : MonoBehaviour
 
     private void Impact(Collider col, Vector3 point, Vector3 normal)
     {
+
         // GetComponentInParent so the collider can be on a child of the health-owning object.
         var damageable = col.GetComponentInParent<IDamageable>();
         if (damageable != null) damageable.TakeDamage(damage);

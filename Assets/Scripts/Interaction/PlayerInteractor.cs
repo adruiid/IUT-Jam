@@ -39,6 +39,9 @@ public class PlayerInteractor : MonoBehaviour
         [Tooltip("Item required in the inventory to do this (e.g. Axe for Logging, Pickaxe for Mining). " +
                  "Assign the same Items asset the crafted tool uses. Leave empty for no requirement.")]
         public Items requiredTool;
+        [Tooltip("Tool model shown in the hand during this interaction (axe/pickaxe/shovel). " +
+                 "Instantiated once at the Tool Mount and reused. Leave empty for none.")]
+        public GameObject toolPrefab;
     }
 
     [Header("Detection")]
@@ -66,6 +69,10 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private Reaction[] reactions;
     [Tooltip("Fired when an interaction is blocked because the required tool isn't in the inventory.")]
     [SerializeField] private UnityEvent onMissingTool;
+    [Tooltip("Hand transform where interaction tools (axe/pickaxe/shovel) appear during an interaction.")]
+    [SerializeField] private Transform toolMount;
+    [Tooltip("Desired WORLD scale of tools. Compensates for a scaled hand bone (Mixamo rigs).")]
+    [SerializeField] private Vector3 toolWorldScale = Vector3.one;
 
     [Header("Interaction lifecycle (signals)")]
     [Tooltip("Fired when an interaction animation STARTS. Wire to lock movement, e.g. " +
@@ -101,18 +108,45 @@ public class PlayerInteractor : MonoBehaviour
     private Coroutine _fallback;
     private ThirdPersonController _movementController; // locked directly during interactions
 
+    private readonly Dictionary<GameObject, GameObject> _toolInstances = new Dictionary<GameObject, GameObject>();
+    private GameObject _activeTool;
+
     private Transform Origin => originOverride != null ? originOverride : transform;
     private Camera Cam => interactionCamera != null ? interactionCamera : Camera.main;
 
     private void Awake()
     {
         _movementController = GetComponentInParent<ThirdPersonController>();
-        if (_movementController == null) _movementController = FindFirstObjectByType<ThirdPersonController>();
+        if (_movementController == null) _movementController = FindAnyObjectByType<ThirdPersonController>();
     }
 
     private void SetMovementLocked(bool locked)
     {
         if (_movementController != null) _movementController.MovementLocked = locked;
+    }
+
+    // Shows the tool for this interaction at the hand mount (instantiated once, reused).
+    private void ShowTool(GameObject prefab)
+    {
+        HideTool();
+        if (prefab == null || toolMount == null) return;
+
+        if (!_toolInstances.TryGetValue(prefab, out GameObject inst) || inst == null)
+        {
+            inst = Instantiate(prefab, toolMount);
+            inst.transform.localPosition = Vector3.zero;
+            inst.transform.localRotation = Quaternion.identity;
+            inst.transform.localScale = PlayerCombat.CompensateScale(toolMount, toolWorldScale);
+            _toolInstances[prefab] = inst;
+        }
+        inst.SetActive(true);
+        _activeTool = inst;
+    }
+
+    private void HideTool()
+    {
+        if (_activeTool != null) _activeTool.SetActive(false);
+        _activeTool = null;
     }
 
     private void Update()
@@ -297,6 +331,7 @@ public class PlayerInteractor : MonoBehaviour
         _pendingTarget = target;
 
         SetMovementLocked(true);      // lock the controller directly
+        ShowTool(r.toolPrefab);       // put the axe/pickaxe/shovel in hand
         onInteractionStart?.Invoke(); // + signal for anything else
         animator.SetTrigger(r.animatorTrigger);
 
@@ -318,6 +353,7 @@ public class PlayerInteractor : MonoBehaviour
         if (_fallback != null) { StopCoroutine(_fallback); _fallback = null; }
 
         SetMovementLocked(false);   // unlock the controller directly
+        HideTool();                 // put the tool away
         onInteractionEnd?.Invoke(); // + signal for anything else
         _isInteracting = false;
 
@@ -343,7 +379,7 @@ public class PlayerInteractor : MonoBehaviour
     private void OnDisable()
     {
         // If disabled mid-interaction, don't leave movement locked forever.
-        if (_isInteracting) { SetMovementLocked(false); onInteractionEnd?.Invoke(); }
+        if (_isInteracting) { SetMovementLocked(false); HideTool(); onInteractionEnd?.Invoke(); }
         _isInteracting = false;
         if (_fallback != null) { StopCoroutine(_fallback); _fallback = null; }
     }

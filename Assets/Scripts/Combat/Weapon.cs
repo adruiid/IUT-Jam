@@ -18,7 +18,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float fireRate = 8f;
 
     [Header("Ammo")]
-    [SerializeField] private int magSize = 12;
+    [Tooltip("Rounds per magazine. 1 for a bolt-action (reload after every shot); 2 for a double.")]
+    [SerializeField] private int magSize = 1;
 
     [Header("Feedback")]
     [SerializeField] private AudioSource audioSource;
@@ -70,7 +71,12 @@ public class Weapon : MonoBehaviour
 
         Vector3 origin = muzzle != null ? muzzle.position : transform.position;
         Vector3 dir = aimPoint - origin;
-        if (dir.sqrMagnitude < 0.0001f) dir = muzzle != null ? muzzle.forward : transform.forward;
+        dir.y = 0f; // isometric: bullets fly flat, staying at the muzzle's height
+        if (dir.sqrMagnitude < 0.0001f)
+        {
+            dir = muzzle != null ? muzzle.forward : transform.forward;
+            dir.y = 0f;
+        }
         dir.Normalize();
 
         GameObject b = Instantiate(bulletPrefab, origin, Quaternion.LookRotation(dir));

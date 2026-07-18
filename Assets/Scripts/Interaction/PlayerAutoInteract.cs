@@ -66,7 +66,7 @@ public class PlayerAutoInteract : MonoBehaviour
         if (!(movementController is ThirdPersonController))
         {
             ThirdPersonController tpc = GetComponentInParent<ThirdPersonController>();
-            if (tpc == null) tpc = FindFirstObjectByType<ThirdPersonController>();
+            if (tpc == null) tpc = FindAnyObjectByType<ThirdPersonController>();
             if (tpc != null) movementController = tpc;
         }
 

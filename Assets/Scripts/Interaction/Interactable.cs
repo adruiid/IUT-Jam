@@ -10,6 +10,7 @@ public enum InteractionType
     Mining,
     Repairing,
     Shopkeeper,
+    Digging,
 }
 
 /// <summary>Contract the PlayerInteractor talks to.</summary>
