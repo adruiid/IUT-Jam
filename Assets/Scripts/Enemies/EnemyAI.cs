@@ -48,6 +48,9 @@ public class EnemyAI : MonoBehaviour
     [Header("Death")]
     [Tooltip("Seconds to keep the corpse before destroying (lets the death anim play).")]
     [SerializeField] private float deathDelay = 2f;
+    [Tooltip("Vertical shift applied on death so the corpse settles on the ground instead of " +
+             "floating (the NavMeshAgent holds it up while alive). Negative = down.")]
+    [SerializeField] private float deathYOffset = -0.2f;
 
     private NavMeshAgent _agent;
     private EnemyHealth _health;
@@ -153,6 +156,9 @@ public class EnemyAI : MonoBehaviour
             _agent.enabled = false;                 // stop pathing + avoidance
         }
         if (_collider != null) _collider.enabled = false; // corpse doesn't block or eat bullets
+
+        // Agent no longer holds the body up — settle it onto the ground for the death anim.
+        transform.position += Vector3.up * deathYOffset;
 
         if (animator != null && !string.IsNullOrEmpty(dieTrigger))
             animator.SetTrigger(dieTrigger);

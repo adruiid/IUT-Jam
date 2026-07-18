@@ -18,6 +18,9 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float damage = 10f;
     [Tooltip("What the bullet can hit. Exclude the Player and Bullet layers.")]
     [SerializeField] private LayerMask hitMask = ~0;
+    [Tooltip("Size of the bullet's hit volume — a box swept along its path. Increase Y to reliably " +
+             "hit targets at any height WITHOUT enlarging the enemy's own collider. Shown as a yellow gizmo.")]
+    [SerializeField] private Vector3 hitBoxSize = new Vector3(0.25f, 2.5f, 0.25f);
 
     [Header("Model")]
     [Tooltip("Euler offset to correct the model's facing (e.g. Y=180 if it flies backwards). " +
@@ -59,8 +62,10 @@ public class Bullet : MonoBehaviour
     {
         float step = speed * Time.deltaTime;
 
-        // Raycast the segment we're about to travel; hit = stop there.
-        if (Physics.Raycast(transform.position, _direction, out RaycastHit hit, step, hitMask, QueryTriggerInteraction.Ignore))
+        // Sweep a world-aligned box (tall on Y) along the segment we're about to travel,
+        // so flat-flying bullets hit targets at any height without a bigger enemy collider.
+        if (Physics.BoxCast(transform.position, hitBoxSize * 0.5f, _direction, out RaycastHit hit,
+                            Quaternion.identity, step, hitMask, QueryTriggerInteraction.Ignore))
         {
             Impact(hit.collider, hit.point, hit.normal);
             return;
@@ -85,5 +90,12 @@ public class Bullet : MonoBehaviour
         if (hitVfxPrefab != null) Instantiate(hitVfxPrefab, point, Quaternion.LookRotation(normal));
 
         Destroy(gameObject);
+    }
+
+    // Visualise the hit box so you can size it (yellow, world-aligned, at the bullet).
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, hitBoxSize);
     }
 }

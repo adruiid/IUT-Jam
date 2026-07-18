@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6074179644462968597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6246418615283571857}
+  - component: {fileID: 3462673949951624591}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6246418615283571857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6074179644462968597}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3462673949951624591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6074179644462968597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f9565d9e768f34a95ca94191c93c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+  enemyTypes:
+  - prefab: {fileID: 2058506402482342588, guid: 81f267122fbfc254dafdeafe35f848f7, type: 3}
+    weight: 5
+  - prefab: {fileID: 4988714554678534655, guid: 8cc3d97ed6f47884f831be372c7f74d1, type: 3}
+    weight: 4
+  - prefab: {fileID: 6968505914827149137, guid: d718238045cc3714090e92e3a0e191cc, type: 3}
+    weight: 5
+  - prefab: {fileID: 960087398589509889, guid: 9d05c9302a3654740bbc2c2da02f33f9, type: 3}
+    weight: 2
+  - prefab: {fileID: 737916072946954512, guid: ad3c92c4c724d0143b030d41c0d2794e, type: 3}
+    weight: 3
+  playerTag: Player
+  maxAlive: 30
+  startInterval: 5
+  minInterval: 1.5
+  rampDuration: 120
+  minRadius: 15
+  maxRadius: 25
+  navSampleRadius: 4
+  placementAttempts: 8

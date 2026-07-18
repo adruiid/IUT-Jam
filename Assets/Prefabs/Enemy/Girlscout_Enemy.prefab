@@ -13,6 +13,18 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.3581913
       objectReference: {fileID: 0}
@@ -51,6 +63,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8183481454299698827, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
       propertyPath: m_Layer
@@ -337,9 +353,6 @@ PrefabInstance:
       addedObject: {fileID: 8236238129742418734}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -2078321132751111125}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 422912709577266499}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
       insertIndex: -1
@@ -347,6 +360,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1913589181971620868}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6398980559337219557}
   m_SourcePrefab: {fileID: 100100000, guid: ad5074a5678f9884584be49f8eeb2231, type: 3}
 --- !u!1 &6968505914827149137 stripped
 GameObject:
@@ -375,28 +391,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!64 &-2078321132751111125
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6968505914827149137}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!195 &422912709577266499
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -407,10 +401,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 100
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -451,6 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   playerTag: Player
+  moveSpeed: 3.5
   repathInterval: 0.2
   attackRange: 1.8
   attackDamage: 10
@@ -461,5 +456,29 @@ MonoBehaviour:
   animator: {fileID: 8236238129742418734}
   speedParam: Speed
   attackTrigger: Attack
-  dieTrigger: Die
-  deathDelay: 2
+  dieTrigger: Death
+  deathDelay: 5
+  deathYOffset: -0.8
+--- !u!136 &-6398980559337219557
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6968505914827149137}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.62
+  m_Height: 2.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.44, z: 0}

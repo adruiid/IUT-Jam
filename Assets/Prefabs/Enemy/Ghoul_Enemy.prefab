@@ -389,9 +389,6 @@ PrefabInstance:
       addedObject: {fileID: 6420700747657144971}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1ec66cd7b81c064488ed89034904cc4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9164489719865741840}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1ec66cd7b81c064488ed89034904cc4, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6160334284594862671}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1ec66cd7b81c064488ed89034904cc4, type: 3}
       insertIndex: -1
@@ -399,6 +396,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1ec66cd7b81c064488ed89034904cc4, type: 3}
       insertIndex: -1
       addedObject: {fileID: -8514047038655468628}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1ec66cd7b81c064488ed89034904cc4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6570532618386863082}
   m_SourcePrefab: {fileID: 100100000, guid: e1ec66cd7b81c064488ed89034904cc4, type: 3}
 --- !u!1 &4988714554678534655 stripped
 GameObject:
@@ -427,28 +427,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!64 &9164489719865741840
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4988714554678534655}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!195 &6160334284594862671
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -503,6 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   playerTag: Player
+  moveSpeed: 3.5
   repathInterval: 0.2
   attackRange: 1.8
   attackDamage: 10
@@ -513,5 +492,29 @@ MonoBehaviour:
   animator: {fileID: 6420700747657144971}
   speedParam: Speed
   attackTrigger: Attack
-  dieTrigger: Die
-  deathDelay: 2
+  dieTrigger: Death
+  deathDelay: 5
+  deathYOffset: -0.8
+--- !u!136 &6570532618386863082
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4988714554678534655}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.44
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.03, z: 0}
