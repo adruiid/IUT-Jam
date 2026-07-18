@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using StarterAssets;
+using System.Collections;
 
 /// <summary>
 /// Script 1 — on the Player. Combat INPUT + ANIMATION; tells the Weapon (script 2)
@@ -65,6 +66,17 @@ public class PlayerCombat : MonoBehaviour
 
     private Camera Cam => aimCamera != null ? aimCamera : Camera.main;
 
+    [Header("Holster")]
+    [SerializeField] private float holsterDelay = 5f;
+    [SerializeField] private string equippedBool = "Equipped";
+    [SerializeField] private float holsterAnimationTime = 0.5f;
+
+    private float _lastFireTime;
+    private bool _equipped;
+    private Coroutine _holsterRoutine;
+
+    [SerializeField] private Transform holsterMount;
+
     private void Awake()
     {
         if (interactor == null) interactor = GetComponent<PlayerInteractor>();
@@ -76,14 +88,14 @@ public class PlayerCombat : MonoBehaviour
         // Weapon is always out (except during interactions): spawn it once.
         if (weaponPrefab != null && weaponMount != null)
         {
-            _weaponInstance = Instantiate(weaponPrefab, weaponMount);
+            _weaponInstance = Instantiate(weaponPrefab, holsterMount);
             _weaponInstance.transform.localPosition = Vector3.zero;
             _weaponInstance.transform.localRotation = Quaternion.identity;
-            _weaponInstance.transform.localScale = CompensateScale(weaponMount, weaponWorldScale);
+            _weaponInstance.transform.localScale = CompensateScale(holsterMount, weaponWorldScale);
             _weaponInstance.SetActive(true); // ensure visible even if the prefab root was inactive
             _weaponVisible = true;
             _weapon = _weaponInstance.GetComponent<Weapon>();
-            _currentMount = weaponMount;
+            _currentMount = holsterMount;
             if (_weapon == null)
                 Debug.LogWarning("PlayerCombat: weapon prefab has no Weapon component — it won't fire.", this);
         }
@@ -91,6 +103,14 @@ public class PlayerCombat : MonoBehaviour
         {
             Debug.LogWarning("PlayerCombat: assign both Weapon Prefab and Weapon Mount — no gun will spawn/fire.", this);
         }
+
+        _lastFireTime = -holsterDelay;
+        _equipped = false;
+
+        if (animator != null)
+            animator.SetBool(equippedBool, false);
+
+        SetWeaponVisible(false);
     }
 
     private void Update()
@@ -106,7 +126,19 @@ public class PlayerCombat : MonoBehaviour
         // the shoot mount; otherwise keep it on the default mount.
         bool shooting = Time.time < _shootUntil;
         SetMovementLocked(shooting);
-        UpdateWeaponMount(shooting && shootMount != null ? shootMount : weaponMount);
+
+        if (!_equipped)
+        {
+            UpdateWeaponMount(holsterMount);
+        }
+        else if (shooting && shootMount != null)
+        {
+            UpdateWeaponMount(shootMount);
+        }
+        else
+        {
+            UpdateWeaponMount(weaponMount);
+        }
 
         HandleReload();
         HandleFire();
@@ -165,8 +197,13 @@ public class PlayerCombat : MonoBehaviour
 
         if (_weapon.TryFire(aimPoint))
         {
-            if (animator != null && !string.IsNullOrEmpty(fireTrigger)) animator.SetTrigger(fireTrigger);
-            _shootUntil = Time.time + shootDuration; // raise weapon to shoot mount + pause movement
+            EquipWeapon();
+            ResetHolsterTimer();
+
+            if (animator != null && !string.IsNullOrEmpty(fireTrigger))
+                animator.SetTrigger(fireTrigger);
+
+            _shootUntil = Time.time + shootDuration;
         }
     }
 
@@ -190,10 +227,20 @@ public class PlayerCombat : MonoBehaviour
 
     private void StartReload()
     {
+        if (!_equipped)
+        {
+            EquipWeapon();
+            ResetHolsterTimer();
+        }
+
         _reloading = true;
         _reloadEndTime = Time.time + reloadTime;
-        if (animator != null && !string.IsNullOrEmpty(reloadTrigger)) animator.SetTrigger(reloadTrigger);
-        if (_weapon != null) _weapon.PlayReloadSfx();
+
+        if (animator != null && !string.IsNullOrEmpty(reloadTrigger))
+            animator.SetTrigger(reloadTrigger);
+
+        if (_weapon != null)
+            _weapon.PlayReloadSfx();
     }
 
     // Rotate the body horizontally toward the aim point. Done in Update so the
@@ -242,4 +289,73 @@ public class PlayerCombat : MonoBehaviour
             Mathf.Approximately(p.y, 0f) ? desiredWorld.y : desiredWorld.y / p.y,
             Mathf.Approximately(p.z, 0f) ? desiredWorld.z : desiredWorld.z / p.z);
     }
+
+    private void EquipWeapon()
+    {
+        if (_holsterRoutine != null)
+        {
+            StopCoroutine(_holsterRoutine);
+            _holsterRoutine = null;
+        }
+
+        if (!_weaponVisible)
+            SetWeaponVisible(true);
+
+        if (!_equipped)
+        {
+            _equipped = true;
+            animator.SetBool(equippedBool, true);
+
+            UpdateWeaponMount(weaponMount);
+        }
+    }
+
+    private void ResetHolsterTimer()
+    {
+        _lastFireTime = Time.time;
+
+        if (_holsterRoutine == null)
+            _holsterRoutine = StartCoroutine(HolsterAfterDelay());
+    }
+
+    private IEnumerator HolsterAfterDelay()
+    {
+        while (Time.time - _lastFireTime < holsterDelay)
+            yield return null;
+
+        _equipped = false;
+        animator.SetBool(equippedBool, false);
+
+        yield return new WaitForSeconds(holsterAnimationTime);
+
+        UpdateWeaponMount(holsterMount);
+        SetWeaponVisible(false);
+
+        _holsterRoutine = null;
+    }
+
+    public void ForceHolster()
+    {
+        if (_holsterRoutine != null)
+        {
+            StopCoroutine(_holsterRoutine);
+            _holsterRoutine = null;
+        }
+
+        _equipped = false;
+
+        if (animator != null)
+            animator.SetBool(equippedBool, false);
+
+        StartCoroutine(ForceHolsterRoutine());
+    }
+
+    private IEnumerator ForceHolsterRoutine()
+    {
+        yield return new WaitForSeconds(holsterAnimationTime);
+
+        UpdateWeaponMount(holsterMount);
+        SetWeaponVisible(false);
+    }
+
 }

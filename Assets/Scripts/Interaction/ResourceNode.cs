@@ -56,6 +56,7 @@ public class ResourceNode : Interactable
         {
             Vector2 offset = Random.insideUnitCircle * dropScatterRadius;
             Vector3 pos = transform.position + new Vector3(offset.x, dropSpawnHeight, offset.y);
+            pos.y += 2f;
             Instantiate(dropPrefab, pos, Quaternion.identity);
         }
     }

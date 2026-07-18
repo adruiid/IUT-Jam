@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8434915355703243046}
   m_LocalEulerAnglesHint: {x: -76.452, y: -78.679, z: -390.223}
+--- !u!1 &4953536374913508695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1408782829441764422}
+  m_Layer: 6
+  m_Name: Tool_Equip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1408782829441764422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4953536374913508695}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.14542304, y: 0.09583835, z: 0.6752988, w: -0.7166859}
+  m_LocalPosition: {x: -24, y: 7.3, z: -0.8}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8434915355703243046}
+  m_LocalEulerAnglesHint: {x: -19.748, y: 3.596, z: -447.22}
 --- !u!1 &6267902611254639382
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,15 +138,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.851586
+      value: 303.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.000000007984909
+      value: 4.3922
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.332613
+      value: 329.48474
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       propertyPath: m_LocalRotation.w
@@ -449,6 +480,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8620584004580592378, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3178933265958780331}
+    - targetCorrespondingSourceObject: {fileID: 8620584004580592378, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1408782829441764422}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       insertIndex: -1
@@ -750,7 +784,7 @@ MonoBehaviour:
   animator: {fileID: 6036569528926570061}
   moveSpeed: 5.335
   turnSpeed: 720
-  stoppingDistance: 1.2
+  stoppingDistance: 2
   targetSampleRadius: 2
   speedParam: Speed
   motionSpeedParam: MotionSpeed
@@ -823,13 +857,13 @@ MonoBehaviour:
   - type: 2
     animatorTrigger: Repair
     sfx: {fileID: 0}
-    requiredTool: {fileID: 0}
+    requiredTool: {fileID: 11400000, guid: 1e8371d1413cca0489fce9496b927f67, type: 2}
     toolPrefab: {fileID: 0}
   - type: 1
     animatorTrigger: Repair
     sfx: {fileID: 0}
     requiredTool: {fileID: 11400000, guid: 950c977f54c5249418f25fb8b4991c64, type: 2}
-    toolPrefab: {fileID: 0}
+    toolPrefab: {fileID: 12497306346252605, guid: 895313d0335f04b41bfc5f20aec56c78, type: 3}
   - type: 4
     animatorTrigger: Dig
     sfx: {fileID: 0}
@@ -838,7 +872,7 @@ MonoBehaviour:
   onMissingTool:
     m_PersistentCalls:
       m_Calls: []
-  toolMount: {fileID: 7968165856201372938}
+  toolMount: {fileID: 1408782829441764422}
   toolWorldScale: {x: 1, y: 1, z: 1}
   onInteractionStart:
     m_PersistentCalls:

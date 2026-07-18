@@ -116,10 +116,14 @@ public class PlayerInteractor : MonoBehaviour
     private Transform Origin => originOverride != null ? originOverride : transform;
     private Camera Cam => interactionCamera != null ? interactionCamera : Camera.main;
 
+    private PlayerCombat playerCombat;
+
     private void Awake()
     {
         _movementController = GetComponentInParent<ThirdPersonController>();
         if (_movementController == null) _movementController = FindAnyObjectByType<ThirdPersonController>();
+
+        playerCombat = GetComponent<PlayerCombat>();
     }
 
     private void SetMovementLocked(bool locked)
@@ -332,7 +336,7 @@ public class PlayerInteractor : MonoBehaviour
         _isInteracting = true;
         _resolved = false;
         _pendingTarget = target;
-
+        playerCombat.ForceHolster();
         SetMovementLocked(true);      // lock the controller directly
         ShowTool(r.toolPrefab);       // put the axe/pickaxe/shovel in hand
         onInteractionStart?.Invoke(); // + signal for anything else

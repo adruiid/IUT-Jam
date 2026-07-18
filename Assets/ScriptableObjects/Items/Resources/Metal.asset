@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a87abd83f3311042af8a9c7272d76b7, type: 3}
   m_Name: Metal
   m_EditorClassIdentifier: Assembly-CSharp::ResourceItems
-  itemName: 
-  sprite: {fileID: 0}
-  type: 0
-  stackable: 0
-  description: 
+  itemName: Metal
+  sprite: {fileID: 21300000, guid: 68d4dfbac049f2d4fba03b785d0d16a8, type: 3}
+  type: 2
+  stackable: 1
+  description: Standard Crafting and Repair Material.
   durabillity: 0
-  resourceType: 0
+  resourceType: 5
