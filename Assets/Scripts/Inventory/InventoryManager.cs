@@ -82,6 +82,28 @@ public class InventoryManager : MonoBehaviour
         AddItem(item.resultingItem);
     }
 
+    public void AddCookedItem(CookableItem item)
+    {
+        foreach (ResourceRequirement requirement in item.requirements)
+        {
+            InventoryItem itemInSlot = null;
+            foreach (InventorySlot slot in inventorySlots)
+            {
+                itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
+                if (itemInSlot == null) continue;
+
+                if (itemInSlot.GetItem() is ResourceItems resouce && resouce.resourceType == requirement.resourceType)
+                {
+                    RemoveItem(itemInSlot.GetItem(), requirement.amount);
+                    break;
+
+                }
+            }
+        }
+        AddItem(item.resultingItem);
+    }
+
     public void RemoveItem(Items item, int count)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
@@ -163,6 +185,22 @@ public class InventoryManager : MonoBehaviour
     }
 
     public bool ResourceItemCountPresent(CraftableItem item)
+    {
+        foreach (ResourceRequirement requirement in item.requirements)
+        {
+            int temp = GetResourceCount(requirement.resourceType);
+            if (temp < requirement.amount)
+            {
+                Debug.Log(requirement.resourceType.ToString() + " is insuffecient");
+                return false;
+            }
+
+        }
+        Debug.Log("All crafting requirement present");
+        return true;
+    }
+
+    public bool ResourceItemCountPresent(CookableItem item)
     {
         foreach (ResourceRequirement requirement in item.requirements)
         {

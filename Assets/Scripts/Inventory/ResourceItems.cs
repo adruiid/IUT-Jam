@@ -11,5 +11,9 @@ public enum ResourceType
     Wood,
     Stone,
     Iron,
-    Leather
+    Leather,
+    Meat,
+    Metals,
+    Chicken,
+    Apple
 }

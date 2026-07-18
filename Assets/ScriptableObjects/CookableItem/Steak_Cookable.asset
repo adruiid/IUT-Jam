@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab6080cc9e7e5c4884447fb87788d65, type: 3}
+  m_Name: Steak_Cookable
+  m_EditorClassIdentifier: Assembly-CSharp::CookableItem
+  itemName: Steak
+  sprite: {fileID: 21300000, guid: 3fd96e85e63feda4abf14276e8d1477e, type: 3}
+  type: 0
+  stackable: 0
+  description: 1
+  durabillity: 0
+  requirements:
+  - resourceType: 4
+    amount: 1
+  resultingItem: {fileID: 11400000, guid: 9ecd7f88a15151740a45608de6bb9398, type: 2}
