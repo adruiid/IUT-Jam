@@ -19,15 +19,15 @@ public class MissingItemCheck : MonoBehaviour
     {
         _popup = Instantiate(textPrefab, worldCanvas.transform);
 
-        Vector3 worldPos = target.transform.position + Vector3.up * 0.5f; 
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+            Vector3 worldPos = target.transform.position + Vector3.up * 0.5f; 
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
-        RectTransform popupRect = _popup.GetComponent<RectTransform>();
-        popupRect.position = screenPos;
+            RectTransform popupRect = _popup.GetComponent<RectTransform>();
+            popupRect.position = screenPos;
 
-        _popup.GetComponent<TextMeshProUGUI>().text = "Missing " + item.itemName;
+            _popup.GetComponent<TextMeshProUGUI>().text = "Missing " + item.itemName;
 
-        StartCoroutine(DestroyPopup());
+            StartCoroutine(DestroyPopup());
 
     }
 

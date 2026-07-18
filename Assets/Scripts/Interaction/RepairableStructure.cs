@@ -16,16 +16,21 @@ public class RepairableStructure : Interactable
         public int amount;
     }
 
+
     [Header("Repair")]
     [Tooltip("Resources consumed to repair.")]
     [SerializeField] private RepairCost[] costs;
     [Tooltip("Starts needing repair? Usually driven by a damage system at runtime.")]
     [SerializeField] private bool needsRepair = true;
 
+    public bool NeedsRepair => needsRepair;
+
     [Tooltip("Fires on a successful repair. Hook the visual/health restore here.")]
     [SerializeField] private UnityEvent onRepaired;
     [Tooltip("Optional feedback when the player lacks resources.")]
     [SerializeField] private UnityEvent onNotEnoughResources;
+
+    public RepairCost[] Costs => costs;
 
     private void Reset()
     {
