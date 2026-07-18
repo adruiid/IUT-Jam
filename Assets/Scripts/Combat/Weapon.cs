@@ -27,7 +27,8 @@ public class Weapon : MonoBehaviour
     [Header("Feedback")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip fireSfx;
-    [SerializeField] private AudioClip emptySfx;
+    [Tooltip("Played when a reload starts.")]
+    [SerializeField] private AudioClip reloadSfx;
     [Tooltip("Optional muzzle-flash particle system (a child of the muzzle). Played per shot.")]
     [SerializeField] private ParticleSystem muzzleFlash;
 
@@ -52,10 +53,7 @@ public class Weapon : MonoBehaviour
         _nextFireTime = Time.time + 1f / Mathf.Max(0.01f, fireRate);
 
         if (CurrentAmmo <= 0)
-        {
-            if (emptySfx != null && audioSource != null) audioSource.PlayOneShot(emptySfx);
-            return false;                                        // out of ammo -> reload
-        }
+            return false;                                        // out of ammo -> caller triggers reload
 
         CurrentAmmo--;
         onAmmoChanged?.Invoke();
@@ -93,5 +91,11 @@ public class Weapon : MonoBehaviour
     {
         CurrentAmmo = magSize;
         onAmmoChanged?.Invoke();
+    }
+
+    /// <summary>Plays the reload sound (called by PlayerCombat when a reload starts).</summary>
+    public void PlayReloadSfx()
+    {
+        if (reloadSfx != null && audioSource != null) audioSource.PlayOneShot(reloadSfx);
     }
 }

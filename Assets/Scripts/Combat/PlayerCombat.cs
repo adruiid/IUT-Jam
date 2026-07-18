@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using StarterAssets;
 
 /// <summary>
 /// Script 1 — on the Player. Combat INPUT + ANIMATION; tells the Weapon (script 2)
@@ -32,6 +33,8 @@ public class PlayerCombat : MonoBehaviour
     [Header("Firing")]
     [Tooltip("Off = one shot per click (bolt-action). On = hold to fire.")]
     [SerializeField] private bool fullAuto = false;
+    [Tooltip("Movement is paused for this long after each shot (0 = never pause). Reload never pauses.")]
+    [SerializeField] private float shootMovementLockDuration = 0.3f;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -42,8 +45,6 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Key reloadKey = Key.R;
     [Tooltip("Reload duration — match your reload animation length.")]
     [SerializeField] private float reloadTime = 1.2f;
-    [Tooltip("Automatically start reloading once the magazine is empty.")]
-    [SerializeField] private bool autoReload = false;
 
     [Header("References (auto-found if empty)")]
     [SerializeField] private PlayerInteractor interactor;
@@ -54,6 +55,8 @@ public class PlayerCombat : MonoBehaviour
     private bool _weaponVisible = true;
     private bool _reloading;
     private float _reloadEndTime;
+    private float _shootLockUntil;
+    private ThirdPersonController _movementController;
 
     private Camera Cam => aimCamera != null ? aimCamera : Camera.main;
 
@@ -62,6 +65,8 @@ public class PlayerCombat : MonoBehaviour
         if (interactor == null) interactor = GetComponent<PlayerInteractor>();
         if (autoInteract == null) autoInteract = GetComponent<PlayerAutoInteract>();
         if (animator == null) animator = GetComponentInChildren<Animator>();
+        _movementController = GetComponentInParent<ThirdPersonController>();
+        if (_movementController == null) _movementController = FindAnyObjectByType<ThirdPersonController>();
 
         // Weapon is always out (except during interactions): spawn it once.
         if (weaponPrefab != null && weaponMount != null)
@@ -88,10 +93,19 @@ public class PlayerCombat : MonoBehaviour
         // Shopkeeper has no interaction animation, so it never hides the gun.
         bool interacting = interactor != null && interactor.IsInteracting;
         SetWeaponVisible(!interacting);
-        if (interacting) return;
+        if (interacting) return;                                     // interaction owns movement lock
+        if (autoInteract != null && autoInteract.IsWalking) return;  // autopath owns movement
+
+        // Pause movement briefly while shooting (never during reload).
+        SetMovementLocked(Time.time < _shootLockUntil);
 
         HandleReload();
         HandleFire();
+    }
+
+    private void SetMovementLocked(bool locked)
+    {
+        if (_movementController != null) _movementController.MovementLocked = locked;
     }
 
     private void SetWeaponVisible(bool visible)
@@ -118,14 +132,20 @@ public class PlayerCombat : MonoBehaviour
         FaceAim(aimPoint);
 
         bool wantFire = fullAuto ? mouse.leftButton.isPressed : mouse.leftButton.wasPressedThisFrame;
-        if (wantFire && _weapon != null && _weapon.TryFire(aimPoint))
+        if (!wantFire || _weapon == null) return;
+
+        // Empty mag: auto-reload instead of firing.
+        if (_weapon.CurrentAmmo <= 0)
         {
-            if (animator != null && !string.IsNullOrEmpty(fireTrigger)) animator.SetTrigger(fireTrigger);
+            StartReload();
+            return;
         }
 
-        // Bolt-action: auto-reload once the mag runs dry (optional).
-        if (autoReload && _weapon != null && _weapon.CurrentAmmo <= 0 && !_weapon.IsFull)
-            StartReload();
+        if (_weapon.TryFire(aimPoint))
+        {
+            if (animator != null && !string.IsNullOrEmpty(fireTrigger)) animator.SetTrigger(fireTrigger);
+            _shootLockUntil = Time.time + shootMovementLockDuration; // pause movement briefly
+        }
     }
 
     private void HandleReload()
@@ -151,6 +171,7 @@ public class PlayerCombat : MonoBehaviour
         _reloading = true;
         _reloadEndTime = Time.time + reloadTime;
         if (animator != null && !string.IsNullOrEmpty(reloadTrigger)) animator.SetTrigger(reloadTrigger);
+        if (_weapon != null) _weapon.PlayReloadSfx();
     }
 
     // Rotate the body horizontally toward the aim point. Done in Update so the
