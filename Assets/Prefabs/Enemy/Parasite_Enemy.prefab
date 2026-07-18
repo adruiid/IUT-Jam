@@ -345,9 +345,6 @@ PrefabInstance:
       addedObject: {fileID: 5649643158412876936}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29c6c41c175972647857f47d984770a8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1261528505811904129}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29c6c41c175972647857f47d984770a8, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1152807540426348601}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29c6c41c175972647857f47d984770a8, type: 3}
       insertIndex: -1
@@ -386,19 +383,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1261528505811904129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737916072946954512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 048211bef6d762e438c3b8a067da908c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
-  anim: {fileID: 0}
 --- !u!64 &1152807540426348601
 MeshCollider:
   m_ObjectHideFlags: 0

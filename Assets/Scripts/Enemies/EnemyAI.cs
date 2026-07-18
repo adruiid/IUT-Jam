@@ -21,6 +21,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private string playerTag = "Player";
 
     [Header("Movement")]
+    [Tooltip("Chase speed (m/s). Applied to the NavMeshAgent on start.")]
+    [SerializeField] private float moveSpeed = 3.5f;
     [Tooltip("How often (s) the path to the player is recomputed. Higher = cheaper for big hordes.")]
     [SerializeField] private float repathInterval = 0.2f;
 
