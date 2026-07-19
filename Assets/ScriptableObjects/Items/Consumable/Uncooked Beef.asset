@@ -16,7 +16,10 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: c97aae2d675451441b792794013aa1cd, type: 3}
   type: 0
   stackable: 1
-  description: 'For consumption. Restores<color=red>+2</color> Health and <color=yellow>+1</color>
+  description: 'For consumption. Restores<color=red>+10</color> Health and <color=yellow>+5</color>
     Hunger. Cook to improve stats. '
-  hpRestored: 2
-  hungerRestored: 1
+  durabillity: 0
+  speedBoost: 0
+  hpUpgade: 0
+  hpRestored: 10
+  hungerRestored: 5
