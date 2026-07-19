@@ -9,7 +9,7 @@ public class BackgroundMusic : MonoBehaviour
 
     private void Awake()
     {
-        
+        music.LoadAudioData();
     }
 
     private void Start()
@@ -20,7 +20,10 @@ public class BackgroundMusic : MonoBehaviour
     private void PlayMusicOne()
     {
         if (_musicPlaying) return;
-        source.PlayOneShot(music);
+
+        source.clip = music;
+        source.Play();
+
         _musicPlaying = true;
     }
 }
