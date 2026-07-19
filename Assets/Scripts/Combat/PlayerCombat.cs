@@ -225,6 +225,10 @@ public class PlayerCombat : MonoBehaviour
         if (animator != null) animator.SetBool(_equippedHash, on);
     }
 
+    /// <summary>Holster the gun immediately (e.g. when an interaction starts) so it doesn't
+    /// pop back into hand afterwards. The dagger returns during the next holstered walk.</summary>
+    public void ForceHolster() => _equipUntil = 0f;
+
     // --- Shooting ------------------------------------------------------------
 
     private void HandleShoot()
