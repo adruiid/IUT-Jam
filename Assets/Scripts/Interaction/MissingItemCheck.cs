@@ -27,18 +27,18 @@ public class MissingItemCheck : MonoBehaviour
 
             _popup.GetComponent<TextMeshProUGUI>().text = "Missing " + item.itemName;
 
-            StartCoroutine(DestroyPopup(_popup));
+            StartCoroutine(DestroyPopup());
 
     }
 
-    private IEnumerator DestroyPopup(GameObject popup)
+    private IEnumerator DestroyPopup()
     {
         yield return new WaitForSeconds(1f);
 
-        if (popup != null)
+        if (_popup != null)
         {
             Destroy(_popup);
-            popup = null;
+            _popup = null;
         }
     }
 
