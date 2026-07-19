@@ -93,6 +93,68 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8434915355703243046}
   m_LocalEulerAnglesHint: {x: -19.748, y: 3.596, z: -447.22}
+--- !u!1 &7473526372125687022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3081995041980939177}
+  m_Layer: 6
+  m_Name: Holster_Equip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3081995041980939177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473526372125687022}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.13345902, y: 0.5964733, z: 0.015760943, w: -0.79130274}
+  m_LocalPosition: {x: 0.8, y: -27.5, z: 18.9}
+  m_LocalScale: {x: 0.4, y: 0.39999992, z: 0.4000001}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 950092315154557672}
+  m_LocalEulerAnglesHint: {x: -13.298, y: -74.943, z: -352.07}
+--- !u!1 &7549350992492765713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2144898353275307566}
+  m_Layer: 6
+  m_Name: Dagger_Equip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2144898353275307566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7549350992492765713}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7084795, y: 0.045778275, z: 0.6724404, w: -0.20924869}
+  m_LocalPosition: {x: -7.4, y: 5.6, z: -3}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8434915355703243046}
+  m_LocalEulerAnglesHint: {x: -20.981, y: 90.496, z: -526.58997}
 --- !u!1 &8761400295691910083
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,15 +200,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 303.4
+      value: 371.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.3922
+      value: 3.99
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 329.48474
+      value: 338.9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       propertyPath: m_LocalRotation.w
@@ -474,6 +536,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4071880491883518161}
+    - targetCorrespondingSourceObject: {fileID: -8105416907387006668, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3081995041980939177}
     - targetCorrespondingSourceObject: {fileID: 8620584004580592378, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7968165856201372938}
@@ -483,6 +548,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8620584004580592378, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1408782829441764422}
+    - targetCorrespondingSourceObject: {fileID: 8620584004580592378, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2144898353275307566}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       insertIndex: -1
@@ -524,6 +592,11 @@ PrefabInstance:
 --- !u!4 &371011319809203255 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
+  m_PrefabInstance: {fileID: 192706631733951452}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &950092315154557672 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8105416907387006668, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
   m_PrefabInstance: {fileID: 192706631733951452}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1039707510980740749 stripped
@@ -869,6 +942,11 @@ MonoBehaviour:
     sfx: {fileID: 0}
     requiredTool: {fileID: 11400000, guid: 950c977f54c5249418f25fb8b4991c64, type: 2}
     toolPrefab: {fileID: 0}
+  - type: 5
+    animatorTrigger: 
+    sfx: {fileID: 0}
+    requiredTool: {fileID: 0}
+    toolPrefab: {fileID: 0}
   onMissingTool:
     m_PersistentCalls:
       m_Calls: []
@@ -883,6 +961,7 @@ MonoBehaviour:
   interactionFallbackSeconds: 0.7
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 7
+  searchHighlightRadius: 20
 --- !u!114 &7626407544286556538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -896,7 +975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerEmote
   animator: {fileID: 6036569528926570061}
-  _controller: {fileID: 0}
+  _controller: {fileID: 5500654529908567470}
 --- !u!114 &4755065799464063930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -909,10 +988,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e19567db7202444ea99adfed88378d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
-  weaponPrefab: {fileID: 7001555617241222686, guid: b6da7e134a53ada41ac595176461d82d, type: 3}
-  weaponMount: {fileID: 7968165856201372938}
-  shootMount: {fileID: 3178933265958780331}
-  weaponWorldScale: {x: 0.1, y: 0.1, z: 0.1}
+  gunItem: {fileID: 0}
+  gunPrefab: {fileID: 0}
+  holsterMount: {fileID: 3081995041980939177}
+  gunHandMount: {fileID: 7968165856201372938}
+  gunWorldScale: {x: 1, y: 1, z: 1}
+  daggerPrefab: {fileID: 6991199167903785909, guid: d1313a2fc5b3fd44cb094326d494267e, type: 3}
+  daggerMount: {fileID: 2144898353275307566}
+  daggerWorldScale: {x: 0.1, y: 0.1, z: 0.1}
   aimCamera: {fileID: 0}
   aimMask:
     serializedVersion: 2
@@ -921,9 +1004,22 @@ MonoBehaviour:
   aimTurnSpeed: 2000
   fullAuto: 0
   shootDuration: 0.5
+  equipDuration: 5
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 512
+  meleeRange: 2.5
+  meleeDamage: 25
+  meleeWindup: 0.3
+  meleeRecovery: 0.3
+  meleeKey: 36
+  meleeSwingSfx: {fileID: 8300000, guid: 66670486804d9e44baedfb699788fd0d, type: 3}
+  audioSource: {fileID: 3868897824163370637}
   animator: {fileID: 6036569528926570061}
+  equippedBool: Equipped
   fireTrigger: Fire
   reloadTrigger: Reload
+  meleeTrigger: Melee
   reloadKey: 32
   reloadTime: 1.2
   interactor: {fileID: 1369483648140206388}

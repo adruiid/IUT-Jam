@@ -68,6 +68,7 @@ MonoBehaviour:
   itemName: {fileID: 0}
   descriptionText: {fileID: 0}
   maxStackable: 99
+  playerController: {fileID: 0}
 --- !u!114 &209712032681340768
 MonoBehaviour:
   m_ObjectHideFlags: 0

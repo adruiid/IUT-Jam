@@ -14,8 +14,10 @@ public enum ResourceType
     Leather,
     Meat,
     Metal,
-    Corkscrew,
+    Screw,
     Rope,
+    Toolkit,
     Chicken,
+    Beef,
     Apple
 }

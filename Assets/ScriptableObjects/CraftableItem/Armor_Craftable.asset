@@ -10,18 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69f20566b1903c74893e55f0bbfb5b73, type: 3}
-  m_Name: Prybar_Craftable
+  m_Name: Armor_Craftable
   m_EditorClassIdentifier: Assembly-CSharp::CraftableItem
-  itemName: Prybar
-  sprite: {fileID: 21300000, guid: 9e3fa5ed804e8384094d76576538b92e, type: 3}
-  type: 3
+  itemName: Improved Armor
+  sprite: {fileID: 21300000, guid: 8f312f5712dc9e24a9d3badc75810ced, type: 3}
+  type: 4
   stackable: 0
   description: 
   durabillity: 0
   speedBoost: 0
   hpUpgade: 0
   requirements:
+  - resourceType: 3
+    amount: 10
   - resourceType: 5
-    amount: 5
-  resultingItem: {fileID: 11400000, guid: 3d23671eb255c6042b9380f666c5a2a7, type: 2}
+    amount: 20
+  resultingItem: {fileID: 11400000, guid: 6354999468eb7f245951212b23796989, type: 2}
   resourceType: 0

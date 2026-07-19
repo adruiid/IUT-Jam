@@ -8,6 +8,8 @@ public class CraftMenuOpenClose : MonoBehaviour
 
     public static CraftMenuOpenClose instance;
 
+    public bool CraftMenuBlock=false;
+
     private void Awake()
     {
         instance = this;
@@ -24,12 +26,15 @@ public class CraftMenuOpenClose : MonoBehaviour
 
     public void CraftMenuStatus()
     {
+        if (CraftMenuBlock) return;
+
         craftMenuActive = !craftMenuActive;
         craftingCanvas.GetComponent<Canvas>().enabled =craftMenuActive;
     }
 
     public void CraftMenuStatus(bool status)
     {
+        if (CraftMenuBlock) return;
         craftMenuActive = status;
         craftingCanvas.GetComponent<Canvas>().enabled = craftMenuActive;
     }

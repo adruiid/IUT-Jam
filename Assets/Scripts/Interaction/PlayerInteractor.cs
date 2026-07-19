@@ -171,6 +171,15 @@ public class PlayerInteractor : MonoBehaviour
         }
 
         HandleInput();
+
+        if (isCooking)
+        {
+            if (Vector3.Distance(transform.position, currentCookingInteract.transform.position)
+                > cookingExitDistance)
+            {
+                EndCooking();
+            }
+        }
     }
 
     // --- Detection + highlight ----------------------------------------------
@@ -425,5 +434,25 @@ public class PlayerInteractor : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere((originOverride != null ? originOverride : transform).position, interactionRange);
+    }
+
+    private CookInteract currentCookingInteract;
+    private bool isCooking;
+    [SerializeField] private float cookingExitDistance = 5f;
+
+    public void BeginCooking(CookInteract station)
+    {
+        currentCookingInteract = station;
+        isCooking = true;
+
+        CookMenu.instance.CraftMenuStatus(true);
+    }
+
+    private void EndCooking()
+    {
+        isCooking = false;
+        currentCookingInteract = null;
+
+        CookMenu.instance.CraftMenuStatus(false);
     }
 }
