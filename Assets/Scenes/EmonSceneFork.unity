@@ -19698,7 +19698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603437207767757354, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2216680
+      value: 2547181.8
       objectReference: {fileID: 0}
     - target: {fileID: 6613745555896641206, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -27592,18 +27592,6 @@ PrefabInstance:
     - target: {fileID: 2381230047929648253, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
       propertyPath: m_Name
       value: Turrent (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2709062825474512923, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.2917
-      objectReference: {fileID: 0}
-    - target: {fileID: 2709062825474512923, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.2917
-      objectReference: {fileID: 0}
-    - target: {fileID: 2709062825474512923, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.2917
       objectReference: {fileID: 0}
     - target: {fileID: 2709062825474512923, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
       propertyPath: m_LocalPosition.x
