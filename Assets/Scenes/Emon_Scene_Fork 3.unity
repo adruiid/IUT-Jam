@@ -3070,7 +3070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603607163599226601, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 103195.26
+      value: 183804.33
       objectReference: {fileID: 0}
     - target: {fileID: 8009578785768280475, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_Pivot.x
@@ -14883,6 +14883,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: reactions.Array.data[6].sfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 1a9f6ac6abd26164ab8050ce58223019, type: 3}
+    - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
       propertyPath: reactions.Array.data[5].type
       value: 6
       objectReference: {fileID: 0}
@@ -14890,6 +14894,10 @@ PrefabInstance:
       propertyPath: reactions.Array.data[6].type
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: reactions.Array.data[6].toolPrefab
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: 46a2bad05b22425419be8bb3cefb8d42, type: 3}
     - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
       propertyPath: reactions.Array.data[6].requiredTool
       value: 
@@ -20002,7 +20010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603437207767757354, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 568285.8
+      value: 648899.75
       objectReference: {fileID: 0}
     - target: {fileID: 6613745555896641206, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -43219,7 +43227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7216592763269180416, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
       propertyPath: startingGears.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7216592763269180416, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
       propertyPath: 'startingGears.Array.data[0]'
