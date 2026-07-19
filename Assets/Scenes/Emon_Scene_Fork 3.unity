@@ -935,6 +935,42 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 141301832479427353, guid: 9a5289418eaf6f84f9edb28db36bff3d, type: 3}
   m_PrefabInstance: {fileID: 1474026641}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &57104122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3470863930626081326, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+  m_PrefabInstance: {fileID: 1258992395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &57104123 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8425526018779442118, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+  m_PrefabInstance: {fileID: 1258992395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &57104126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57104122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b22521987904e48a578dbab082a9be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Turret
+  rotationPivot: {fileID: 57104123}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 512
+  range: 12
+  turnSpeed: 360
+  aimTolerance: 8
+  damage: 15
+  fireRate: 2
+  maxAmmo: 30
+  muzzleFlash: {fileID: 0}
+  audioSource: {fileID: 0}
+  fireSfx: {fileID: 0}
+  baseStructure: {fileID: 0}
 --- !u!1001 &59339718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3134,6 +3170,42 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a5289418eaf6f84f9edb28db36bff3d, type: 3}
+--- !u!1 &193342287 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3470863930626081326, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+  m_PrefabInstance: {fileID: 399161343}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &193342288 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8425526018779442118, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+  m_PrefabInstance: {fileID: 399161343}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &193342291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193342287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b22521987904e48a578dbab082a9be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Turret
+  rotationPivot: {fileID: 193342288}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 512
+  range: 12
+  turnSpeed: 360
+  aimTolerance: 8
+  damage: 15
+  fireRate: 2
+  maxAmmo: 30
+  muzzleFlash: {fileID: 0}
+  audioSource: {fileID: 0}
+  fireSfx: {fileID: 0}
+  baseStructure: {fileID: 0}
 --- !u!1001 &196622392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6323,10 +6395,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 193342291}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Activate
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Turret, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3470863930626081326, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 193342291}
   m_SourcePrefab: {fileID: 100100000, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
 --- !u!1001 &401805426
 PrefabInstance:
@@ -20105,7 +20208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603437207767757354, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 961972.94
+      value: 1248126
       objectReference: {fileID: 0}
     - target: {fileID: 6613745555896641206, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -20920,6 +21023,26 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a5289418eaf6f84f9edb28db36bff3d, type: 3}
+--- !u!1 &1097155371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 592808760309883477, guid: a27ce045eda413749b48f4c0195382cd, type: 3}
+  m_PrefabInstance: {fileID: 413132066374132118}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1097155378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097155371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 278406053e1d978488fe3bd82a423a68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitFlash
+  flashColor: {r: 1, g: 0.25, b: 0.25, a: 1}
+  flashDuration: 0.08
+  autoHookEnemyHealth: 1
 --- !u!4 &1099269624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6296118711481304615, guid: ecb132e197b3d134e8acc6cf4257ac9d, type: 3}
@@ -23850,6 +23973,42 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ddd7b4ab801db64fabc5c2d3b59f762, type: 3}
+--- !u!1 &1216726063 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3470863930626081326, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+  m_PrefabInstance: {fileID: 1431644734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1216726064 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8425526018779442118, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+  m_PrefabInstance: {fileID: 1431644734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1216726067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216726063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b22521987904e48a578dbab082a9be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Turret
+  rotationPivot: {fileID: 1216726064}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 512
+  range: 12
+  turnSpeed: 360
+  aimTolerance: 8
+  damage: 15
+  fireRate: 2
+  maxAmmo: 30
+  muzzleFlash: {fileID: 0}
+  audioSource: {fileID: 0}
+  fireSfx: {fileID: 0}
+  baseStructure: {fileID: 0}
 --- !u!4 &1219055427 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8847699620713499617, guid: 3406992047a644a459fcc1287cc08109, type: 3}
@@ -24482,10 +24641,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 57104126}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Activate
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Turret, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3470863930626081326, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 57104126}
   m_SourcePrefab: {fileID: 100100000, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
 --- !u!1001 &1260071209
 PrefabInstance:
@@ -28117,10 +28307,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1216726067}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Activate
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Turret, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3470863930626081326, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1216726067}
   m_SourcePrefab: {fileID: 100100000, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
 --- !u!1001 &1433168550
 PrefabInstance:
@@ -31925,6 +32146,42 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5760660055312214478, guid: 913f3090763ab56418cad48bc94c7411, type: 3}
   m_PrefabInstance: {fileID: 1596022785}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1596408606 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3470863930626081326, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+  m_PrefabInstance: {fileID: 1824173198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1596408607 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8425526018779442118, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+  m_PrefabInstance: {fileID: 1824173198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1596408610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596408606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b22521987904e48a578dbab082a9be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Turret
+  rotationPivot: {fileID: 1596408607}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 512
+  range: 12
+  turnSpeed: 360
+  aimTolerance: 8
+  damage: 15
+  fireRate: 2
+  maxAmmo: 30
+  muzzleFlash: {fileID: 0}
+  audioSource: {fileID: 0}
+  fireSfx: {fileID: 0}
+  baseStructure: {fileID: 0}
 --- !u!114 &1598682485 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6044697467322076625, guid: 558382ec0ca2a4f40b33ef28da60d49f, type: 3}
@@ -36495,10 +36752,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1596408610}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Activate
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Turret, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3470863930626081326, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1596408610}
   m_SourcePrefab: {fileID: 100100000, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
 --- !u!1001 &1830510218
 PrefabInstance:
@@ -43413,7 +43701,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 592808760309883477, guid: a27ce045eda413749b48f4c0195382cd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1097155378}
   m_SourcePrefab: {fileID: 100100000, guid: a27ce045eda413749b48f4c0195382cd, type: 3}
 --- !u!4 &543450652090732470
 Transform:

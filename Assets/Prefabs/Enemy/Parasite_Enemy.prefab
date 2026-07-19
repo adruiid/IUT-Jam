@@ -355,6 +355,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29c6c41c175972647857f47d984770a8, type: 3}
       insertIndex: -1
       addedObject: {fileID: -5244974214668981431}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29c6c41c175972647857f47d984770a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6881755959882821338}
   m_SourcePrefab: {fileID: 100100000, guid: 29c6c41c175972647857f47d984770a8, type: 3}
 --- !u!1 &737916072946954512 stripped
 GameObject:
@@ -474,3 +477,18 @@ CapsuleCollider:
   m_Height: 2.88
   m_Direction: 1
   m_Center: {x: 0, y: 1.41, z: 0}
+--- !u!114 &-6881755959882821338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737916072946954512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 278406053e1d978488fe3bd82a423a68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitFlash
+  flashColor: {r: 1, g: 0.25, b: 0.25, a: 1}
+  flashDuration: 0.08
+  autoHookEnemyHealth: 1

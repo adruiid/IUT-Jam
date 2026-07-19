@@ -38,6 +38,14 @@ public class AnimalAI : MonoBehaviour
     [SerializeField] private float dropScatterRadius = 0.6f;
     [SerializeField] private float dropSpawnHeight = 0.5f;
 
+    [Header("Hit SFX")]
+    [Tooltip("Played when the animal takes damage.")]
+    [SerializeField] private AudioClip hitSfx;
+    [Tooltip("Source for the hit SFX. Auto-found on this object if empty.")]
+    [SerializeField] private AudioSource audioSource;
+    [Tooltip("Minimum seconds between hit sounds so rapid hits don't overlap.")]
+    [SerializeField] private float hitSfxCooldown = 0.15f;
+
     [Header("Death")]
     [Tooltip("Seconds to keep the corpse before destroying (lets the death anim play).")]
     [SerializeField] private float deathDelay = 2f;
@@ -50,6 +58,7 @@ public class AnimalAI : MonoBehaviour
     private Vector3 _home;
     private bool _dead;
     private int _speedHash;
+    private float _lastHitSfxTime = -999f;
 
     private void Awake()
     {
@@ -57,14 +66,29 @@ public class AnimalAI : MonoBehaviour
         _health = GetComponent<EnemyHealth>();
         _collider = GetComponentInChildren<Collider>();
         if (animator == null) animator = GetComponentInChildren<Animator>();
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
         if (!string.IsNullOrEmpty(speedParam)) _speedHash = Animator.StringToHash(speedParam);
 
         _health.Died += OnDied;
+        _health.onDamaged.AddListener(OnDamagedSfx);
     }
 
     private void OnDestroy()
     {
-        if (_health != null) _health.Died -= OnDied;
+        if (_health != null)
+        {
+            _health.Died -= OnDied;
+            _health.onDamaged.RemoveListener(OnDamagedSfx);
+        }
+    }
+
+    // Play the hit sound, throttled so rapid hits don't stack into a buzz.
+    private void OnDamagedSfx()
+    {
+        if (hitSfx == null || Time.time - _lastHitSfxTime < hitSfxCooldown) return;
+        _lastHitSfxTime = Time.time;
+        if (audioSource != null) audioSource.PlayOneShot(hitSfx);
+        else AudioSource.PlayClipAtPoint(hitSfx, transform.position);
     }
 
     private void Start()

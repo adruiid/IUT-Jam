@@ -56,6 +56,12 @@ public class HitFlash : MonoBehaviour
             _health = GetComponent<EnemyHealth>();
             if (_health != null) _health.onDamaged.AddListener(Flash);
         }
+
+        int tintable = 0;
+        for (int i = 0; i < _colorProp.Length; i++) if (_colorProp[i] != 0) tintable++;
+        Debug.Log($"[HitFlash DIAG] {name}: renderers={_renderers.Length}, tintable={tintable}, " +
+                  $"hookedHealth={_health != null}. First material shader: " +
+                  $"{(_renderers.Length > 0 && _renderers[0].sharedMaterial != null ? _renderers[0].sharedMaterial.shader.name : "none")}", this);
     }
 
     private void OnDestroy()
@@ -66,6 +72,7 @@ public class HitFlash : MonoBehaviour
     /// <summary>Flash the enemy reddish. Safe to call rapidly (restarts the timer).</summary>
     public void Flash()
     {
+        Debug.Log($"[HitFlash DIAG] {name} Flash() called", this);
         if (!isActiveAndEnabled) return;
         if (_routine != null) StopCoroutine(_routine);
         _routine = StartCoroutine(FlashRoutine());

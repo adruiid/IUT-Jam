@@ -69,6 +69,10 @@ public class PlayerCombat : MonoBehaviour
     [Tooltip("Time after the hit before the player can move/act again.")]
     [SerializeField] private float meleeRecovery = 0.3f;
     [SerializeField] private Key meleeKey = Key.V;
+    [Tooltip("Played on each melee swing.")]
+    [SerializeField] private AudioClip meleeSwingSfx;
+    [Tooltip("Source for the swing SFX. Auto-found on this object if empty.")]
+    [SerializeField] private AudioSource audioSource;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -113,6 +117,7 @@ public class PlayerCombat : MonoBehaviour
         if (animator == null) animator = GetComponentInChildren<Animator>();
         _movementController = GetComponentInParent<ThirdPersonController>();
         if (_movementController == null) _movementController = FindAnyObjectByType<ThirdPersonController>();
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
         _equippedHash = Animator.StringToHash(equippedBool);
 
         // Dagger is always available: spawn it once at its mount.
@@ -288,6 +293,12 @@ public class PlayerCombat : MonoBehaviour
 
         FaceClosestEnemy();
         if (animator != null && !string.IsNullOrEmpty(meleeTrigger)) animator.SetTrigger(meleeTrigger);
+
+        if (meleeSwingSfx != null)
+        {
+            if (audioSource != null) audioSource.PlayOneShot(meleeSwingSfx);
+            else AudioSource.PlayClipAtPoint(meleeSwingSfx, transform.position);
+        }
 
         StartCoroutine(MeleeRoutine());
     }
