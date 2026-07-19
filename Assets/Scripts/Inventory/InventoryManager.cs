@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using StarterAssets;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private int maxStackable;
 
     public event Action OnInventoryChanged;
+
+    [SerializeField] private ThirdPersonController playerController;
 
     private void Awake()
     {
@@ -53,6 +56,7 @@ public class InventoryManager : MonoBehaviour
                 Debug.Log("Added new " + item.itemName);
                 SpawnNewItem(item, slot);
                 OnInventoryChanged?.Invoke();
+                CheckSpecialItem(item);
                 return;
             }
         }
@@ -232,5 +236,14 @@ public class InventoryManager : MonoBehaviour
     public void HideDescription()
     {
         descriptionBox.SetActive(false);
+    }
+
+    private void CheckSpecialItem(Items item)
+    {
+        if (item.type == ItemType.Equipment)
+        {
+            playerController.MoveSpeed *= item.speedBoost;
+            playerController.SprintSpeed *= item.speedBoost;
+        }
     }
 }

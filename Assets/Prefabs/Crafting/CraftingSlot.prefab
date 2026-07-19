@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f1ae3393f533843bb35153b6953a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CraftingSlot
-  holdingItem: {fileID: 11400000, guid: 2f01d86dd360b9d4eace4de1242c08e9, type: 2}
+  holdingItem: {fileID: 11400000, guid: aa499351ce599464986f8a875411ee4d, type: 2}
   image: {fileID: 1805575249466887646}
   nameText: {fileID: 3829316355338778829}
   typeText: {fileID: 1298122733426676707}
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 91.24833, w: 17.263218}
+  m_margin: {x: 0, y: 0, z: -22.279135, w: 17.263218}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

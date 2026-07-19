@@ -115,6 +115,8 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
+        private bool _hasBoot;
+
         private bool IsCurrentDeviceMouse
         {
             get
