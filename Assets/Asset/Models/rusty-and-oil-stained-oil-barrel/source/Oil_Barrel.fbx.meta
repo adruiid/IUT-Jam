@@ -3,7 +3,12 @@ guid: e39bbbcd77cbd9a4da785271281fe985
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oil_barell
+    second: {fileID: 2100000, guid: ea3170e4e70047147bcb85b49b4231a0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
