@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 363f1f4a3e4fe354cb6f49a533f2c4b2, type: 3}
-  m_Name: Boot
+  m_Name: Prybar
   m_EditorClassIdentifier: Assembly-CSharp::Items
-  itemName: Improved Boot
-  sprite: {fileID: 21300000, guid: 1837aa0882c30694b95cde301f54ecc6, type: 3}
-  type: 0
+  itemName: Prybar
+  sprite: {fileID: 21300000, guid: 9e3fa5ed804e8384094d76576538b92e, type: 3}
+  type: 3
   stackable: 0
-  description: Increase movement speed and improves defense slightly.
+  description: Used to pry open different objects.
+  durabillity: 0
+  speedBoost: 0
+  hpUpgade: 0

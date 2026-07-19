@@ -14,6 +14,10 @@ public class Items : ScriptableObject
     [Header("For tools only")]
     public float durabillity;
 
+    [Header("For equipment only")]
+    public float speedBoost;
+    public float hpUpgade;
+
 }
 
 public enum ItemType
@@ -21,5 +25,6 @@ public enum ItemType
     Consumable,
     Weapon,
     Resource,
-    Tool
+    Tool,
+    Equipment
 }

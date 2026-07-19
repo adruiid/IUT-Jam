@@ -8,6 +8,8 @@ public class CraftingManager : MonoBehaviour
     [Header("UI")]
     [SerializeField]private CraftingSlot[] craftingSlots;
 
+    [SerializeField] private ScrollRect scrollRect;
+
     private void Start()
     {
         foreach(CraftingSlot slots in craftingSlots)
@@ -15,6 +17,8 @@ public class CraftingManager : MonoBehaviour
             CraftableItem itemType = slots.GetHoldingItem();
             slots.button.onClick.AddListener(() => CraftItem(itemType, slots));
         }
+
+        scrollRect.verticalNormalizedPosition = 1f;
     }
 
     private void CraftItem(CraftableItem item, CraftingSlot  slot)
