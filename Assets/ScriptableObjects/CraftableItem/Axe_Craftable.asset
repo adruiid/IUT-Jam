@@ -17,9 +17,9 @@ MonoBehaviour:
   type: 3
   stackable: 0
   description: 
+  durabillity: 0
   requirements:
   - resourceType: 0
-    amount: 2
-  - resourceType: 1
-    amount: 2
+    amount: 8
   resultingItem: {fileID: 11400000, guid: 2399de4b62c547c41972c7b796f70b9a, type: 2}
+  resourceType: 0
