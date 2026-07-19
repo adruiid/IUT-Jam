@@ -14859,12 +14859,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4755065799464063930, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4755065799464063930, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
       propertyPath: holsterMount
       value: 
-      objectReference: {fileID: 1956353670}
+      objectReference: {fileID: 1776560774}
     - target: {fileID: 7626407544286556538, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
       propertyPath: _controller
       value: 
@@ -19912,7 +19912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603437207767757354, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2877619.5
+      value: 3036687.8
       objectReference: {fileID: 0}
     - target: {fileID: 6613745555896641206, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -34687,10 +34687,10 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2830680140063221531, guid: ba51347e37e274246aaf536950a53afd, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -35316,6 +35316,11 @@ PrefabInstance:
       addedObject: {fileID: 2017353662}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3406992047a644a459fcc1287cc08109, type: 3}
+--- !u!4 &1776560774 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1408782829441764422, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+  m_PrefabInstance: {fileID: 829998169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1777052810
 PrefabInstance:
   m_ObjectHideFlags: 0

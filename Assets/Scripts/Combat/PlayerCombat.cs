@@ -1,54 +1,85 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using StarterAssets;
-using System.Collections;
 
 /// <summary>
-/// Script 1 — on the Player. Combat INPUT + ANIMATION; tells the Weapon (script 2)
-/// when to fire/reload. The weapon is always out (no draw/holster). Firing rules:
-///   - Left-click on empty space (not UI, not an interactable) fires toward the cursor.
-///   - While the fire button is held, the player rotates to face the aim point.
-///   - R reloads (bolt-action: tiny magazine, infinite reserve).
+/// Player combat: a gun (only if owned in the inventory) and an always-available melee
+/// dagger.
+///
+/// Held-item rules:
+///   - No gun in inventory  -> dagger always in hand, "Equipped" bool OFF (normal walk),
+///                             the gun is never even instantiated.
+///   - Gun in inventory     -> dagger in hand while holstered (gun rests on the holster
+///                             mount). Left-click fires: the gun snaps to the hand mount,
+///                             "Equipped" bool ON, dagger hidden; it stays in hand while
+///                             shooting and for a few seconds after, then holsters again.
+///   - During an interaction (chop/mine/...) both gun and dagger hide (tool shows instead).
+///
+/// Melee:
+///   - V           -> swing at the closest enemy in range (no aiming).
+///   - Right-click on an enemy -> walk up to it (auto-path), then swing.
+///   Melee stops movement for the swing and instantly holsters the gun. Damage is applied
+///   at the hit frame to the closest enemy in range (no real collision needed).
 /// </summary>
 [DisallowMultipleComponent]
 public class PlayerCombat : MonoBehaviour
 {
-    [Header("Weapon")]
-    [Tooltip("Prefab with the Weapon (script 2) on it. Instantiated once at the mount, always visible.")]
-    [SerializeField] private GameObject weaponPrefab;
-    [Tooltip("Default mount where the weapon rests (e.g. right-hand/hip bone).")]
-    [SerializeField] private Transform weaponMount;
-    [Tooltip("Mount the weapon moves to WHILE shooting (raised/aim pose). Returns to Weapon Mount " +
-             "when the shot ends. Leave empty to keep it on the default mount.")]
-    [SerializeField] private Transform shootMount;
-    [Tooltip("Desired WORLD scale of the weapon. Compensates for a scaled hand bone " +
-             "(Mixamo rigs often have near-zero bone scale). Tweak if the gun looks too big/small.")]
-    [SerializeField] private Vector3 weaponWorldScale = Vector3.one;
+    [Header("Inventory gate")]
+    [Tooltip("The gun Items asset to look for in the inventory. If not owned, no gun is used.")]
+    [SerializeField] private Items gunItem;
+
+    [Header("Gun")]
+    [Tooltip("Prefab with the Weapon (script 2) on it. Instantiated once you own the gun.")]
+    [SerializeField] private GameObject gunPrefab;
+    [Tooltip("Where the gun rests when holstered (on the body, e.g. back/hip).")]
+    [SerializeField] private Transform holsterMount;
+    [Tooltip("Where the gun sits in-hand while equipped (aim/shoot pose).")]
+    [SerializeField] private Transform gunHandMount;
+    [SerializeField] private Vector3 gunWorldScale = Vector3.one;
+
+    [Header("Dagger (melee)")]
+    [SerializeField] private GameObject daggerPrefab;
+    [SerializeField] private Transform daggerMount;
+    [SerializeField] private Vector3 daggerWorldScale = Vector3.one;
 
     [Header("Aiming (toward mouse cursor)")]
     [SerializeField] private Camera aimCamera;
-    [Tooltip("What the cursor ray hits to find the aim point. Exclude Player and Bullet layers.")]
+    [Tooltip("What the cursor ray hits to find the aim point. Exclude Player/Bullet layers.")]
     [SerializeField] private LayerMask aimMask = ~0;
     [SerializeField] private float aimRayDistance = 200f;
-    [Tooltip("How fast the player turns to face the aim while firing (deg/sec).")]
     [SerializeField] private float aimTurnSpeed = 720f;
 
-    [Header("Firing")]
+    [Header("Shooting")]
     [Tooltip("Off = one shot per click (bolt-action). On = hold to fire.")]
     [SerializeField] private bool fullAuto = false;
-    [Tooltip("Duration of the shoot action: the weapon stays at the Shoot Mount and movement is " +
-             "paused for this long. Set to your fire animation length. Reload never pauses movement.")]
+    [Tooltip("Movement pause + weapon-in-hand pose per shot. Set to your fire animation length.")]
     [SerializeField] private float shootDuration = 0.5f;
+    [Tooltip("How long the gun stays in hand after the last shot before auto-holstering.")]
+    [SerializeField] private float equipDuration = 5f;
+
+    [Header("Melee")]
+    [Tooltip("Layers enemies/animals are on (for the closest-target check).")]
+    [SerializeField] private LayerMask enemyMask;
+    [SerializeField] private float meleeRange = 2.5f;
+    [SerializeField] private float meleeDamage = 25f;
+    [Tooltip("Delay from swing start to when damage lands. Sync with the melee anim's hit frame.")]
+    [SerializeField] private float meleeWindup = 0.3f;
+    [Tooltip("Time after the hit before the player can move/act again.")]
+    [SerializeField] private float meleeRecovery = 0.3f;
+    [SerializeField] private Key meleeKey = Key.V;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
+    [Tooltip("Bool set true while the gun is in hand (drives the gun-holding upper-body pose).")]
+    [SerializeField] private string equippedBool = "Equipped";
     [SerializeField] private string fireTrigger = "Fire";
     [SerializeField] private string reloadTrigger = "Reload";
+    [SerializeField] private string meleeTrigger = "Melee";
 
     [Header("Reload")]
     [SerializeField] private Key reloadKey = Key.R;
-    [Tooltip("Reload duration — match your reload animation length.")]
     [SerializeField] private float reloadTime = 1.2f;
 
     [Header("References (auto-found if empty)")]
@@ -56,26 +87,24 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private PlayerAutoInteract autoInteract;
 
     private Weapon _weapon;
-    private GameObject _weaponInstance;
-    private bool _weaponVisible = true;
+    private GameObject _gunInstance;
+    private GameObject _daggerInstance;
+    private Transform _currentGunMount;
+
+    private bool _hasGun;
+    private float _equipUntil;   // gun stays in hand until this time
+    private float _shootUntil;   // movement pause per shot
     private bool _reloading;
     private float _reloadEndTime;
-    private float _shootUntil;
-    private Transform _currentMount;
+    private bool _meleeing;
+    private int _equippedHash;
+
     private ThirdPersonController _movementController;
 
+    // cached visual state to avoid redundant calls
+    private bool _gunActive, _daggerActive, _equippedState;
+
     private Camera Cam => aimCamera != null ? aimCamera : Camera.main;
-
-    [Header("Holster")]
-    [SerializeField] private float holsterDelay = 5f;
-    [SerializeField] private string equippedBool = "Equipped";
-    [SerializeField] private float holsterAnimationTime = 0.5f;
-
-    private float _lastFireTime;
-    private bool _equipped;
-    private Coroutine _holsterRoutine;
-
-    [SerializeField] private Transform holsterMount;
 
     private void Awake()
     {
@@ -84,128 +113,238 @@ public class PlayerCombat : MonoBehaviour
         if (animator == null) animator = GetComponentInChildren<Animator>();
         _movementController = GetComponentInParent<ThirdPersonController>();
         if (_movementController == null) _movementController = FindAnyObjectByType<ThirdPersonController>();
+        _equippedHash = Animator.StringToHash(equippedBool);
 
-        // Weapon is always out (except during interactions): spawn it once.
-        if (weaponPrefab != null && weaponMount != null)
+        // Dagger is always available: spawn it once at its mount.
+        if (daggerPrefab != null && daggerMount != null)
         {
-            _weaponInstance = Instantiate(weaponPrefab, holsterMount);
-            _weaponInstance.transform.localPosition = Vector3.zero;
-            _weaponInstance.transform.localRotation = Quaternion.identity;
-            _weaponInstance.transform.localScale = CompensateScale(holsterMount, weaponWorldScale);
-            _weaponInstance.SetActive(true); // ensure visible even if the prefab root was inactive
-            _weaponVisible = true;
-            _weapon = _weaponInstance.GetComponent<Weapon>();
-            _currentMount = holsterMount;
-            if (_weapon == null)
-                Debug.LogWarning("PlayerCombat: weapon prefab has no Weapon component — it won't fire.", this);
+            _daggerInstance = Instantiate(daggerPrefab, daggerMount);
+            _daggerInstance.transform.localPosition = Vector3.zero;
+            _daggerInstance.transform.localRotation = Quaternion.identity;
+            _daggerInstance.transform.localScale = CompensateScale(daggerMount, daggerWorldScale);
+            _daggerActive = true;
         }
-        else
-        {
-            Debug.LogWarning("PlayerCombat: assign both Weapon Prefab and Weapon Mount — no gun will spawn/fire.", this);
-        }
-
-        _lastFireTime = -holsterDelay;
-        _equipped = false;
-
-        if (animator != null)
-            animator.SetBool(equippedBool, false);
-
-        SetWeaponVisible(false);
     }
 
     private void Update()
     {
-        // Hide the gun while doing an interaction (chop/mine/dig/repair) and show it after.
-        // Shopkeeper has no interaction animation, so it never hides the gun.
         bool interacting = interactor != null && interactor.IsInteracting;
-        SetWeaponVisible(!interacting);
-        if (interacting) return;                                     // interaction owns movement lock
-        if (autoInteract != null && autoInteract.IsWalking) return;  // autopath owns movement
+        bool walking = autoInteract != null && autoInteract.IsWalking;
 
-        // While shooting: pause movement (never during reload) and raise the weapon to
-        // the shoot mount; otherwise keep it on the default mount.
-        bool shooting = Time.time < _shootUntil;
-        SetMovementLocked(shooting);
+        _hasGun = HasGun();
+        if (_hasGun) EnsureGun();
 
-        if (!_equipped)
+        // Combat input only when not interacting / auto-walking / mid-reload / mid-melee.
+        if (!interacting && !walking)
         {
-            UpdateWeaponMount(holsterMount);
+            HandleReload();
+            if (!_reloading && !_meleeing)
+            {
+                HandleShoot();
+                HandleMelee();
+            }
+            // Pause movement while shooting or meleeing (never during reload / normal walk).
+            SetMovementLocked((Time.time < _shootUntil) || _meleeing);
         }
-        else if (shooting && shootMount != null)
+
+        RefreshHeldItems(interacting);
+    }
+
+    // --- Held items ----------------------------------------------------------
+
+    private void RefreshHeldItems(bool interacting)
+    {
+        if (interacting)
         {
-            UpdateWeaponMount(shootMount);
+            SetGunActive(false);
+            SetDaggerActive(false);
+            SetEquipped(false);
+            return;
+        }
+
+        bool equipped = _hasGun && Time.time < _equipUntil && !_meleeing;
+
+        if (_hasGun)
+        {
+            SetGunActive(true);
+            AttachGun(equipped ? gunHandMount : holsterMount);
         }
         else
         {
-            UpdateWeaponMount(weaponMount);
+            SetGunActive(false);
         }
 
-        HandleReload();
-        HandleFire();
+        // Dagger is in hand whenever the gun is NOT equipped (holstered walk / melee / no gun).
+        SetDaggerActive(!equipped);
+        SetEquipped(equipped);
     }
 
-    private void SetMovementLocked(bool locked)
+    private void EnsureGun()
     {
-        if (_movementController != null) _movementController.MovementLocked = locked;
+        if (_gunInstance != null || gunPrefab == null || holsterMount == null) return;
+
+        _gunInstance = Instantiate(gunPrefab, holsterMount);
+        _currentGunMount = holsterMount;
+        _gunInstance.transform.localPosition = Vector3.zero;
+        _gunInstance.transform.localRotation = Quaternion.identity;
+        _gunInstance.transform.localScale = CompensateScale(holsterMount, gunWorldScale);
+        _weapon = _gunInstance.GetComponent<Weapon>();
+        _gunActive = true;
     }
 
-    // Reparents the weapon to the given mount (zeroing local offset, compensating scale).
-    private void UpdateWeaponMount(Transform mount)
+    private void AttachGun(Transform mount)
     {
-        if (_weaponInstance == null || mount == null || _currentMount == mount) return;
-        _currentMount = mount;
+        if (_gunInstance == null || mount == null || _currentGunMount == mount) return;
+        _currentGunMount = mount;
 
-        Transform t = _weaponInstance.transform;
+        Transform t = _gunInstance.transform;
         t.SetParent(mount, worldPositionStays: false);
         t.localPosition = Vector3.zero;
         t.localRotation = Quaternion.identity;
-        t.localScale = CompensateScale(mount, weaponWorldScale);
+        t.localScale = CompensateScale(mount, gunWorldScale);
     }
 
-    private void SetWeaponVisible(bool visible)
+    private void SetGunActive(bool on)
     {
-        if (_weaponInstance == null || visible == _weaponVisible) return;
-        _weaponVisible = visible;
-        _weaponInstance.SetActive(visible);
+        if (_gunInstance == null || on == _gunActive) return;
+        _gunActive = on;
+        _gunInstance.SetActive(on);
     }
 
-    private void HandleFire()
+    private void SetDaggerActive(bool on)
     {
-        if (_reloading) return;
-        if (interactor != null && interactor.IsInteracting) return;   // busy chopping/mining/repairing
-        if (autoInteract != null && autoInteract.IsWalking) return;   // auto-running to an interactable
+        if (_daggerInstance == null || on == _daggerActive) return;
+        _daggerActive = on;
+        _daggerInstance.SetActive(on);
+    }
+
+    private void SetEquipped(bool on)
+    {
+        if (on == _equippedState) return;
+        _equippedState = on;
+        if (animator != null) animator.SetBool(_equippedHash, on);
+    }
+
+    /// <summary>Holster the gun immediately (e.g. when an interaction starts) so it doesn't
+    /// pop back into hand afterwards. The dagger returns during the next holstered walk.</summary>
+    public void ForceHolster() => _equipUntil = 0f;
+
+    // --- Shooting ------------------------------------------------------------
+
+    private void HandleShoot()
+    {
+        if (!_hasGun) return; // no gun -> can't shoot
 
         var mouse = Mouse.current;
         if (mouse == null || !mouse.leftButton.isPressed) return;
+        if (IsPointerOverUI()) return;
+        if (interactor != null && interactor.Hovered != null) return; // clicking interactable -> interact
 
-        if (IsPointerOverUI()) return;                                // clicking UI
-        if (interactor != null && interactor.Hovered != null) return; // clicking an interactable -> interact, not fire
-
-        // Valid combat input: face the cursor and (try to) fire.
         Vector3 aimPoint = GetAimPoint();
         FaceAim(aimPoint);
 
         bool wantFire = fullAuto ? mouse.leftButton.isPressed : mouse.leftButton.wasPressedThisFrame;
         if (!wantFire || _weapon == null) return;
 
-        // Empty mag: auto-reload instead of firing.
-        if (_weapon.CurrentAmmo <= 0)
-        {
-            StartReload();
-            return;
-        }
+        if (_weapon.CurrentAmmo <= 0) { StartReload(); return; } // auto-reload on empty
 
         if (_weapon.TryFire(aimPoint))
         {
-            EquipWeapon();
-            ResetHolsterTimer();
-
-            if (animator != null && !string.IsNullOrEmpty(fireTrigger))
-                animator.SetTrigger(fireTrigger);
-
-            _shootUntil = Time.time + shootDuration;
+            if (animator != null && !string.IsNullOrEmpty(fireTrigger)) animator.SetTrigger(fireTrigger);
+            _shootUntil = Time.time + shootDuration;   // movement pause
+            _equipUntil = Time.time + equipDuration;   // keep gun in hand
         }
     }
+
+    // --- Melee ---------------------------------------------------------------
+
+    private void HandleMelee()
+    {
+        // V: swing at the closest enemy in range.
+        if (Keyboard.current != null && Keyboard.current[meleeKey].wasPressedThisFrame)
+        {
+            BeginMelee();
+            return;
+        }
+
+        // Right-click on an enemy: walk up to it, then swing.
+        var mouse = Mouse.current;
+        if (mouse != null && mouse.rightButton.wasPressedThisFrame && !IsPointerOverUI())
+        {
+            if (TryGetEnemyUnderCursor(out Vector3 enemyPos))
+            {
+                _equipUntil = 0f; // holster the gun during the approach
+                if (autoInteract != null && autoInteract.GoToPoint(enemyPos, BeginMelee)) return;
+                BeginMelee(); // no autopath available -> just swing where we are
+            }
+        }
+    }
+
+    private void BeginMelee()
+    {
+        if (_meleeing) return;
+        _meleeing = true;
+        _equipUntil = 0f; // gun holsters instantly for the melee
+
+        FaceClosestEnemy();
+        if (animator != null && !string.IsNullOrEmpty(meleeTrigger)) animator.SetTrigger(meleeTrigger);
+
+        StartCoroutine(MeleeRoutine());
+    }
+
+    private IEnumerator MeleeRoutine()
+    {
+        yield return new WaitForSeconds(meleeWindup);
+
+        // Guaranteed hit: damage the closest enemy in range at the hit frame (no collision).
+        IDamageable victim = FindClosestEnemy();
+        if (victim != null) victim.TakeDamage(meleeDamage);
+
+        yield return new WaitForSeconds(meleeRecovery);
+        _meleeing = false;
+    }
+
+    private IDamageable FindClosestEnemy()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, meleeRange, enemyMask, QueryTriggerInteraction.Collide);
+        IDamageable best = null;
+        float bestSqr = float.MaxValue;
+        foreach (var c in hits)
+        {
+            var d = c.GetComponentInParent<IDamageable>();
+            if (d == null) continue;
+            float sqr = (c.transform.position - transform.position).sqrMagnitude;
+            if (sqr < bestSqr) { bestSqr = sqr; best = d; }
+        }
+        return best;
+    }
+
+    private void FaceClosestEnemy()
+    {
+        IDamageable closest = FindClosestEnemy();
+        if (closest == null) return;
+        Vector3 dir = ((Component)closest).transform.position - transform.position;
+        dir.y = 0f;
+        if (dir.sqrMagnitude > 0.01f) transform.rotation = Quaternion.LookRotation(dir);
+    }
+
+    private bool TryGetEnemyUnderCursor(out Vector3 pos)
+    {
+        pos = default;
+        var cam = Cam;
+        if (cam == null || Mouse.current == null) return false;
+
+        Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out RaycastHit hit, aimRayDistance, enemyMask, QueryTriggerInteraction.Collide)
+            && hit.collider.GetComponentInParent<IDamageable>() != null)
+        {
+            pos = hit.collider.transform.position;
+            return true;
+        }
+        return false;
+    }
+
+    // --- Reload --------------------------------------------------------------
 
     private void HandleReload()
     {
@@ -219,7 +358,7 @@ public class PlayerCombat : MonoBehaviour
             return;
         }
 
-        if (_weapon == null || _weapon.IsFull) return;
+        if (!_hasGun || _weapon == null || _weapon.IsFull || _meleeing) return;
 
         if (Keyboard.current != null && Keyboard.current[reloadKey].wasPressedThisFrame)
             StartReload();
@@ -227,24 +366,26 @@ public class PlayerCombat : MonoBehaviour
 
     private void StartReload()
     {
-        if (!_equipped)
-        {
-            EquipWeapon();
-            ResetHolsterTimer();
-        }
-
         _reloading = true;
         _reloadEndTime = Time.time + reloadTime;
-
-        if (animator != null && !string.IsNullOrEmpty(reloadTrigger))
-            animator.SetTrigger(reloadTrigger);
-
-        if (_weapon != null)
-            _weapon.PlayReloadSfx();
+        _equipUntil = Time.time + equipDuration; // gun in hand for the reload
+        if (animator != null && !string.IsNullOrEmpty(reloadTrigger)) animator.SetTrigger(reloadTrigger);
+        if (_weapon != null) _weapon.PlayReloadSfx();
     }
 
-    // Rotate the body horizontally toward the aim point. Done in Update so the
-    // ThirdPersonController's LateUpdate camera-pinning keeps the camera steady.
+    // --- Helpers -------------------------------------------------------------
+
+    private bool HasGun()
+    {
+        return gunItem != null && InventoryManager.instance != null
+               && InventoryManager.instance.SearchItemCount(gunItem) > 0;
+    }
+
+    private void SetMovementLocked(bool locked)
+    {
+        if (_movementController != null) _movementController.MovementLocked = locked;
+    }
+
     private void FaceAim(Vector3 aimPoint)
     {
         Vector3 dir = aimPoint - transform.position;
@@ -260,14 +401,9 @@ public class PlayerCombat : MonoBehaviour
         if (cam == null || Mouse.current == null) return transform.position + transform.forward * 10f;
 
         Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-        // Prefer a real surface hit (gives correct height for shooting up/down).
         if (Physics.Raycast(ray, out RaycastHit hit, aimRayDistance, aimMask, QueryTriggerInteraction.Ignore))
             return hit.point;
 
-        // Fallback: intersect a horizontal plane at the player's height. This always
-        // yields a valid point in ANY direction, so the character can aim 360* even
-        // when the ray misses all colliders (which otherwise limited turning to ~180*).
         Plane ground = new Plane(Vector3.up, new Vector3(0f, transform.position.y, 0f));
         if (ground.Raycast(ray, out float dist))
             return ray.GetPoint(dist);
@@ -289,73 +425,4 @@ public class PlayerCombat : MonoBehaviour
             Mathf.Approximately(p.y, 0f) ? desiredWorld.y : desiredWorld.y / p.y,
             Mathf.Approximately(p.z, 0f) ? desiredWorld.z : desiredWorld.z / p.z);
     }
-
-    private void EquipWeapon()
-    {
-        if (_holsterRoutine != null)
-        {
-            StopCoroutine(_holsterRoutine);
-            _holsterRoutine = null;
-        }
-
-        if (!_weaponVisible)
-            SetWeaponVisible(true);
-
-        if (!_equipped)
-        {
-            _equipped = true;
-            animator.SetBool(equippedBool, true);
-
-            UpdateWeaponMount(weaponMount);
-        }
-    }
-
-    private void ResetHolsterTimer()
-    {
-        _lastFireTime = Time.time;
-
-        if (_holsterRoutine == null)
-            _holsterRoutine = StartCoroutine(HolsterAfterDelay());
-    }
-
-    private IEnumerator HolsterAfterDelay()
-    {
-        while (Time.time - _lastFireTime < holsterDelay)
-            yield return null;
-
-        _equipped = false;
-        animator.SetBool(equippedBool, false);
-
-        yield return new WaitForSeconds(holsterAnimationTime);
-
-        UpdateWeaponMount(holsterMount);
-        SetWeaponVisible(false);
-
-        _holsterRoutine = null;
-    }
-
-    public void ForceHolster()
-    {
-        if (_holsterRoutine != null)
-        {
-            StopCoroutine(_holsterRoutine);
-            _holsterRoutine = null;
-        }
-
-        _equipped = false;
-
-        if (animator != null)
-            animator.SetBool(equippedBool, false);
-
-        StartCoroutine(ForceHolsterRoutine());
-    }
-
-    private IEnumerator ForceHolsterRoutine()
-    {
-        yield return new WaitForSeconds(holsterAnimationTime);
-
-        UpdateWeaponMount(holsterMount);
-        SetWeaponVisible(false);
-    }
-
 }
