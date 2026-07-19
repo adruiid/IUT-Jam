@@ -20,6 +20,7 @@ public class PickUpObject : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Added 1 "+item.itemName);
+            PickupPopup.Instance.Show(item, 1, transform);
             InventoryManager.instance.AddItem(item);
             Destroy(gameObject);
         }

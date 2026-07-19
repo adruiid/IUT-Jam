@@ -11,6 +11,7 @@ public enum InteractionType
     Repairing,
     Shopkeeper,
     Digging,
+    Scour
 }
 
 /// <summary>Contract the PlayerInteractor talks to.</summary>

@@ -118,6 +118,9 @@ public class PlayerInteractor : MonoBehaviour
 
     private PlayerCombat playerCombat;
 
+    [SerializeField] private float searchHighlightRadius = 20f;
+    public bool SearchHeld { get; set; }
+
     private void Awake()
     {
         _movementController = GetComponentInParent<ThirdPersonController>();
@@ -162,6 +165,11 @@ public class PlayerInteractor : MonoBehaviour
         if (_isInteracting) return;
 
         RefreshTargets();
+        if (Keyboard.current != null && Keyboard.current.tabKey.isPressed || SearchHeld)
+        {
+            HighlightNearbyInteractables();
+        }
+
         HandleInput();
     }
 
@@ -172,6 +180,28 @@ public class PlayerInteractor : MonoBehaviour
         UpdateHovered();               // sets Hovered (+ _hoveredCollider), no range gate
         Nearest = GetNearestInRange(); // range-gated by the overlap sphere
         UpdateOutlines();              // outline BOTH
+    }
+
+    public void HighlightNearbyInteractables()
+    {
+        Vector3 origin = Origin.position;
+
+        int count = Physics.OverlapSphereNonAlloc(
+            origin,
+            searchHighlightRadius,
+            _hits,
+            interactableMask,
+            QueryTriggerInteraction.Collide);
+
+        for (int i = 0; i < count; i++)
+        {
+            var interactable = _hits[i].GetComponentInParent<Interactable>();
+
+            if (interactable == null || !interactable.CanInteract(this))
+                continue;
+
+            AddOutline(interactable);
+        }
     }
 
     private void UpdateHovered()

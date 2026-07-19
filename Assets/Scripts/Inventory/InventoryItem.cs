@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Threading;
 using TMPro;
+using System.Collections;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
@@ -18,6 +19,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     [SerializeField] private float _doubleClickDelay = 0.25f;
     private float _lastClickTime;
+
 
     private void Awake()
     {
@@ -41,6 +43,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (holdingItem.itemName == "Gun(Broken)") return;
+
         image.raycastTarget = false;
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
@@ -48,12 +52,14 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
 
     public void OnDrag(PointerEventData eventData)
-    { 
+    {
+        if (holdingItem.itemName == "Gun(Broken)") return;
         transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)
-    { 
+    {
+        if (holdingItem.itemName == "Gun(Broken)") return;
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
     }
@@ -87,5 +93,21 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         bool consumed = ConsumableRestore.instance.ConsumeItem((ConsumableItems)holdingItem);
         if (consumed) InventoryManager.instance.RemoveItem(holdingItem, 1);
+        else StartCoroutine(Shake());
+    }
+
+    private IEnumerator Shake()
+    {
+        float duration = 0.2f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            transform.localScale = Vector3.one * Random.Range(0.95f, 1.05f);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = Vector3.one;
     }
 }

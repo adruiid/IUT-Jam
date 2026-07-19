@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.4773
+      value: 1.4773002
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       propertyPath: m_LocalScale.y
@@ -22,31 +22,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 362.907
+      value: -6.1119995
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.429
+      value: 0.423
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 345.203
+      value: 2.1440125
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.13156469
+      value: 0.6323451
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.17802684
+      value: -0.6769519
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.69475955
+      value: 0.27454403
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.68432915
+      value: 0.257879
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -54,15 +54,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 64.695
+      value: 1.6430054
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
+      value: 42.615005
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       propertyPath: m_Name
       value: medical_crate_low
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -71,6 +75,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 59629158992474067}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3840568351827504935}
   m_SourcePrefab: {fileID: 100100000, guid: 927bd68558f2c924a98b78a10808b8fa, type: 3}
 --- !u!1 &116662041737705950 stripped
 GameObject:
@@ -98,3 +105,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.98882866, y: 0.6043964, z: 0.50566345}
   m_Center: {x: 0.0060190083, y: -0.009421914, z: 0.2473287}
+--- !u!114 &3840568351827504935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116662041737705950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606b3f8b9c5e055428f5effe3f55dc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scour
+  type: 5
+  prompt: Search
+  item: {fileID: 11400000, guid: c944495a05558804191910f2133ee3cb, type: 2}
+  amount: 1
