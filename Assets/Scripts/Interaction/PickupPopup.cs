@@ -34,8 +34,10 @@ public class PickupPopup : MonoBehaviour
     {
         _popup = Instantiate(textPrefab, worldCanvas.transform);
 
-        Vector3 worldPos = target.transform.position + Vector3.up * 0.5f;
+        Vector3 worldPos = target.position + Vector3.up * Random.Range(0.5f, 3f) + Vector3.right * Random.Range(-2f, 2f);
+
         Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+
 
         RectTransform popupRect = _popup.GetComponent<RectTransform>();
         popupRect.position = screenPos;
