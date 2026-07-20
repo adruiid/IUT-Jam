@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class PlayerStatusBasic : MonoBehaviour
+public class PlayerStatusBasic : MonoBehaviour, IDamageable
 {
     [Header("UI")]
     [SerializeField] private int maxHealth;
@@ -48,6 +48,13 @@ public class PlayerStatusBasic : MonoBehaviour
         currentHealth = currentHealth > maxHealth ? maxHealth : currentHealth;
         Debug.Log("Player Current Health: " + currentHealth);
         onHealthChanged?.Invoke();
+    }
+
+    /// <summary>IDamageable — lets enemies (anything using IDamageable) hurt the player.</summary>
+    public void TakeDamage(float amount)
+    {
+        if (amount <= 0f) return;
+        SetCurrentHealth(currentHealth - Mathf.CeilToInt(amount));
     }
 
     public int GetCurrentHunger()
