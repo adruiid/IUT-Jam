@@ -128,7 +128,12 @@ public class Turret : MonoBehaviour
         // Direct damage to the locked target (no projectile).
         if (_targetDamageable != null) _targetDamageable.TakeDamage(damage);
 
-        if (muzzleFlash != null) muzzleFlash.Play();
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            muzzleFlash.Play(true);
+        }
+
         if (fireSfx != null && audioSource != null) audioSource.PlayOneShot(fireSfx);
 
         _currentAmmo--;

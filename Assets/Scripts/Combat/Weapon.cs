@@ -64,7 +64,7 @@ public class Weapon : MonoBehaviour
         FireBullet(aimPoint);
 
         if (fireSfx != null && audioSource != null) audioSource.PlayOneShot(fireSfx);
-        if (muzzleFlash != null) muzzleFlash.Play();
+        PlayMuzzleFlash();
 
         return true;
     }
@@ -102,5 +102,13 @@ public class Weapon : MonoBehaviour
     public void PlayReloadSfx()
     {
         if (reloadSfx != null && audioSource != null) audioSource.PlayOneShot(reloadSfx);
+    }
+
+    private void PlayMuzzleFlash()
+    {
+        if (muzzleFlash == null) return;
+        // Hard-restart so it re-flashes even if the previous flash is still playing.
+        muzzleFlash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        muzzleFlash.Play(true);
     }
 }

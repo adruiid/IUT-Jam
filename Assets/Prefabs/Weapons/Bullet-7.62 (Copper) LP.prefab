@@ -550,9 +550,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   speed: 30
-  maxDistance: 60
+  maxDistance: 25
   maxLifetime: 5
-  damage: 500
+  damage: 50
   hitMask:
     serializedVersion: 2
     m_Bits: 512

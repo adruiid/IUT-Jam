@@ -1,14 +1,16 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// Switches between day and night when called (SetDay / SetNight / Toggle from your game
-/// manager). The directional light's rotation, color temperature and intensity ease
-/// smoothly from the current values to the target profile over Transition Seconds.
-/// Night enables the spawn manager; day disables it. Exposes a universal IsNight flag +
-/// events so other mechanics can react (e.g. monsters die at day).
+/// Self-driving day/night cycle with an internal clock.
+///   - Starts at 6:00 on Day 1. Day = 06:00–20:00, Night = 20:00–06:00.
+///   - Each new morning (06:00) advances the day counter, up to Days To Survive (3).
+///   - Surviving past the final night fires onSurvived (hook your game-over/win screen).
+///   - The directional light eases (dawn/dusk) over the Ramp Hours BEFORE each boundary,
+///     so the change starts a little early like real twilight — not abruptly at 6/20.
+///   - Night enables the spawn manager; day disables it and purges monsters.
+/// Day + time are exposed for a TextMeshPro UI (Day, Hour, TimeString).
 /// </summary>
 [DisallowMultipleComponent]
 public class DayNightController : MonoBehaviour
@@ -30,10 +32,16 @@ public class DayNightController : MonoBehaviour
     [SerializeField]
     private LightProfile night = new LightProfile { rotation = new Vector3(36f, 585f, 1f), temperature = 10000f, intensity = 1f };
 
-    [Header("Transition")]
-    [Tooltip("Seconds to ease the light from its current values to the target profile.")]
-    [SerializeField] private float transitionSeconds = 3f;
-    [SerializeField] private bool startAtNight = false;
+    [Header("Clock")]
+    [Tooltip("Real seconds for a full 24-hour in-game day.")]
+    [SerializeField] private float dayLengthSeconds = 120f;
+    [SerializeField] private float startHour = 6f;
+    [SerializeField] private float dayStartHour = 6f;
+    [SerializeField] private float nightStartHour = 20f;
+    [Tooltip("Hours over which dawn/dusk eases the light, ending at each boundary (real twilight).")]
+    [SerializeField] private float rampHours = 2f;
+    [Tooltip("Survive this many days; morning after the final night fires onSurvived.")]
+    [SerializeField] private int daysToSurvive = 3;
 
     [Header("Spawning")]
     [Tooltip("Enabled at night, disabled during day (assign your EnemySpawner).")]
@@ -42,91 +50,119 @@ public class DayNightController : MonoBehaviour
     [Header("Events")]
     [SerializeField] private UnityEvent onBecameDay;
     [SerializeField] private UnityEvent onBecameNight;
+    [Tooltip("Fired the morning after the final night — the player survived. Hook your game-over/win screen.")]
+    [SerializeField] private UnityEvent onSurvived;
 
     /// <summary>Universal flag — read from anywhere: DayNightController.IsNight.</summary>
     public static bool IsNight { get; private set; }
-    /// <summary>Fired on every phase change; argument is the new isNight value.</summary>
+    /// <summary>Fired on every phase boundary; argument is the new isNight value.</summary>
     public static event Action<bool> PhaseChanged;
 
-    // Current (raw) light values we ease from — kept raw so the given >360 rotation eases predictably.
-    private Vector3 _curRot;
-    private float _curTemp;
-    private float _curInt;
-    private Coroutine _transition;
+    // --- Exposed for UI ---
+    public int Day { get; private set; } = 1;
+    public float Hour => _hour;
+    public bool IsNightNow => _isNight;
+    /// <summary>Formatted clock, e.g. "06:00" — bind to a TextMeshPro text.</summary>
+    public string TimeString
+    {
+        get { int h = (int)_hour; int m = (int)((_hour - h) * 60f); return $"{h:00}:{m:00}"; }
+    }
+
+    private float _hour;
+    private bool _isNight;
+    private bool _ended;
 
     private void Start()
     {
         if (directionalLight != null) directionalLight.useColorTemperature = true;
 
-        LightProfile p = startAtNight ? night : day;
-        _curRot = p.rotation; _curTemp = p.temperature; _curInt = p.intensity;
-        ApplyCurrent();
+        _hour = startHour;
+        Day = 1;
+        _isNight = IsNightAt(_hour);
+        IsNight = _isNight;
+        if (spawnManager != null) spawnManager.enabled = _isNight;
 
-        IsNight = startAtNight;
-        if (spawnManager != null) spawnManager.enabled = startAtNight;
+        ApplyLight(DayFactor(_hour));
     }
 
-    // --- Public API (call from your game manager) ---------------------------
+    private void Update()
+    {
+        if (_ended) return;
 
-    public void SetNight() => SetPhase(true);
-    public void SetDay() => SetPhase(false);
-    public void Toggle() => SetPhase(!IsNight);
+        // Advance the clock.
+        _hour += (24f / Mathf.Max(1f, dayLengthSeconds)) * Time.deltaTime;
+        if (_hour >= 24f) _hour -= 24f;
+
+        // Ease the light by time of day (dawn/dusk ramps handle the early transition).
+        ApplyLight(DayFactor(_hour));
+
+        // Handle phase boundary crossings.
+        bool night = IsNightAt(_hour);
+        if (night != _isNight)
+        {
+            _isNight = night;
+            IsNight = night;
+            if (night) EnterNight(); else EnterDay();
+        }
+    }
+
+    // --- Optional manual control (jumps the clock to that phase) -------------
+    public void SetDay() => _hour = dayStartHour;
+    public void SetNight() => _hour = nightStartHour;
 
     // ------------------------------------------------------------------------
 
-    private void SetPhase(bool toNight)
+    private void EnterNight()
     {
-        IsNight = toNight;
-
-        // Spawning on at night, off during day.
-        if (spawnManager != null) spawnManager.enabled = toNight;
-
-        // Fire hooks so other mechanics can react.
-        if (toNight) onBecameNight?.Invoke(); else onBecameDay?.Invoke();
-        PhaseChanged?.Invoke(toNight);
-
-        // Built-in mechanic: daybreak purges all monsters.
-        if (!toNight) KillAllMonsters();
-
-        // Ease the light to the target profile (visual only — the phase already changed).
-        if (_transition != null) StopCoroutine(_transition);
-        _transition = StartCoroutine(LightTransition(toNight ? night : day));
+        if (spawnManager != null) spawnManager.enabled = true;
+        onBecameNight?.Invoke();
+        PhaseChanged?.Invoke(true);
     }
 
-    private IEnumerator LightTransition(LightProfile target)
+    private void EnterDay()
     {
-        Vector3 startRot = _curRot;
-        float startTemp = _curTemp;
-        float startInt = _curInt;
-
-        float t = 0f, dur = Mathf.Max(0.01f, transitionSeconds);
-        while (t < dur)
+        // New morning: advance the day, or end the run if the final night is survived.
+        if (Day >= daysToSurvive)
         {
-            t += Time.deltaTime;
-            float k = Mathf.Clamp01(t / dur);
-            _curRot = Vector3.Lerp(startRot, target.rotation, k);
-            _curTemp = Mathf.Lerp(startTemp, target.temperature, k);
-            _curInt = Mathf.Lerp(startInt, target.intensity, k);
-            ApplyCurrent();
-            yield return null;
+            _ended = true;
+            if (spawnManager != null) spawnManager.enabled = false;
+            KillAllMonsters();
+            onSurvived?.Invoke(); // game-over / win screen
+            return;
         }
 
-        _curRot = target.rotation; _curTemp = target.temperature; _curInt = target.intensity;
-        ApplyCurrent();
-        _transition = null;
+        Day++;
+        if (spawnManager != null) spawnManager.enabled = false;
+        KillAllMonsters();
+        onBecameDay?.Invoke();
+        PhaseChanged?.Invoke(false);
     }
 
-    private void ApplyCurrent()
+    private bool IsNightAt(float h) => h >= nightStartHour || h < dayStartHour;
+
+    // 1 = full day, 0 = full night, eased over rampHours before each boundary.
+    private float DayFactor(float h)
+    {
+        float dawnStart = dayStartHour - rampHours;   // e.g. 04:00
+        float duskStart = nightStartHour - rampHours; // e.g. 18:00
+
+        if (h < dawnStart) return 0f;                                        // deep night
+        if (h < dayStartHour) return Mathf.Clamp01((h - dawnStart) / rampHours);   // dawn
+        if (h < duskStart) return 1f;                                        // full day
+        if (h < nightStartHour) return Mathf.Clamp01(1f - (h - duskStart) / rampHours); // dusk
+        return 0f;                                                           // night
+    }
+
+    private void ApplyLight(float dayFactor)
     {
         if (directionalLight == null) return;
-        directionalLight.transform.eulerAngles = _curRot;
-        directionalLight.colorTemperature = _curTemp;
-        directionalLight.intensity = _curInt;
+        directionalLight.transform.eulerAngles = Vector3.Lerp(night.rotation, day.rotation, dayFactor);
+        directionalLight.colorTemperature = Mathf.Lerp(night.temperature, day.temperature, dayFactor);
+        directionalLight.intensity = Mathf.Lerp(night.intensity, day.intensity, dayFactor);
     }
 
     private void KillAllMonsters()
     {
-        // Monsters = things with EnemyAI (not passive animals, which use AnimalAI).
         var monsters = FindObjectsByType<EnemyAI>(FindObjectsSortMode.None);
         for (int i = 0; i < monsters.Length; i++)
         {
