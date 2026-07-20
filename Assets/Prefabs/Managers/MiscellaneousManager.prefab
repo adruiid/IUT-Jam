@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7216592763269180416}
   - component: {fileID: 5568726536192001634}
   - component: {fileID: 1590531309765061986}
+  - component: {fileID: 4963978831830602821}
+  - component: {fileID: 2489393291599709776}
   m_Layer: 0
   m_Name: MiscellaneousManager
   m_TagString: Untagged
@@ -62,7 +64,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.4
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -158,3 +160,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   source: {fileID: 5568726536192001634}
   music: {fileID: 8300000, guid: 3934919fe9f940b43847a914815d15ab, type: 3}
+--- !u!114 &4963978831830602821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097356784614648311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f5f779edfd3ea84d8873d0692755d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
+  fadeGroup: {fileID: 0}
+  fadeDuration: 1
+--- !u!114 &2489393291599709776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097356784614648311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4397dc12641474f8c9c9237f7fe51e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoadScene
