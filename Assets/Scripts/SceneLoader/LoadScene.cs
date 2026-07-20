@@ -19,6 +19,12 @@ public class LoadScene : MonoBehaviour
         StartCoroutine(LoadSceneAsync(1));
     }
 
+    public void RestartLevel()
+    {
+        Time.timeScale = 1f;
+        StartCoroutine(LoadSceneAsync(SceneManager.GetActiveScene().buildIndex));
+    }
+
     public void ReturnToMainMenu()
     {
         SceneManager.LoadScene(0);

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 public class PlayerStatusBasic : MonoBehaviour, IDamageable
 {
@@ -22,6 +23,11 @@ public class PlayerStatusBasic : MonoBehaviour, IDamageable
     public event Action onHealthChanged;
     public event Action onHungerChanged;
 
+    [Header("Events")]
+    [SerializeField] private UnityEvent onGameOver;
+
+    private bool _playerDead = false;
+
 
 
     private void Awake()
@@ -43,10 +49,18 @@ public class PlayerStatusBasic : MonoBehaviour, IDamageable
 
     public void SetCurrentHealth(int newHP)
     {
+        if (_playerDead) return;
         
         currentHealth = newHP >= 0 ? newHP: 0 ;
         currentHealth = currentHealth > maxHealth ? maxHealth : currentHealth;
         Debug.Log("Player Current Health: " + currentHealth);
+
+        if (currentHealth == 0)
+        {
+            _playerDead = true;
+            onGameOver?.Invoke();
+        }
+
         onHealthChanged?.Invoke();
     }
 
