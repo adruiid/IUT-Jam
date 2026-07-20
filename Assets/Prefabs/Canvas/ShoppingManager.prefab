@@ -47,6 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShoppingManager
   shoppingSlots:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &3753779807547855507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,3 +65,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShoppingMenu
   shoppingCanvas: {fileID: 0}
+  source: {fileID: 0}
+  shopKeeperNoises: {fileID: 8300000, guid: b9a3d905cccd641429af7a118c1e7069, type: 3}
