@@ -55,7 +55,7 @@ MonoBehaviour:
     temperature: 10000
     intensity: 1
   dayLengthSeconds: 480
-  startHour: 20
+  startHour: 6
   dayStartHour: 6
   nightStartHour: 20
   rampHours: 2
@@ -83,21 +83,23 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   musicSource: {fileID: 7482755777601996842}
   dayMusic: {fileID: 8300000, guid: 583ea1437f3497841abafed8b723d7b1, type: 3}
   nightMusic: {fileID: 8300000, guid: 0de6356018889bb438d9ae871af6a7d8, type: 3}
   musicSilenceSeconds: 10
+  musicVolume: 0.7
+  musicFadeSeconds: 2
 --- !u!82 &7482755777601996842
 AudioSource:
   m_ObjectHideFlags: 0
@@ -111,7 +113,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0
