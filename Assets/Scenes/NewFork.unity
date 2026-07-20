@@ -11691,7 +11691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603607163599226601, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6348422.5
+      value: 6362068.5
       objectReference: {fileID: 0}
     - target: {fileID: 7125597268627422835, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -26139,7 +26139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 722474719088277184, guid: 89052838563a50b4fa69b0af9fbcfb2a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6289125.5
+      value: 6302771.5
       objectReference: {fileID: 0}
     - target: {fileID: 871964644210730067, guid: 89052838563a50b4fa69b0af9fbcfb2a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -27612,7 +27612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603437207767757354, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 42461508
+      value: 42475124
       objectReference: {fileID: 0}
     - target: {fileID: 6613745555896641206, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -31022,7 +31022,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1753636982}
         m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
         m_MethodName: RestartLevel
         m_Mode: 1
