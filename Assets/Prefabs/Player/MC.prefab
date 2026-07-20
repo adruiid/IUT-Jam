@@ -588,6 +588,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4755065799464063930}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5241799143953076300}
   m_SourcePrefab: {fileID: 100100000, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
 --- !u!4 &371011319809203255 stripped
 Transform:
@@ -724,10 +727,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 274649b0e221539409070ebf6c18918b, type: 3}
   - {fileID: 8300000, guid: a3194b8bbc96ef84fab1f98f4b7dae3e, type: 3}
   FootstepAudioVolume: 0.3
-  JumpHeight: 1.2
+  JumpHeight: 0.5
   Gravity: -15
-  JumpTimeout: 0.3
-  FallTimeout: 0.15
+  JumpTimeout: 0.8
+  FallTimeout: 0.1
   Grounded: 1
   GroundedOffset: -0.14
   GroundedRadius: 0.28
@@ -927,36 +930,43 @@ MonoBehaviour:
     sfx: {fileID: 0}
     requiredTool: {fileID: 11400000, guid: 2399de4b62c547c41972c7b796f70b9a, type: 2}
     toolPrefab: {fileID: 0}
+    hungerCost: 10
   - type: 2
     animatorTrigger: Repair
     sfx: {fileID: 0}
     requiredTool: {fileID: 11400000, guid: 1e8371d1413cca0489fce9496b927f67, type: 2}
     toolPrefab: {fileID: 0}
+    hungerCost: 10
   - type: 1
     animatorTrigger: Repair
     sfx: {fileID: 0}
     requiredTool: {fileID: 11400000, guid: 950c977f54c5249418f25fb8b4991c64, type: 2}
     toolPrefab: {fileID: 12497306346252605, guid: 895313d0335f04b41bfc5f20aec56c78, type: 3}
+    hungerCost: 10
   - type: 4
     animatorTrigger: Dig
     sfx: {fileID: 0}
     requiredTool: {fileID: 11400000, guid: 950c977f54c5249418f25fb8b4991c64, type: 2}
     toolPrefab: {fileID: 0}
+    hungerCost: 0
   - type: 5
     animatorTrigger: 
     sfx: {fileID: 0}
     requiredTool: {fileID: 0}
     toolPrefab: {fileID: 0}
+    hungerCost: 0
   - type: 6
     animatorTrigger: 
     sfx: {fileID: 0}
     requiredTool: {fileID: 0}
     toolPrefab: {fileID: 0}
+    hungerCost: 0
   - type: 7
     animatorTrigger: 
     sfx: {fileID: 8300000, guid: 1a9f6ac6abd26164ab8050ce58223019, type: 3}
     requiredTool: {fileID: 11400000, guid: 3d23671eb255c6042b9380f666c5a2a7, type: 2}
     toolPrefab: {fileID: 919132149155446097, guid: 46a2bad05b22425419be8bb3cefb8d42, type: 3}
+    hungerCost: 10
   onMissingTool:
     m_PersistentCalls:
       m_Calls: []
@@ -994,15 +1004,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039707510980740749}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e19567db7202444ea99adfed88378d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
   gunItem: {fileID: 0}
-  gunPrefab: {fileID: 0}
+  gunPrefab: {fileID: 7001555617241222686, guid: b6da7e134a53ada41ac595176461d82d, type: 3}
   holsterMount: {fileID: 3081995041980939177}
   gunHandMount: {fileID: 7968165856201372938}
+  shootMount: {fileID: 0}
   gunWorldScale: {x: 1, y: 1, z: 1}
   daggerPrefab: {fileID: 6991199167903785909, guid: d1313a2fc5b3fd44cb094326d494267e, type: 3}
   daggerMount: {fileID: 2144898353275307566}
@@ -1035,6 +1046,26 @@ MonoBehaviour:
   reloadTime: 1.2
   interactor: {fileID: 1369483648140206388}
   autoInteract: {fileID: 6088979904313599063}
+  shootHungerCost: 2
+  meleeHungerCost: 5
+--- !u!114 &5241799143953076300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039707510980740749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a9fd769d946654abb2fb6257dbe47c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraZoom
+  cameraObject: {fileID: 0}
+  minDistance: 2
+  maxDistance: 15
+  zoomStep: 1
+  smoothTime: 0.12
+  scrollUpZoomsIn: 1
 --- !u!95 &6036569528926570061 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}

@@ -438,7 +438,7 @@ MonoBehaviour:
   playerTag: Player
   moveSpeed: 3.5
   repathInterval: 0.2
-  attackRange: 1.8
+  attackRange: 3
   attackDamage: 10
   attackCooldown: 1.5
   attackWindup: 0.4
