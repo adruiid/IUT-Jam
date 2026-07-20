@@ -45,6 +45,12 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("Optional. Leave empty to skip the death animation.")]
     [SerializeField] private string dieTrigger = "Die";
 
+    [Header("Audio")]
+    [Tooltip("Played when the enemy swings (attack).")]
+    [SerializeField] private AudioClip attackSfx;
+    [Tooltip("Source for the attack SFX. Auto-found on this object if empty.")]
+    [SerializeField] private AudioSource audioSource;
+
     [Header("Death")]
     [Tooltip("Seconds to keep the corpse before destroying (lets the death anim play).")]
     [SerializeField] private float deathDelay = 2f;
@@ -71,6 +77,7 @@ public class EnemyAI : MonoBehaviour
         _collider = GetComponentInChildren<Collider>();
         if (animator == null) animator = GetComponentInChildren<Animator>();
         if (!string.IsNullOrEmpty(speedParam)) _speedHash = Animator.StringToHash(speedParam);
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
 
         _health.Died += OnDied;
     }
@@ -123,6 +130,12 @@ public class EnemyAI : MonoBehaviour
 
         if (animator != null && !string.IsNullOrEmpty(attackTrigger))
             animator.SetTrigger(attackTrigger);
+
+        if (attackSfx != null)
+        {
+            if (audioSource != null) audioSource.PlayOneShot(attackSfx);
+            else AudioSource.PlayClipAtPoint(attackSfx, transform.position);
+        }
 
         yield return new WaitForSeconds(attackWindup);
 

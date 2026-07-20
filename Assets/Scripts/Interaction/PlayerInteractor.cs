@@ -453,7 +453,7 @@ public class PlayerInteractor : MonoBehaviour
 
     private CookInteract currentCookingInteract;
     private bool isCooking;
-    [SerializeField] private float cookingExitDistance = 5f;
+    [SerializeField] private float cookingExitDistance = 2f;
 
     public void BeginCooking(CookInteract station)
     {
