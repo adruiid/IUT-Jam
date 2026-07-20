@@ -45,7 +45,6 @@ public class PauseMenuManager : MonoBehaviour
         resumeGameButton.GetComponent<Button>().onClick.AddListener(ResumeButton);
         settingButton.GetComponent<Button>().onClick.AddListener(OnSettingButton);
         returnSettingButton.GetComponent<Button>().onClick.AddListener(OnSettingButton);
-        exitToMenuButton.GetComponent<Button>().onClick.AddListener(OnExitButton);
     }
 
     private void Update()
@@ -66,7 +65,7 @@ public class PauseMenuManager : MonoBehaviour
         PauseUnpause();
     }
 
-    private void PauseUnpause()
+    public void PauseUnpause()
     {
         InventoryOpenClose.instance.InventoryStatus(false);
         CraftMenuOpenClose.instance.CraftMenuStatus(false);

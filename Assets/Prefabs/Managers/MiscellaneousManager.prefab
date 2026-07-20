@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 5568726536192001634}
   - component: {fileID: 1590531309765061986}
   - component: {fileID: 4963978831830602821}
-  - component: {fileID: 2489393291599709776}
+  - component: {fileID: 277078177965011151}
+  - component: {fileID: 1171125379238842025}
+  - component: {fileID: 1758785284974638511}
   m_Layer: 0
   m_Name: MiscellaneousManager
   m_TagString: Untagged
@@ -56,13 +58,13 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097356784614648311}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -2830680140063221531, guid: ba51347e37e274246aaf536950a53afd, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -153,7 +155,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097356784614648311}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b4ecff6a4590f648a6ed3e832caf41f, type: 3}
   m_Name: 
@@ -167,14 +169,54 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097356784614648311}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f5f779edfd3ea84d8873d0692755d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
   fadeGroup: {fileID: 0}
   fadeDuration: 1
---- !u!114 &2489393291599709776
+--- !u!114 &277078177965011151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097356784614648311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da975f1bc119b8344b91233d32505118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameOverManager
+  gameOverCanvas: {fileID: 0}
+  background: {fileID: 0}
+  gameOverText: {fileID: 0}
+  returnButton: {fileID: 0}
+  fadeDuration: 1
+  spacingDuration: 1
+  gameOverMusicSource: {fileID: 0}
+  gameOverMusic: {fileID: 8300000, guid: c2ba6ba8e60e2d849a0db6a1bb467376, type: 3}
+--- !u!114 &1171125379238842025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097356784614648311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3dcc96af5fbf040adb254b53f2cd69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WinSignal
+  gameOverCanvas: {fileID: 0}
+  background: {fileID: 0}
+  gameOverText: {fileID: 0}
+  returnButton: {fileID: 0}
+  fadeDuration: 1
+  spacingDuration: 1
+  gameOverMusicSource: {fileID: 0}
+  gameOverMusic: {fileID: 8300000, guid: 29ad09b9544f7a84abe9b9c226296eea, type: 3}
+--- !u!114 &1758785284974638511
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,3 +228,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d4397dc12641474f8c9c9237f7fe51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadScene
+  loadingScreen: {fileID: 0}
+  loadingBarFill: {fileID: 0}

@@ -20858,7 +20858,6 @@ GameObject:
   - component: {fileID: 841017122}
   - component: {fileID: 841017124}
   - component: {fileID: 841017125}
-  - component: {fileID: 841017127}
   - component: {fileID: 841017126}
   m_Layer: 0
   m_Name: Main Menu Manager
@@ -21032,20 +21031,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LoadScene
   loadingScreen: {fileID: 127238799}
   loadingBarFill: {fileID: 404916369}
---- !u!114 &841017127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 841017121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f5f779edfd3ea84d8873d0692755d83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
-  fadeGroup: {fileID: 703902689}
-  fadeDuration: 1
 --- !u!4 &847552180 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3491086722150959662, guid: c04ea2a3624672c4492e67174bf47f1d, type: 3}

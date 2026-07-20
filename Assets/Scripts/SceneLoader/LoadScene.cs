@@ -27,7 +27,10 @@ public class LoadScene : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        PauseMenuManager.instance.PauseUnpause();
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
+        
     }
 
     public void ExitGame()
