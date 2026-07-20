@@ -13,21 +13,27 @@ public class EnemySpawner : MonoBehaviour
     public class EnemyType
     {
         public GameObject prefab;
-        [Tooltip("Relative spawn chance. Weight 2 spawns twice as often as weight 1. 0 = never.")]
+        [Tooltip("Base relative spawn chance on night 1. Weight 2 spawns twice as often as weight 1. 0 = never.")]
         [Min(0f)] public float weight = 1f;
+        [Tooltip("Weight multiplies by this each night. >1 = more common later (elites), <1 = rarer later (grunts), 1 = unchanged.")]
+        [Min(0f)] public float weightPerNight = 1f;
     }
 
     [Header("Enemies (weighted random)")]
     [SerializeField] private EnemyType[] enemyTypes;
     [SerializeField] private string playerTag = "Player";
-    [Tooltip("Maximum enemies alive at once.")]
-    [SerializeField] private int maxAlive = 30;
+    [Tooltip("Maximum enemies alive at once on night 1.")]
+    [SerializeField] private int maxAlive = 20;
+    [Tooltip("Max-alive cap multiplies by this each night (1.3 = 30% more per night).")]
+    [SerializeField] private float maxAlivePerNight = 1.3f;
 
-    [Header("Rate (ramps from start -> min over Ramp Duration)")]
-    [SerializeField] private float startInterval = 2f;
+    [Header("Rate (per-night)")]
+    [Tooltip("Seconds between spawns on the FIRST night.")]
+    [SerializeField] private float baseInterval = 2f;
+    [Tooltip("Fastest allowed interval, so it never gets absurd.")]
     [SerializeField] private float minInterval = 0.4f;
-    [Tooltip("Seconds over which spawning ramps to its fastest. 0 = always fastest.")]
-    [SerializeField] private float rampDuration = 120f;
+    [Tooltip("Each night the spawn RATE multiplies by this (interval divides by it). 1.5 = 50% faster per night.")]
+    [SerializeField] private float nightRateMultiplier = 1.5f;
 
     [Header("Placement (ring around the player)")]
     [SerializeField] private float minRadius = 12f;
@@ -44,23 +50,23 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float noSpawnCheckRadius = 0.5f;
 
     private Transform _player;
+    private DayNightController _dayNight;
     private int _alive;
     private float _nextSpawn;
-    private float _startTime;
 
     private void Start()
     {
         var go = GameObject.FindGameObjectWithTag(playerTag);
         if (go != null) _player = go.transform;
+        _dayNight = FindAnyObjectByType<DayNightController>();
 
-        _startTime = Time.time;
-        _nextSpawn = Time.time + startInterval;
+        _nextSpawn = Time.time + CurrentInterval();
     }
 
     private void Update()
     {
         if (_player == null || enemyTypes == null || enemyTypes.Length == 0) return;
-        if (Time.time < _nextSpawn || _alive >= maxAlive) return;
+        if (Time.time < _nextSpawn || _alive >= EffectiveMaxAlive()) return;
 
         GameObject prefab = PickEnemy();
         if (prefab != null && TryGetSpawnPoint(out Vector3 pos))
@@ -69,31 +75,43 @@ public class EnemySpawner : MonoBehaviour
         _nextSpawn = Time.time + CurrentInterval();
     }
 
+    private int CurrentDay => _dayNight != null ? _dayNight.Day : 1;
+
     private float CurrentInterval()
     {
-        float t = rampDuration <= 0f ? 1f : Mathf.Clamp01((Time.time - _startTime) / rampDuration);
-        return Mathf.Lerp(startInterval, minInterval, t);
+        // Spawn rate multiplies by nightRateMultiplier each night (Day 1 = base, Day 2 = 1.5x, ...).
+        float rate = Mathf.Pow(nightRateMultiplier, Mathf.Max(0, CurrentDay - 1));
+        return Mathf.Max(minInterval, baseInterval / rate);
     }
 
-    // Weighted random pick across the enemy types.
+    private int EffectiveMaxAlive()
+    {
+        return Mathf.Max(1, Mathf.RoundToInt(maxAlive * Mathf.Pow(maxAlivePerNight, Mathf.Max(0, CurrentDay - 1))));
+    }
+
+    // A type's weight for the current night (base weight * weightPerNight^(night-1)).
+    private float EffectiveWeight(EnemyType e, int day)
+    {
+        if (e == null || e.prefab == null) return 0f;
+        return Mathf.Max(0f, e.weight) * Mathf.Pow(Mathf.Max(0f, e.weightPerNight), Mathf.Max(0, day - 1));
+    }
+
+    // Weighted random pick across the enemy types (weights scale per night).
     private GameObject PickEnemy()
     {
+        int day = CurrentDay;
+
         float total = 0f;
         for (int i = 0; i < enemyTypes.Length; i++)
-        {
-            var e = enemyTypes[i];
-            if (e != null && e.prefab != null) total += Mathf.Max(0f, e.weight);
-        }
+            total += EffectiveWeight(enemyTypes[i], day);
         if (total <= 0f) return null;
 
         float roll = Random.value * total;
         for (int i = 0; i < enemyTypes.Length; i++)
         {
-            var e = enemyTypes[i];
-            if (e == null || e.prefab == null) continue;
-
-            float w = Mathf.Max(0f, e.weight);
-            if (roll < w) return e.prefab;
+            float w = EffectiveWeight(enemyTypes[i], day);
+            if (w <= 0f) continue;
+            if (roll < w) return enemyTypes[i].prefab;
             roll -= w;
         }
         return null; // shouldn't happen, but safe

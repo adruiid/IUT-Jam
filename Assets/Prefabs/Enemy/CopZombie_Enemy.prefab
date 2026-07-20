@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9dc6d4fe524c1499fc07de2b5c58b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 30
+  maxHealth: 20
   onDamaged:
     m_PersistentCalls:
       m_Calls: []
@@ -447,13 +447,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   playerTag: Player
-  moveSpeed: 3.5
+  moveSpeed: 2
   repathInterval: 0.2
   attackRange: 1.8
-  attackDamage: 10
-  attackCooldown: 1.5
-  attackWindup: 0.4
-  attackRecovery: 0.3
+  attackDamage: 6
+  attackCooldown: 2.5
+  attackWindup: 0.7
+  attackRecovery: 0.8
   hitRangeLeniency: 1.25
   animator: {fileID: 5315626438460983670}
   speedParam: Speed
@@ -461,7 +461,7 @@ MonoBehaviour:
   dieTrigger: Death
   attackSfx: {fileID: 8300000, guid: 9c0145fe4d28be5418447eb570b4a684, type: 3}
   audioSource: {fileID: 0}
-  deathDelay: 5
+  deathDelay: 4
   deathYOffset: -0.8
 --- !u!136 &3422528545728168890
 CapsuleCollider:

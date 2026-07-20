@@ -676,7 +676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   canPush: 0
   strength: 1.1
 --- !u!114 &2916712904169666375
@@ -736,7 +736,7 @@ MonoBehaviour:
   GroundedRadius: 0.28
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 385
   MovementLocked: 0
   CinemachineCameraTarget: {fileID: 8761400295691910083}
   TopClamp: 70
