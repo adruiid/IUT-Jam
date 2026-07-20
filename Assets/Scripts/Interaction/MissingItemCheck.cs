@@ -37,7 +37,7 @@ public class MissingItemCheck : MonoBehaviour
 
         if (popup != null)
         {
-            Destroy(_popup);
+            Destroy(popup);
             popup = null;
         }
     }
