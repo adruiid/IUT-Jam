@@ -34,6 +34,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float minInterval = 0.4f;
     [Tooltip("Each night the spawn RATE multiplies by this (interval divides by it). 1.5 = 50% faster per night.")]
     [SerializeField] private float nightRateMultiplier = 1.5f;
+    [Tooltip("Grace delay after night begins before the first spawn (time to get back to base).")]
+    [SerializeField] private float nightStartDelay = 5f;
 
     [Header("Placement (ring around the player)")]
     [SerializeField] private float minRadius = 12f;
@@ -59,8 +61,12 @@ public class EnemySpawner : MonoBehaviour
         var go = GameObject.FindGameObjectWithTag(playerTag);
         if (go != null) _player = go.transform;
         _dayNight = FindAnyObjectByType<DayNightController>();
+    }
 
-        _nextSpawn = Time.time + CurrentInterval();
+    // Runs each time spawning is enabled (i.e. when night begins) — grace period first.
+    private void OnEnable()
+    {
+        _nextSpawn = Time.time + nightStartDelay;
     }
 
     private void Update()
