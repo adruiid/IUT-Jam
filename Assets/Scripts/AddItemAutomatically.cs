@@ -15,7 +15,16 @@ public class AddItemAutomatically : MonoBehaviour
                 temp = i;
                 InventoryManager.instance.AddItem(containItem);
             }
-            PickupPopup.Instance.Show(containItem, temp, transform);
+            PickupPopup.Instance.Show(containItem, temp-1, transform);
+        }
+    }
+
+    public void SendToPlayerOnce()
+    {
+        foreach(Items containItem in items)
+        {
+            InventoryManager.instance.AddItem(containItem);
+            PickupPopup.Instance.Show(containItem, 1, transform);
         }
     }
 }

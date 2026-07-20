@@ -590,7 +590,7 @@ PrefabInstance:
       addedObject: {fileID: 4755065799464063930}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5241799143953076300}
+      addedObject: {fileID: 7896685202644803438}
   m_SourcePrefab: {fileID: 100100000, guid: 31b5054ce2d8f954bb84a6996f477c34, type: 3}
 --- !u!4 &371011319809203255 stripped
 Transform:
@@ -1009,12 +1009,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e19567db7202444ea99adfed88378d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
-  gunItem: {fileID: 0}
+  gunItem: {fileID: 11400000, guid: 7db471ca859e3d04085403aa17e6431b, type: 2}
   gunPrefab: {fileID: 7001555617241222686, guid: b6da7e134a53ada41ac595176461d82d, type: 3}
   holsterMount: {fileID: 3081995041980939177}
   gunHandMount: {fileID: 7968165856201372938}
-  shootMount: {fileID: 0}
-  gunWorldScale: {x: 1, y: 1, z: 1}
+  shootMount: {fileID: 3178933265958780331}
+  gunWorldScale: {x: 0.1, y: 0.1, z: 0.1}
   daggerPrefab: {fileID: 6991199167903785909, guid: d1313a2fc5b3fd44cb094326d494267e, type: 3}
   daggerMount: {fileID: 2144898353275307566}
   daggerWorldScale: {x: 0.1, y: 0.1, z: 0.1}
@@ -1048,7 +1048,7 @@ MonoBehaviour:
   autoInteract: {fileID: 6088979904313599063}
   shootHungerCost: 2
   meleeHungerCost: 5
---- !u!114 &5241799143953076300
+--- !u!114 &7896685202644803438
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
