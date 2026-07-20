@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7216592763269180416}
   - component: {fileID: 5568726536192001634}
   - component: {fileID: 1590531309765061986}
-  - component: {fileID: 6651880970834579659}
   - component: {fileID: 4963978831830602821}
   - component: {fileID: 2489393291599709776}
   m_Layer: 0
@@ -161,20 +160,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   source: {fileID: 5568726536192001634}
   music: {fileID: 8300000, guid: 3934919fe9f940b43847a914815d15ab, type: 3}
---- !u!114 &6651880970834579659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1097356784614648311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b19548d5f9274c447a841ab58f9d15e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TimeTracker
-  dayLength: 480
-  timerText: {fileID: 0}
 --- !u!114 &4963978831830602821
 MonoBehaviour:
   m_ObjectHideFlags: 0
