@@ -900,6 +900,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatusBasic
   maxHealth: 100
   maxHunger: 100
+  hungerRestoreSfx: {fileID: 8300000, guid: 7275c9611b0f3264d9d0213b55083610, type: 3}
+  hungerEmptySfx: {fileID: 8300000, guid: ee39f8cc58662c34ebdf36a1114bb9f3, type: 3}
+  hungerLowThreshold: 10
+  audioSource: {fileID: 3868897824163370637}
 --- !u!114 &1369483648140206388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -983,6 +987,7 @@ MonoBehaviour:
   outlineWidth: 7
   searchHighlightRadius: 20
   cookingExitDistance: 5
+  shoppingExitDistance: 5
 --- !u!114 &7626407544286556538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1055,7 +1060,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039707510980740749}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87a9fd769d946654abb2fb6257dbe47c, type: 3}
   m_Name: 

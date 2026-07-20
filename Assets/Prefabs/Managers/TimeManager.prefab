@@ -83,8 +83,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   musicSource: {fileID: 7482755777601996842}
-  dayMusic: {fileID: 8300000, guid: 3934919fe9f940b43847a914815d15ab, type: 3}
-  nightMusic: {fileID: 0}
+  dayMusic: {fileID: 8300000, guid: 583ea1437f3497841abafed8b723d7b1, type: 3}
+  nightMusic: {fileID: 8300000, guid: 0de6356018889bb438d9ae871af6a7d8, type: 3}
   musicSilenceSeconds: 10
 --- !u!82 &7482755777601996842
 AudioSource:
