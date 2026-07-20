@@ -1,19 +1,18 @@
 <div align="center">
 
-# 🕯️ ASHFALL
+# 🌑 NIGHTFALL
 
-**An isometric survival game about the hours between dusk and dawn.**
+**Gather by day. Fortify by dusk. Survive three nights.**
 
-*Scavenge by day. Barricade by night. Decide who's worth the last can of food.*
+*The sun keeps them away. When it sets, everything that's out there comes for you — and you'd better be ready.*
 
-[![Unity](https://img.shields.io/badge/Unity-6000.0%20LTS-black?logo=unity)](https://unity.com/)
+[![Unity](https://img.shields.io/badge/Unity-6000.5-black?logo=unity)](https://unity.com/)
+[![Render Pipeline](https://img.shields.io/badge/render-URP-blue)]()
 [![Platform](https://img.shields.io/badge/platform-Windows%20(PC)-blue)]()
-[![Build](https://img.shields.io/badge/build-passing-brightgreen)]()
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
-[![Wishlist on Steam](https://img.shields.io/badge/Steam-Wishlist-1b2838?logo=steam)]()
 
-<!-- Drop a looping gameplay GIF here — it does more than any paragraph below. -->
-<img src="docs/media/hero.gif" alt="Ashfall gameplay" width="720"/>
+<!-- Drop a looping gameplay GIF here — it sells the game better than any text below. -->
+<img src="docs/media/hero.gif" alt="Nightfall gameplay" width="720"/>
 
 </div>
 
@@ -21,80 +20,74 @@
 
 ## What it is
 
-Ashfall is an **isometric, real-time survival game** built in Unity. The design DNA is *Darkwood*'s dread-soaked day/night split crossed with *60 Seconds*' brutal resource triage: daylight is for risk, darkness is for consequences.
+Nightfall is a **third-person, isometric survival game** built in Unity. It runs on a hard day/night clock: **days are for gathering and building, nights are for holding the line.** Make it through **three nights** and you win.
 
-- **Day** — leave the shelter to scavenge. The map is dangerous but you need fuel, food, meds, and materials. Every trip is a bet on how far you push before the light fails.
-- **Night** — you cannot fight what's out there head-on. Board the windows, ration the lamp oil, and survive until dawn. What you *didn't* prepare for is what kills you.
-- **Between** — decide who eats, who's healthy enough to scavenge tomorrow, and what you're willing to trade to see another sunrise.
-
-> Not a horde shooter. A game about scarcity, bad options, and the noise outside the door.
+- **Day (06:00–20:00)** — the world is safe. Chop trees, mine stone and iron, dig for buried loot, cook food to stave off hunger, and craft the gear you'll need. Repair your turrets and spend at the shopkeeper.
+- **Dusk** — the light shifts early, like real twilight. That's your warning: get back to base.
+- **Night (20:00–06:00)** — a horde spawns around you and closes in. Fight with rifle and blade, let your turrets thin the crowd, and stay alive. Each night is faster, denser, and nastier than the last.
+- **Dawn** — daybreak burns the monsters away. Rebuild and do it again… twice more.
 
 ---
 
 ## Features
 
-- 🌗 **Day/night survival loop** — distinct scavenge and defense phases with a hard, escalating clock.
-- 🎒 **Grid inventory & crafting** — weight and space matter; you can't take everything.
-- 🔨 **Barricade system** — reinforce entry points; structures degrade under pressure.
-- 🧑‍🤝‍🧑 **Survivor management** — hunger, health, sanity, and morale per character; hard choices with no clean answer.
-- 🗺️ **Hand-authored + seeded maps** — a stable home layout with procedurally varied scavenge zones for replayability.
-- 🕯️ **Light as a resource** — visibility is a currency you spend, not a given.
-- 📻 **Event system** — narrative and random events (data-driven ScriptableObjects) that reshape a run.
+- 🌗 **Self-driving day/night cycle** — a real clock (starts 06:00), a rising day counter, dynamic sun (rotation, colour temperature, intensity) that eases through dawn/dusk, and day/night music that fades in and out.
+- 🪓 **Interaction & gathering** — chop trees for wood, mine rock/iron, dig for loot, repair structures, talk to the shopkeeper. The right tool (axe / pickaxe / shovel) appears in hand for each job; **click a target to auto-path to it**, or hit **E** up close.
+- 🎒 **Inventory, crafting & cooking** — stackable resource inventory, craft tools/weapons from what you gather, and cook consumables that restore hunger.
+- 🍖 **Survival needs** — health and hunger, with feedback SFX as you eat and when you're starving.
+- 🔫 **Combat** — a bolt-action rifle (only usable once you've crafted one) that aims at the cursor with a magazine, reload, muzzle flash and recoil pause; plus an always-ready **melee dagger** (press **V**, or right-click an enemy to charge in and strike).
+- 🛡️ **Repairable turrets** — auto-tracking Y-axis turrets that lock the closest target and fire until out of ammo, then power down until you repair the base to reload them.
+- 🧟 **Five enemy types** — Zombie, Ghoul, Girl Scout, Mutant, and Parasite, each with a distinct move-speed / attack-speed / damage / health profile.
+- 🌊 **Escalating horde director** — enemies spawn in a ring around you on the NavMesh, with **safe zones** (base, barn, hut) excluded and a grace delay each night. Every night the spawn rate ×1.5, the alive-cap grows, and the mix shifts from grunts toward elites.
+- 🐄 **Wildlife** — chickens and cows that wander their home range, take hits (with a red flash), and drop resources.
+- 🎥 **Isometric camera** — Cinemachine follow with mouse-wheel zoom that ignores scroll while you're over UI.
 
 ---
 
-## Screenshots
+## Controls
 
-| Shelter | Scavenge run | Nightfall |
-|---|---|---|
-| ![](docs/media/shot_shelter.png) | ![](docs/media/shot_scavenge.png) | ![](docs/media/shot_night.png) |
+| Input | Action |
+|---|---|
+| **WASD / Arrows** | Move |
+| **Mouse wheel** | Zoom camera |
+| **Left-click** on a highlighted object | Auto-walk to it and interact (chop / mine / dig / repair / shop) |
+| **Left-click** elsewhere | Draw the rifle and fire toward the cursor *(if you own one)* |
+| **E** | Interact with the nearest object in range |
+| **R** | Reload |
+| **V** | Melee the closest enemy in range |
+| **Right-click** an enemy | Run up to it and melee |
+
+Keyboard + mouse is the primary scheme; movement/interaction also work on a gamepad via the shared input actions.
 
 ---
 
 ## Built with
 
-- **Engine:** Unity `6000.0 LTS` (Universal Render Pipeline)
+- **Engine:** Unity `6000.5` (Universal Render Pipeline)
 - **Language:** C#
-- **Input:** Unity Input System (keyboard + mouse, controller supported)
-- **Architecture:** MonoBehaviour + ScriptableObject-driven data (items, events, enemies)
-- **Persistence:** JSON save system (`Application.persistentDataPath`)
-
-> **Assumption:** Unity 6 LTS + URP, PC-first. If you're on a different LTS, update `ProjectSettings/ProjectVersion.txt` expectations and the badge above.
+- **Input:** Unity Input System (keyboard + mouse, partial controller)
+- **Navigation:** AI Navigation 2.0 (NavMesh) — enemy pathing, crowd avoidance, click-to-move
+- **Camera:** Cinemachine 3.1 (3rd Person Follow)
+- **Character base:** Unity Starter Assets (ThirdPersonController), extended with a movement-lock flag for interactions/combat
+- **Architecture:** MonoBehaviour + ScriptableObject data (items, recipes); a shared `IDamageable` interface connects bullets, melee, turrets, enemies, animals, and the player
 
 ---
 
 ## Getting started
 
 ### Prerequisites
-- Unity Hub + Unity **6000.0 LTS** (install the exact version in `ProjectSettings/ProjectVersion.txt` to avoid reimport churn)
-- Git with [Git LFS](https://git-lfs.com/) (art/audio are tracked via LFS)
+- Unity Hub + Unity **6000.5** (match `ProjectSettings/ProjectVersion.txt` to avoid reimport churn)
+- Git (with Git LFS if you add large art/audio)
 
 ### Clone & open
 ```bash
-git lfs install
-git clone https://github.com/<you>/ashfall.git
-cd ashfall
+git clone https://github.com/adruiid/IUT-Jam.git
+cd IUT-Jam
 ```
-Then in Unity Hub: **Add project from disk → select the cloned folder → open with the matching editor version.**
-
-First open will take a few minutes while Unity imports and builds the Library. That's expected — don't commit `Library/`.
+Then in Unity Hub: **Add → select the cloned folder → open with the matching editor version.** First import builds the `Library/` (a few minutes) — that's expected and not committed.
 
 ### Play
-Open `Assets/_Project/Scenes/Boot.unity` and press ▶️. `Boot` loads into the main menu; **New Run** starts the loop.
-
----
-
-## Building
-
-**From the editor:** `File → Build Settings → Windows → Build`.
-
-**Headless / CI:**
-```bash
-Unity -quit -batchmode -projectPath . \
-  -executeMethod BuildScripts.BuildWindows \
-  -logFile build.log
-```
-See `Assets/Editor/BuildScripts.cs` for build targets and output paths.
+Open the main gameplay scene under `Assets/Scenes/`, bake the NavMesh if prompted, and press ▶️.
 
 ---
 
@@ -102,72 +95,43 @@ See `Assets/Editor/BuildScripts.cs` for build targets and output paths.
 
 ```
 Assets/
-├── _Project/              # Everything first-party lives under one root
-│   ├── Scenes/            # Boot, MainMenu, Shelter, Scavenge_*
-│   ├── Scripts/
-│   │   ├── Core/          # Game loop, day/night clock, save system
-│   │   ├── Survival/      # Needs (hunger/health/sanity), survivors
-│   │   ├── Inventory/     # Grid inventory, items, crafting
-│   │   ├── Defense/       # Barricades, night threats, spawn logic
-│   │   ├── World/         # Map gen, scavenge zones, interactables
-│   │   └── UI/            # HUD, menus, inventory screens
-│   ├── Data/              # ScriptableObjects: items, recipes, events, enemies
-│   ├── Art/               # Sprites, models, materials (LFS)
-│   ├── Audio/             # SFX, music (LFS)
-│   └── Prefabs/
-├── Editor/                # Build scripts, custom inspectors, tooling
-├── Plugins/               # Third-party
-└── Settings/              # URP assets, input actions
+├── Scripts/
+│   ├── Interaction/    # Interactable base, PlayerInteractor, auto-walk,
+│   │                   #   ResourceNode (log/mine), DigSpot, RepairableStructure, Shopkeeper
+│   ├── Combat/         # PlayerCombat (gun + dagger), Weapon, Bullet, Turret, IDamageable
+│   ├── Enemies/        # EnemyAI, EnemyHealth, HitFlash, EnemySpawner (horde director)
+│   ├── Animals/        # AnimalAI (chicken / cow)
+│   ├── Inventory/      # Inventory, items, consumables, pickups
+│   ├── Crafting/       # Crafting + cooking
+│   ├── Managers/       # DayNightController (clock, sun, music, day counter, win event)
+│   ├── Player/         # PlayerStatusBasic (health / hunger)
+│   ├── Camera/         # CameraZoom
+│   ├── UI/             # DayNightUI and other HUD binders
+│   ├── Main Menu/  ·  Pause Menu/
+│   └── Audio/          # VolumeSettings
+├── Starter Assets/     # ThirdPersonController (Unity), extended in-repo
+├── Prefabs/            # Enemies, weapons, turrets, resources, UI
+└── Scenes/
 ```
 
-**Convention:** all first-party content lives under `Assets/_Project/` so imported packages and store assets never mix with your own. Data over code — new items/events/enemies should be authorable as ScriptableObjects without touching C#.
-
----
-
-## Roadmap
-
-- [x] Core day/night loop
-- [x] Grid inventory + crafting
-- [ ] Barricade degradation & repair pass
-- [ ] Survivor morale / sanity systems
-- [ ] Procedural scavenge-zone generator
-- [ ] Event/card system content
-- [ ] Audio pass (adaptive night tension mix)
-- [ ] Steam wishlist page + demo build
-
-See [Issues](../../issues) for the granular backlog and [Projects](../../projects) for the current milestone.
-
----
-
-## Contributing
-
-This is a small-team project. If you're collaborating:
-
-1. Branch from `develop`: `git checkout -b feature/your-thing`
-2. Keep scenes out of merge hell — **one person edits a given scene at a time**, or use prefab-based composition.
-3. Never commit `Library/`, `Temp/`, `Logs/`, `Build/` (see `.gitignore`).
-4. Track binary art/audio with **Git LFS** (`.gitattributes` is configured).
-5. Open a PR into `develop` with a short "what/why" and a GIF if it's visible.
-
-Code style: standard C# conventions, `PascalCase` for public members, one MonoBehaviour per file, `[SerializeField] private` over public fields.
+**Convention:** standard C# style, one MonoBehaviour per file, `[SerializeField] private` over public fields, tunable numbers exposed to the Inspector. Enemies, drops, tools and reactions are data-driven so new content rarely needs code.
 
 ---
 
 ## Credits
 
-- **Design / Programming:** you
-- **Art:** TBD
-- **Audio:** TBD
-- Built during / for [jam or context].
+- **Team:** Bad Wifi Interactive
+- Built for the **IUT Jam**.
+- Third-party: Unity Starter Assets, JMO Assets **WarFX** (muzzle/impact VFX), plus environment/audio packs — see individual asset folders for their licenses.
 
 ---
 
 ## License
 
-Released under the [MIT License](LICENSE). Art and audio assets may be under separate terms — see `Assets/_Project/Art/CREDITS.md`.
+Project code is released under the [MIT License](LICENSE). Bundled third-party art, audio, and VFX remain under their original licenses.
 
 ---
 
 <div align="center">
-<sub>Survive the night. Then do it again.</sub>
+<sub>Three nights. Hold out until dawn.</sub>
 </div>
