@@ -5315,7 +5315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603607163599226601, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 458079.2
+      value: 494335.22
       objectReference: {fileID: 0}
     - target: {fileID: 8009578785768280475, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_Pivot.x
@@ -11219,7 +11219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603607163599226601, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 795806.56
+      value: 832067.56
       objectReference: {fileID: 0}
     - target: {fileID: 8009578785768280475, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_Pivot.x
@@ -25486,7 +25486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603437207767757354, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 37265580
+      value: 37301700
       objectReference: {fileID: 0}
     - target: {fileID: 6613745555896641206, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -35090,6 +35090,10 @@ PrefabInstance:
       propertyPath: worldCanvas
       value: 
       objectReference: {fileID: 1659119524}
+    - target: {fileID: 2802547668608592667, guid: 4678c5dc21ed15a4eb55d4d3fc54a018, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2875794636223114811, guid: 4678c5dc21ed15a4eb55d4d3fc54a018, type: 3}
       propertyPath: playerStatus
       value: 
@@ -35154,6 +35158,10 @@ PrefabInstance:
       propertyPath: playerStatus
       value: 
       objectReference: {fileID: 1551954884}
+    - target: {fileID: 5248120772572537768, guid: 4678c5dc21ed15a4eb55d4d3fc54a018, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
