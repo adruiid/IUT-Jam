@@ -24,5 +24,5 @@ MonoBehaviour:
   - resourceType: 0
     amount: 18
   - resourceType: 7
-    amount: 1
+    amount: 2
   resultingItem: {fileID: 11400000, guid: 950c977f54c5249418f25fb8b4991c64, type: 2}
