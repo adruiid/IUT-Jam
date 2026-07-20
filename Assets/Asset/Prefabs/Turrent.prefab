@@ -512,7 +512,7 @@ MonoBehaviour:
   damage: 15
   fireRate: 2
   maxAmmo: 30
-  muzzleFlash: {fileID: 0}
+  muzzleFlash: {fileID: 19800004, guid: b0a227fc2e558f241b1c747820ccc361, type: 3}
   audioSource: {fileID: 2577673473186946848}
   fireSfx: {fileID: 8300000, guid: 325ecfa9fa1bb244cbd79fa2ead61b57, type: 3}
   baseStructure: {fileID: 8204176166287957353}

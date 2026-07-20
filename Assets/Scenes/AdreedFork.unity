@@ -136,8 +136,12 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3462673949951624591, guid: 2c709fc588289c647b840102e5d684f0, type: 3}
-      propertyPath: startInterval
+      propertyPath: minInterval
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3462673949951624591, guid: 2c709fc588289c647b840102e5d684f0, type: 3}
+      propertyPath: startInterval
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3462673949951624591, guid: 2c709fc588289c647b840102e5d684f0, type: 3}
       propertyPath: noSpawnMask.m_Bits
@@ -10890,7 +10894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603607163599226601, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 3705598.5
+      value: 4403050
       objectReference: {fileID: 0}
     - target: {fileID: 8009578785768280475, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_Pivot.x
@@ -18988,57 +18992,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 953122842560135396, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-      propertyPath: m_SlopeLimit
-      value: 45
-      objectReference: {fileID: 0}
     - target: {fileID: 1039707510980740749, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-      propertyPath: reactions.Array.data[0].hungerCost
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-      propertyPath: reactions.Array.data[1].hungerCost
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-      propertyPath: reactions.Array.data[2].hungerCost
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-      propertyPath: reactions.Array.data[6].hungerCost
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4755065799464063930, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-      propertyPath: gunPrefab
+    - target: {fileID: 5241799143953076300, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: cameraObject
       value: 
-      objectReference: {fileID: 7001555617241222686, guid: b6da7e134a53ada41ac595176461d82d, type: 3}
-    - target: {fileID: 4755065799464063930, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5500654529908567470, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-      propertyPath: JumpHeight
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5500654529908567470, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-      propertyPath: FallTimeout
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5500654529908567470, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-      propertyPath: JumpTimeout
-      value: 0.8
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1646416488}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1039707510980740749, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1754137345}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
 --- !u!4 &832004054 stripped
 Transform:
@@ -24957,7 +24922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603437207767757354, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 34657580
+      value: 35113260
       objectReference: {fileID: 0}
     - target: {fileID: 6613745555896641206, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -29463,6 +29428,14 @@ PrefabInstance:
     - target: {fileID: 2709062825474512923, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470863930626081326, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
+      propertyPath: needsRepair
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8204176166287957353, guid: 7d6fad8f15fee94408dcff7e2fe714dd, type: 3}
       propertyPath: onRepaired.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -35061,11 +35034,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4cd6ce46c6365c449bd7497fdf0531a, type: 3}
---- !u!1 &1507780034 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1039707510980740749, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
-  m_PrefabInstance: {fileID: 829998169}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1507866722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36436,7 +36404,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1369483648140206388, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
   m_PrefabInstance: {fileID: 829998169}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1507780034}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82428b5ae44c9f446a0dbe39445db9a5, type: 3}
@@ -36447,7 +36415,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5370848266281106192, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
   m_PrefabInstance: {fileID: 829998169}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1507780034}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a5e763a39f28824dbd56d7600f3eb67, type: 3}
@@ -41980,30 +41948,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7626407544286556538, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
   m_PrefabInstance: {fileID: 829998169}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1507780034}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa43837ec9a07804190c292b492f90ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerEmote
---- !u!114 &1754137345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1507780034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a9fd769d946654abb2fb6257dbe47c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraZoom
-  cameraObject: {fileID: 1646416488}
-  minDistance: 2
-  maxDistance: 15
-  zoomStep: 1
-  smoothTime: 0.12
-  scrollUpZoomsIn: 1
 --- !u!1 &1755564083 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4550400373828275750, guid: c3b46a0cae4889549b3b49a8814aeee4, type: 3}
@@ -52277,6 +52227,10 @@ PrefabInstance:
     - target: {fileID: 38598489942250195, guid: 81cf879e878e21945b409497c396ad32, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1405106600926638497, guid: 81cf879e878e21945b409497c396ad32, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3206494436528487600, guid: 81cf879e878e21945b409497c396ad32, type: 3}
       propertyPath: m_Name

@@ -35,8 +35,10 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private GameObject gunPrefab;
     [Tooltip("Where the gun rests when holstered (on the body, e.g. back/hip).")]
     [SerializeField] private Transform holsterMount;
-    [Tooltip("Where the gun sits in-hand while equipped (aim/shoot pose).")]
+    [Tooltip("Where the gun sits in-hand while equipped but not shooting (gun-out walk/idle).")]
     [SerializeField] private Transform gunHandMount;
+    [Tooltip("Where the gun goes DURING the shooting animation. Falls back to the hand mount if empty.")]
+    [SerializeField] private Transform shootMount;
     [SerializeField] private Vector3 gunWorldScale = Vector3.one;
 
     [Header("Dagger (melee)")]
@@ -169,11 +171,16 @@ public class PlayerCombat : MonoBehaviour
         }
 
         bool equipped = _hasGun && Time.time < _equipUntil && !_meleeing;
+        bool shooting = _hasGun && Time.time < _shootUntil && !_meleeing;
 
         if (_hasGun)
         {
             SetGunActive(true);
-            AttachGun(equipped ? gunHandMount : holsterMount);
+            // Shooting -> shoot mount; equipped (gun-out) -> hand mount; else holstered.
+            Transform mount = shooting && shootMount != null ? shootMount
+                            : equipped ? gunHandMount
+                            : holsterMount;
+            AttachGun(mount);
         }
         else
         {
