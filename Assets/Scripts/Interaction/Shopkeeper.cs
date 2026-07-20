@@ -8,8 +8,7 @@ using UnityEngine.Events;
 public class Shopkeeper : Interactable
 {
     [Header("Shop")]
-    [Tooltip("Shop UI to open. Optional if you drive it via the event instead.")]
-    [SerializeField] private GameObject shopUI;
+
 
     [Tooltip("Fires when the shop should open. Hook your shop system here.")]
     [SerializeField] private UnityEvent onShopOpened;
@@ -22,7 +21,6 @@ public class Shopkeeper : Interactable
 
     public override void Interacted(PlayerInteractor player)
     {
-        if (shopUI != null) shopUI.SetActive(true);
-        onShopOpened?.Invoke();
+        player.BeginShopping(this);
     }
 }

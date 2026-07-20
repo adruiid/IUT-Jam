@@ -10957,7 +10957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603607163599226601, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 71335.85
+      value: 157219.81
       objectReference: {fileID: 0}
     - target: {fileID: 8009578785768280475, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_Pivot.x
@@ -16607,6 +16607,10 @@ PrefabInstance:
     - target: {fileID: 1484718986389514436, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568726536192001634, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
+      propertyPath: Loop
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7216592763269180416, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
       propertyPath: startingGears.Array.size
@@ -24968,7 +24972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603437207767757354, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 36555530
+      value: 36639644
       objectReference: {fileID: 0}
     - target: {fileID: 6613745555896641206, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -53169,10 +53173,42 @@ PrefabInstance:
       propertyPath: text
       value: 
       objectReference: {fileID: 265967293}
+    - target: {fileID: 6224875796754588972, guid: f73093907ad50f14c987ab626f0ab6bc, type: 3}
+      propertyPath: 'messages.Array.data[0]'
+      value: Press [E] or Click to interact with highlighted objects
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224875796754588972, guid: f73093907ad50f14c987ab626f0ab6bc, type: 3}
+      propertyPath: 'messages.Array.data[1]'
+      value: Hold [Tab] to highlight all nearby objects
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224875796754588972, guid: f73093907ad50f14c987ab626f0ab6bc, type: 3}
+      propertyPath: 'messages.Array.data[2]'
+      value: Press [I] for Inventory and [O] for Crafting Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224875796754588972, guid: f73093907ad50f14c987ab626f0ab6bc, type: 3}
+      propertyPath: 'messages.Array.data[3]'
+      value: Start by finding enough materials to craft an axe
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224875796754588972, guid: f73093907ad50f14c987ab626f0ab6bc, type: 3}
+      propertyPath: 'messages.Array.data[4]'
+      value: Gather enough resources to survive the night
+      objectReference: {fileID: 0}
     - target: {fileID: 6926247179264801438, guid: f73093907ad50f14c987ab626f0ab6bc, type: 3}
       propertyPath: text
       value: 
       objectReference: {fileID: 265967293}
+    - target: {fileID: 6926247179264801438, guid: f73093907ad50f14c987ab626f0ab6bc, type: 3}
+      propertyPath: 'messages.Array.data[0]'
+      value: Press [V] to swing knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926247179264801438, guid: f73093907ad50f14c987ab626f0ab6bc, type: 3}
+      propertyPath: 'messages.Array.data[1]'
+      value: You can right click on an enemy for the same effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926247179264801438, guid: f73093907ad50f14c987ab626f0ab6bc, type: 3}
+      propertyPath: 'messages.Array.data[2]'
+      value: Cook food at fire sources to enhance their stats
+      objectReference: {fileID: 0}
     - target: {fileID: 7764475215873078716, guid: f73093907ad50f14c987ab626f0ab6bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -53221,6 +53257,18 @@ PrefabInstance:
       propertyPath: text
       value: 
       objectReference: {fileID: 265967293}
+    - target: {fileID: 9143677681411709994, guid: f73093907ad50f14c987ab626f0ab6bc, type: 3}
+      propertyPath: 'messages.Array.data[0]'
+      value: Actions causes hunger
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143677681411709994, guid: f73093907ad50f14c987ab626f0ab6bc, type: 3}
+      propertyPath: 'messages.Array.data[1]'
+      value: You can eat food to decrease your hunger
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143677681411709994, guid: f73093907ad50f14c987ab626f0ab6bc, type: 3}
+      propertyPath: 'messages.Array.data[2]'
+      value: Double click on a food in the inventory
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -183,6 +183,15 @@ public class PlayerInteractor : MonoBehaviour
                 EndCooking();
             }
         }
+
+        if (isShopping)
+        {
+            if (Vector3.Distance(transform.position, currentShop.transform.position)
+                > shoppingExitDistance)
+            {
+                EndShopping();
+            }
+        }
     }
 
     // --- Detection + highlight ----------------------------------------------
@@ -469,5 +478,26 @@ public class PlayerInteractor : MonoBehaviour
         currentCookingInteract = null;
 
         CookMenu.instance.CraftMenuStatus(false);
+    }
+
+    private Shopkeeper currentShop;
+    private bool isShopping;
+
+    [SerializeField] private float shoppingExitDistance = 2f;
+
+    public void BeginShopping(Shopkeeper shop)
+    {
+        currentShop = shop;
+        isShopping = true;
+
+        ShoppingMenu.instance.ShopMenuStatus(true);
+    }
+
+    private void EndShopping()
+    {
+        isShopping = false;
+        currentShop = null;
+
+        ShoppingMenu.instance.ShopMenuStatus(false);
     }
 }

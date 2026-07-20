@@ -110,6 +110,30 @@ public class InventoryManager : MonoBehaviour
         AddItem(item.resultingItem);
     }
 
+    public void AddShoppedItem(ShoppableItem item)
+    {
+        foreach (ResourceRequirement requirement in item.requirements)
+        {
+            InventoryItem itemInSlot = null;
+            foreach (InventorySlot slot in inventorySlots)
+            {
+                itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
+                if (itemInSlot == null) continue;
+
+                Items itemTemp = itemInSlot.GetItem();
+
+                if ((itemTemp is ResourceItems resource && resource.resourceType == requirement.resourceType) ||
+                  (itemTemp is ConsumableItems consumable && consumable.resourceType == requirement.resourceType))
+                {
+                    RemoveItem(itemTemp, requirement.amount);
+                    break;
+                }
+            }
+        }
+        AddItem(item.resultingItem);
+    }
+
     public void RemoveItem(Items item, int count)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
@@ -224,6 +248,23 @@ public class InventoryManager : MonoBehaviour
         Debug.Log("All crafting requirement present");
         return true;
     }
+
+    public bool ResourceItemCountPresent(ShoppableItem item)
+    {
+        foreach (ResourceRequirement requirement in item.requirements)
+        {
+            int temp = GetResourceCount(requirement.resourceType);
+            if (temp < requirement.amount)
+            {
+                Debug.Log(requirement.resourceType.ToString() + " is insuffecient");
+                return false;
+            }
+
+        }
+        Debug.Log("All crafting requirement present");
+        return true;
+    }
+
 
     private void SpawnNewItem(Items item, InventorySlot slot)
     {
