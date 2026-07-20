@@ -6523,6 +6523,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 141301832479427353, guid: 9a5289418eaf6f84f9edb28db36bff3d, type: 3}
   m_PrefabInstance: {fileID: 2005780492}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &284195611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4152220975464039479, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+  m_PrefabInstance: {fileID: 1258535155}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &285565484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11059,7 +11064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603607163599226601, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 190158.62
+      value: 1965562.2
       objectReference: {fileID: 0}
     - target: {fileID: 8009578785768280475, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_Pivot.x
@@ -16342,7 +16347,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PryInteract
   type: 7
   prompt: Search
-  loot: []
+  loot:
+  - item: {fileID: 11400000, guid: 1a5581fceb3b69149968c18eec6801d4, type: 2}
+    amount: 3
+  - item: {fileID: 11400000, guid: b3d5f5f4684a6a14e906adc2bad3fc9d, type: 2}
+    amount: 3
+  - item: {fileID: 11400000, guid: c944495a05558804191910f2133ee3cb, type: 2}
+    amount: 1
 --- !u!1001 &717057834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16561,6 +16572,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eda61c68c1231d94f94071753881c639, type: 3}
       insertIndex: -1
       addedObject: {fileID: 720511720}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: eda61c68c1231d94f94071753881c639, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 720511722}
   m_SourcePrefab: {fileID: 100100000, guid: eda61c68c1231d94f94071753881c639, type: 3}
 --- !u!1 &720511719 stripped
 GameObject:
@@ -16593,6 +16607,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eda61c68c1231d94f94071753881c639, type: 3}
   m_PrefabInstance: {fileID: 720511718}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &720511722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720511719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606b3f8b9c5e055428f5effe3f55dc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scour
+  type: 5
+  prompt: Search
+  loot:
+  - item: {fileID: 11400000, guid: b3d5f5f4684a6a14e906adc2bad3fc9d, type: 2}
+    amount: 15
+  - item: {fileID: 11400000, guid: b2da4f847a4e5474183801b429ecb70b, type: 2}
+    amount: 2
+  - item: {fileID: 11400000, guid: a826b92be5e9f6b4bbcb8ee6b74ae784, type: 2}
+    amount: 5
+  - item: {fileID: 11400000, guid: 37943324ff9469b4fa339209c656636e, type: 2}
+    amount: 5
+  - item: {fileID: 11400000, guid: 1a5581fceb3b69149968c18eec6801d4, type: 2}
+    amount: 5
 --- !u!1001 &723161641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25078,7 +25117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603437207767757354, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 36673890
+      value: 38078660
       objectReference: {fileID: 0}
     - target: {fileID: 6613745555896641206, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -29467,6 +29506,91 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3491086722150959662, guid: c04ea2a3624672c4492e67174bf47f1d, type: 3}
   m_PrefabInstance: {fileID: 925355070}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1258535155
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1788632677}
+    m_Modifications:
+    - target: {fileID: 929059132935934209, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: loot.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 929059132935934209, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: loot.Array.data[0].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 68487abb86ced3d46b1b64b055134409, type: 2}
+    - target: {fileID: 929059132935934209, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: loot.Array.data[1].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 06f22fb090d14584cbd3936946b2d040, type: 2}
+    - target: {fileID: 929059132935934209, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: loot.Array.data[2].item
+      value: 
+      objectReference: {fileID: 11400000, guid: b2da4f847a4e5474183801b429ecb70b, type: 2}
+    - target: {fileID: 929059132935934209, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: loot.Array.data[0].amount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 929059132935934209, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: loot.Array.data[1].amount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 929059132935934209, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: loot.Array.data[2].amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3662682512284819085, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: m_Name
+      value: foodcrate (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152220975464039479, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.3099976
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152220975464039479, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.298
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152220975464039479, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -52.589996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152220975464039479, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9487984
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152220975464039479, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.058941156
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152220975464039479, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.3093453
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152220975464039479, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.024759121
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152220975464039479, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -7.306
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152220975464039479, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -36.077
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152220975464039479, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0.607
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2a5632f55e7dd6e42b1f01beb2f559ab, type: 3}
 --- !u!1001 &1258992395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38598,7 +38722,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PryInteract
   type: 7
   prompt: Search
-  loot: []
+  loot:
+  - item: {fileID: 11400000, guid: 68487abb86ced3d46b1b64b055134409, type: 2}
+    amount: 5
+  - item: {fileID: 11400000, guid: b3d5f5f4684a6a14e906adc2bad3fc9d, type: 2}
+    amount: 2
+  - item: {fileID: 11400000, guid: 7a4fb23aa70508d499bcfca3c8db2845, type: 2}
+    amount: 2
 --- !u!1001 &1625416560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42736,6 +42866,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1714301669}
+  - {fileID: 284195611}
   - {fileID: 755410010}
   - {fileID: 330950004}
   - {fileID: 1514856068}
@@ -49121,7 +49252,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PryInteract
   type: 7
   prompt: Search
-  loot: []
+  loot:
+  - item: {fileID: 11400000, guid: b2da4f847a4e5474183801b429ecb70b, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 37943324ff9469b4fa339209c656636e, type: 2}
+    amount: 4
 --- !u!114 &2033816394 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3254404600715077591, guid: 558382ec0ca2a4f40b33ef28da60d49f, type: 3}
