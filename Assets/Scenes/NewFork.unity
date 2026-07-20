@@ -10962,7 +10962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603607163599226601, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 220128.48
+      value: 228558.83
       objectReference: {fileID: 0}
     - target: {fileID: 8009578785768280475, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_Pivot.x
@@ -11521,11 +11521,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1074693854}
   m_SourcePrefab: {fileID: 100100000, guid: 415c369823331ce4a880ce93088e56f4, type: 3}
---- !u!1 &508882405 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1097356784614648311, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
-  m_PrefabInstance: {fileID: 727275057}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &513380837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16602,39 +16597,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5568726536192001634, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
-      propertyPath: Loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7216592763269180416, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
-      propertyPath: startingGears.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7216592763269180416, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
-      propertyPath: 'startingGears.Array.data[0]'
+    - target: {fileID: 4963978831830602821, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
+      propertyPath: fadeGroup
       value: 
-      objectReference: {fileID: 11400000, guid: f29a975c5f01a1743976f8e30bbed8af, type: 2}
-    - target: {fileID: 7216592763269180416, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
-      propertyPath: 'startingGears.Array.data[1]'
+      objectReference: {fileID: 1041625608}
+    - target: {fileID: 6651880970834579659, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
+      propertyPath: timerText
       value: 
-      objectReference: {fileID: 11400000, guid: a826b92be5e9f6b4bbcb8ee6b74ae784, type: 2}
-    - target: {fileID: 7216592763269180416, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
-      propertyPath: 'startingGears.Array.data[2]'
-      value: 
-      objectReference: {fileID: 11400000, guid: b3d5f5f4684a6a14e906adc2bad3fc9d, type: 2}
-    m_RemovedComponents: []
+      objectReference: {fileID: 1680288420}
+    m_RemovedComponents:
+    - {fileID: 6651880970834579659, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1097356784614648311, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1753636970}
-    - targetCorrespondingSourceObject: {fileID: 1097356784614648311, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1753636972}
-    - targetCorrespondingSourceObject: {fileID: 1097356784614648311, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1753636971}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
 --- !u!1 &730824438
 GameObject:
@@ -25060,7 +25035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603437207767757354, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 36702420
+      value: 36710852
       objectReference: {fileID: 0}
     - target: {fileID: 6613745555896641206, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -41887,46 +41862,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1484718986389514436, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
   m_PrefabInstance: {fileID: 727275057}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1753636970
+--- !u!114 &1753636971 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2489393291599709776, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
+  m_PrefabInstance: {fileID: 727275057}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 508882405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b19548d5f9274c447a841ab58f9d15e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TimeTracker
-  dayLength: 480
-  timerText: {fileID: 1680288420}
---- !u!114 &1753636971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 508882405}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d4397dc12641474f8c9c9237f7fe51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadScene
---- !u!114 &1753636972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 508882405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f5f779edfd3ea84d8873d0692755d83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
-  fadeGroup: {fileID: 1041625608}
-  fadeDuration: 1
 --- !u!114 &1754137333 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7626407544286556538, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
