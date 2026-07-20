@@ -56,20 +56,20 @@ public class ShoppingSlot : MonoBehaviour
 
     private IEnumerator Shake()
     {
+        Vector2 startPos = rect.anchoredPosition;
+
         float duration = 0.3f;
         float strength = 5f;
-
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
-            rect.anchoredPosition = originalPos + Random.insideUnitCircle * strength;
+            rect.anchoredPosition = startPos + Random.insideUnitCircle * strength;
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        transform.localPosition = originalPos;
+        rect.anchoredPosition = startPos;
     }
-
 }
