@@ -60,6 +60,10 @@ public class DayNightController : MonoBehaviour
     [SerializeField] private AudioClip nightMusic;
     [Tooltip("Seconds of silence at the START and END of each phase (music only plays in between).")]
     [SerializeField] private float musicSilenceSeconds = 10f;
+    [Tooltip("Music volume when fully faded in.")]
+    [SerializeField] private float musicVolume = 1f;
+    [Tooltip("Seconds to fade the music in and out.")]
+    [SerializeField] private float musicFadeSeconds = 2f;
 
     /// <summary>Universal flag — read from anywhere: DayNightController.IsNight.</summary>
     public static bool IsNight { get; private set; }
@@ -104,7 +108,7 @@ public class DayNightController : MonoBehaviour
             : (_hour - dayStartHour);
         _phaseDurationReal = (_isNight ? NightHours : DayHours) * RealSecondsPerHour;
         _phaseStartTime = Time.time - hoursIn * RealSecondsPerHour;
-        if (musicSource != null) musicSource.loop = true;
+        if (musicSource != null) { musicSource.loop = true; musicSource.volume = 0f; }
     }
 
     private void Update()
@@ -154,7 +158,7 @@ public class DayNightController : MonoBehaviour
             _ended = true;
             if (spawnManager != null) spawnManager.enabled = false;
             KillAllMonsters();
-            SetMusic(null); // silence on the win screen
+            if (musicSource != null) musicSource.Stop(); // silence on the win screen
             onSurvived?.Invoke(); // game-over / win screen
             return;
         }
@@ -177,23 +181,26 @@ public class DayNightController : MonoBehaviour
         float elapsed = Time.time - _phaseStartTime;
         float remaining = _phaseDurationReal - elapsed;
         bool silent = elapsed < musicSilenceSeconds || remaining < musicSilenceSeconds;
+        AudioClip desired = silent ? null : (_isNight ? nightMusic : dayMusic);
 
-        SetMusic(silent ? null : (_isNight ? nightMusic : dayMusic));
-    }
+        float step = (musicVolume / Mathf.Max(0.01f, musicFadeSeconds)) * Time.deltaTime;
 
-    private void SetMusic(AudioClip clip)
-    {
-        if (musicSource == null) return;
-
-        if (clip == null)
+        if (desired != null)
         {
-            if (musicSource.isPlaying) musicSource.Stop();
-            return;
+            // Start (or restart) the track at 0 volume, then fade up.
+            if (musicSource.clip != desired || !musicSource.isPlaying)
+            {
+                musicSource.clip = desired;
+                musicSource.volume = 0f;
+                musicSource.Play();
+            }
+            musicSource.volume = Mathf.MoveTowards(musicSource.volume, musicVolume, step);
         }
-        if (musicSource.clip != clip || !musicSource.isPlaying)
+        else
         {
-            musicSource.clip = clip;
-            musicSource.Play();
+            // Fade down, then stop once silent.
+            musicSource.volume = Mathf.MoveTowards(musicSource.volume, 0f, step);
+            if (musicSource.volume <= 0.001f && musicSource.isPlaying) musicSource.Stop();
         }
     }
 

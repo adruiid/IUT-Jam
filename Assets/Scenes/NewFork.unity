@@ -10979,7 +10979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603607163599226601, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1897090.9
+      value: 1922533.4
       objectReference: {fileID: 0}
     - target: {fileID: 7125597268627422835, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -23766,7 +23766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 722474719088277184, guid: 89052838563a50b4fa69b0af9fbcfb2a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1837787.2
+      value: 1863229.8
       objectReference: {fileID: 0}
     - target: {fileID: 871964644210730067, guid: 89052838563a50b4fa69b0af9fbcfb2a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -25119,7 +25119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603437207767757354, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 38351580
+      value: 38375804
       objectReference: {fileID: 0}
     - target: {fileID: 6613745555896641206, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -52536,6 +52536,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1583902672}
     m_Modifications:
+    - target: {fileID: 2769679513042033691, guid: 53eb5cbb79036b1498e017371c43f735, type: 3}
+      propertyPath: musicVolume
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 2769679513042033691, guid: 53eb5cbb79036b1498e017371c43f735, type: 3}
       propertyPath: spawnManager
       value: 
