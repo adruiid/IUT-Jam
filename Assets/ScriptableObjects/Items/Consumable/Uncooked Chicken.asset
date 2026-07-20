@@ -23,3 +23,4 @@ MonoBehaviour:
   hpUpgade: 0
   hpRestored: 5
   hungerRestored: 2
+  resourceType: 9

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8304090523577168448}
   - component: {fileID: 3170527244765964714}
   - component: {fileID: 2141110356837982786}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Burning wood (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 2410162089780079110}
   - component: {fileID: 8096890013544010559}
   - component: {fileID: 5159136580705946061}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Burning wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 5131976010452113609}
   - component: {fileID: 7668616293303774455}
   - component: {fileID: 369255269855174284}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Burning wood (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 3722752017517561189}
   - component: {fileID: 2199175086865709195}
   - component: {fileID: 480065437915373221}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Burning wood (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -626,6 +626,7 @@ GameObject:
   - component: {fileID: 3695963949097562394}
   - component: {fileID: 8825841762552012225}
   - component: {fileID: 4181937831038208246}
+  - component: {fileID: 4821127073615519954}
   m_Layer: 7
   m_Name: Oil_Barrel_burning
   m_TagString: Untagged
@@ -732,6 +733,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -916425217804615230, guid: e39bbbcd77cbd9a4da785271281fe985, type: 3}
+--- !u!114 &4821127073615519954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8174958703533443459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e749987997dc940a2bd9959620924c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CookInteract
+  type: 6
+  prompt: Interact
 --- !u!1001 &8033880743075890147
 PrefabInstance:
   m_ObjectHideFlags: 0

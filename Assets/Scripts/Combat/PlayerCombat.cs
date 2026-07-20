@@ -129,6 +129,7 @@ public class PlayerCombat : MonoBehaviour
             _daggerInstance.transform.localScale = CompensateScale(daggerMount, daggerWorldScale);
             _daggerActive = true;
         }
+        playerStatus = GetComponent<PlayerStatusBasic>();
     }
 
     private void Update()
@@ -240,6 +241,9 @@ public class PlayerCombat : MonoBehaviour
     {
         if (!_hasGun) return; // no gun -> can't shoot
 
+        if (playerStatus.GetCurrentHunger() < shootHungerCost)
+            return;
+
         var mouse = Mouse.current;
         if (mouse == null || !mouse.leftButton.isPressed) return;
         if (IsPointerOverUI()) return;
@@ -255,6 +259,9 @@ public class PlayerCombat : MonoBehaviour
 
         if (_weapon.TryFire(aimPoint))
         {
+            playerStatus.SetCurrentHunger(
+        playerStatus.GetCurrentHunger() - shootHungerCost);
+
             if (animator != null && !string.IsNullOrEmpty(fireTrigger)) animator.SetTrigger(fireTrigger);
             _shootUntil = Time.time + shootDuration;   // movement pause
             _equipUntil = Time.time + equipDuration;   // keep gun in hand
@@ -288,6 +295,14 @@ public class PlayerCombat : MonoBehaviour
     private void BeginMelee()
     {
         if (_meleeing) return;
+
+        if (playerStatus.GetCurrentHunger() < meleeHungerCost)
+            return;
+
+        playerStatus.SetCurrentHunger(
+            playerStatus.GetCurrentHunger() - meleeHungerCost);
+
+
         _meleeing = true;
         _equipUntil = 0f; // gun holsters instantly for the melee
 
@@ -436,4 +451,10 @@ public class PlayerCombat : MonoBehaviour
             Mathf.Approximately(p.y, 0f) ? desiredWorld.y : desiredWorld.y / p.y,
             Mathf.Approximately(p.z, 0f) ? desiredWorld.z : desiredWorld.z / p.z);
     }
+
+    private PlayerStatusBasic playerStatus;
+
+    [Header("Stamina Cost")]
+    [SerializeField] private int shootHungerCost = 2;
+    [SerializeField] private int meleeHungerCost = 5;
 }

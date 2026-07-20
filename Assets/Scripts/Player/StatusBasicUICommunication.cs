@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,19 +9,45 @@ public class StatusBasicUICommunication : MonoBehaviour
 
     [SerializeField] private PlayerStatusBasic playerStatus;
 
+    [SerializeField] private float lerpSpeed = 5f;
+
+    private float targetHealthFill;
+    private float targetHungerFill;
+
     private void Start()
     {
-        playerStatus.onHealthChanged += UpdateHealthBar;
-        playerStatus.onHungerChanged += UpdateHungerBar;
+        playerStatus.onHealthChanged += UpdateHealthTarget;
+        playerStatus.onHungerChanged += UpdateHungerTarget;
+
+        targetHealthFill = (float)playerStatus.GetCurrentHealth() / playerStatus.GetMaxHealth();
+        targetHungerFill = (float)playerStatus.GetCurrentHunger() / playerStatus.GetMaxHunger();
+
+        healthBar.fillAmount = targetHealthFill;
+        hungerBar.fillAmount = targetHungerFill;
     }
 
-    private void UpdateHealthBar()
+    private void Update()
     {
-        healthBar.fillAmount = ((float)playerStatus.GetCurrentHealth() / playerStatus.GetMaxHealth());
+        healthBar.fillAmount = Mathf.Lerp(
+            healthBar.fillAmount,
+            targetHealthFill,
+            Time.deltaTime * lerpSpeed);
+
+        hungerBar.fillAmount = Mathf.Lerp(
+            hungerBar.fillAmount,
+            targetHungerFill,
+            Time.deltaTime * lerpSpeed);
     }
 
-    private void UpdateHungerBar()
+    private void UpdateHealthTarget()
     {
-        hungerBar.fillAmount = ((float)playerStatus.GetCurrentHunger() / playerStatus.GetMaxHunger());
+        targetHealthFill =
+            (float)playerStatus.GetCurrentHealth() / playerStatus.GetMaxHealth();
+    }
+
+    private void UpdateHungerTarget()
+    {
+        targetHungerFill =
+            (float)playerStatus.GetCurrentHunger() / playerStatus.GetMaxHunger();
     }
 }

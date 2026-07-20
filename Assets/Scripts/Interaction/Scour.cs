@@ -1,14 +1,17 @@
 using UnityEngine;
 
+
+[System.Serializable]
+public struct LootEntry
+{
+    public Items item;
+    public int amount;
+}
 public class Scour : Interactable
 {
-    [SerializeField] private Items item;
-    [SerializeField] private int amount = 1;
+    [SerializeField] private LootEntry[] loot;
 
     private bool collected;
-
-    public Items Item => item;
-    public int Amount => amount;
 
     private void Reset()
     {
@@ -26,11 +29,15 @@ public class Scour : Interactable
         if (collected)
             return;
 
-        for(int i = 0; i < amount; i++)
+        foreach (var entry in loot)
         {
-            InventoryManager.instance.AddItem(item);   
+            for (int i = 0; i < entry.amount; i++)
+            {
+                InventoryManager.instance.AddItem(entry.item);
+            }
+
+            PickupPopup.Instance.Show(entry.item, entry.amount, this);
         }
-        PickupPopup.Instance.Show(item, amount, this);
 
         collected = true;
     }

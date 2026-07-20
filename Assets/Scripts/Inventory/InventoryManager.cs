@@ -97,11 +97,13 @@ public class InventoryManager : MonoBehaviour
 
                 if (itemInSlot == null) continue;
 
-                if (itemInSlot.GetItem() is ResourceItems resouce && resouce.resourceType == requirement.resourceType)
-                {
-                    RemoveItem(itemInSlot.GetItem(), requirement.amount);
-                    break;
+                Items itemTemp = itemInSlot.GetItem();
 
+                if ((itemTemp is ResourceItems resource && resource.resourceType == requirement.resourceType) ||
+                  (itemTemp is ConsumableItems consumable && consumable.resourceType == requirement.resourceType))
+                {
+                    RemoveItem(itemTemp, requirement.amount);
+                    break;
                 }
             }
         }
@@ -179,7 +181,10 @@ public class InventoryManager : MonoBehaviour
             if (inventoryItem == null)
                 continue;
 
-            if (inventoryItem.GetItem() is ResourceItems resouce && resouce.resourceType == type)
+            Items item = inventoryItem.GetItem();
+
+            if ((item is ResourceItems resource && resource.resourceType == type) ||
+               (item is ConsumableItems consumable && consumable.resourceType == type))
             {
                 count += slot.GetComponentInChildren<InventoryItem>().count;
             }

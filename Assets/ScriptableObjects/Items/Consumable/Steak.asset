@@ -18,5 +18,9 @@ MonoBehaviour:
   stackable: 1
   description: 'For consumption. Restores<color=red>+15</color> Health and <color=yellow>+10</color>
     Hunger.  '
+  durabillity: 0
+  speedBoost: 0
+  hpUpgade: 0
   hpRestored: 15
   hungerRestored: 10
+  resourceType: 4

@@ -31,37 +31,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8434915355703243046}
   m_LocalEulerAnglesHint: {x: -76.452, y: -78.679, z: -390.223}
---- !u!1 &4359464817304209918
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2942483438316103537}
-  m_Layer: 6
-  m_Name: Holster_Equip
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2942483438316103537
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4359464817304209918}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.13345902, y: 0.5964733, z: 0.015760943, w: -0.79130274}
-  m_LocalPosition: {x: 0.8, y: -27.5, z: 18.9}
-  m_LocalScale: {x: 0.4, y: 0.39999992, z: 0.4000001}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 950092315154557672}
-  m_LocalEulerAnglesHint: {x: -13.298, y: -74.943, z: -352.07}
 --- !u!1 &4953536374913508695
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,7 +857,7 @@ MonoBehaviour:
   animator: {fileID: 6036569528926570061}
   moveSpeed: 5.335
   turnSpeed: 720
-  stoppingDistance: 2
+  stoppingDistance: 2.5
   targetSampleRadius: 2
   speedParam: Speed
   motionSpeedParam: MotionSpeed
@@ -978,6 +947,16 @@ MonoBehaviour:
     sfx: {fileID: 0}
     requiredTool: {fileID: 0}
     toolPrefab: {fileID: 0}
+  - type: 6
+    animatorTrigger: 
+    sfx: {fileID: 0}
+    requiredTool: {fileID: 0}
+    toolPrefab: {fileID: 0}
+  - type: 7
+    animatorTrigger: 
+    sfx: {fileID: 8300000, guid: 1a9f6ac6abd26164ab8050ce58223019, type: 3}
+    requiredTool: {fileID: 11400000, guid: 3d23671eb255c6042b9380f666c5a2a7, type: 2}
+    toolPrefab: {fileID: 919132149155446097, guid: 46a2bad05b22425419be8bb3cefb8d42, type: 3}
   onMissingTool:
     m_PersistentCalls:
       m_Calls: []
@@ -993,6 +972,7 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 7
   searchHighlightRadius: 20
+  cookingExitDistance: 5
 --- !u!114 &7626407544286556538
 MonoBehaviour:
   m_ObjectHideFlags: 0

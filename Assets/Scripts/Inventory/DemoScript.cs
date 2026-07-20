@@ -56,7 +56,20 @@ public class DemoScript : MonoBehaviour
     {
         inventoryManager.RemoveItem(woodItem, 2);
     }
+
+    [ContextMenu("Count Beef")]
+    public void CountBeef()
+    {
+        inventoryManager.GetResourceCount(ResourceType.Beef);
+    }
+
+    [ContextMenu("Count Metal")]
+    public void CountMetal()
+    {
+        inventoryManager.GetResourceCount(ResourceType.Metal);
+    }
 }
+
 
 
 public class Sample: MonoBehaviour

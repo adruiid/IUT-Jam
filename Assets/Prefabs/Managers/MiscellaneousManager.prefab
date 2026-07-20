@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartingGear
   startingGears:
-  - {fileID: 11400000, guid: 7db471ca859e3d04085403aa17e6431b, type: 2}
+  - {fileID: 11400000, guid: 3d23671eb255c6042b9380f666c5a2a7, type: 2}
 --- !u!82 &5568726536192001634
 AudioSource:
   m_ObjectHideFlags: 0

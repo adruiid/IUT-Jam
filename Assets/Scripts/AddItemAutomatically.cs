@@ -10,7 +10,7 @@ public class AddItemAutomatically : MonoBehaviour
         foreach(Items containItem in items)
         {
             int temp = 0;
-            for(int i=0;i<Random.Range(1, 3); i++)
+            for(int i=0;i<=Random.Range(1, 3); i++)
             {
                 temp = i;
                 InventoryManager.instance.AddItem(containItem);

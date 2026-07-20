@@ -5,6 +5,7 @@ public class ConsumableItems : Items
 {
     public int hpRestored;
     public int hungerRestored;
+    public ResourceType resourceType;
 
 }
 

@@ -12,7 +12,6 @@ public class CraftableItem : Items
 
     public Items resultingItem;
 
-    public ResourceType resourceType;
 }
 
 [Serializable]

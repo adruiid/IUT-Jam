@@ -18,8 +18,11 @@ MonoBehaviour:
   stackable: 0
   description: 
   durabillity: 0
+  speedBoost: 0
+  hpUpgade: 0
   requirements:
   - resourceType: 0
     amount: 8
+  - resourceType: 7
+    amount: 1
   resultingItem: {fileID: 11400000, guid: 2399de4b62c547c41972c7b796f70b9a, type: 2}
-  resourceType: 0

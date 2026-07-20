@@ -43,6 +43,9 @@ public class PlayerInteractor : MonoBehaviour
         [Tooltip("Tool model shown in the hand during this interaction (axe/pickaxe/shovel). " +
                  "Instantiated once at the Tool Mount and reused. Leave empty for none.")]
         public GameObject toolPrefab;
+
+        [Header("Cost")]
+        public int hungerCost;
     }
 
     [Header("Detection")]
@@ -359,6 +362,18 @@ public class PlayerInteractor : MonoBehaviour
                 OnMissingToolEvent?.Invoke(r.requiredTool, target);
                 return;
             }
+        }
+
+        if (r != null && r.hungerCost > 0)
+        {
+            PlayerStatusBasic status = GetComponent<PlayerStatusBasic>();
+
+            if (status.GetCurrentHunger() < r.hungerCost)
+            {
+                return;
+            }
+
+            status.SetCurrentHunger(status.GetCurrentHunger() - r.hungerCost);
         }
 
         if (r != null && r.sfx != null && audioSource != null)

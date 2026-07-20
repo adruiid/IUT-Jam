@@ -1,6 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using System.Collections;
 
 public class PickupPopup : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class PickupPopup : MonoBehaviour
     [SerializeField] private GameObject worldCanvas;
     private GameObject _popup;
 
+    private readonly Queue<(Items item, int amount, Vector3 position)> _queue = new();
+    private bool _processingQueue;
+
     private void Awake()
     {
         Instance = this;
@@ -17,34 +21,39 @@ public class PickupPopup : MonoBehaviour
 
     public void Show(Items item, int amount, Interactable target)
     {
-        _popup = Instantiate(textPrefab, worldCanvas.transform);
-
-        Vector3 worldPos = target.transform.position + Vector3.up * 0.5f;
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
-
-        RectTransform popupRect = _popup.GetComponent<RectTransform>();
-        popupRect.position = screenPos;
-
-        _popup.GetComponent<TextMeshProUGUI>().text = $"+{amount} {item.itemName}";
-
-        StartCoroutine(DestroyPopup(_popup));
+        Show(item, amount, target.transform);
     }
 
     public void Show(Items item, int amount, Transform target)
     {
-        _popup = Instantiate(textPrefab, worldCanvas.transform);
+        _queue.Enqueue((item, amount, target.position));
 
-        Vector3 worldPos = target.position + Vector3.up * Random.Range(0.5f, 3f) + Vector3.right * Random.Range(-2f, 2f);
+        if (!_processingQueue)
+            StartCoroutine(ProcessQueue());
+    }
 
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+    private IEnumerator ProcessQueue()
+    {
+        _processingQueue = true;
 
+        while (_queue.Count > 0)
+        {
+            var (item, amount, position) = _queue.Dequeue();
 
-        RectTransform popupRect = _popup.GetComponent<RectTransform>();
-        popupRect.position = screenPos;
+            GameObject popup = Instantiate(textPrefab, worldCanvas.transform);
 
-        _popup.GetComponent<TextMeshProUGUI>().text = $"+{amount} {item.itemName}";
+            Vector3 worldPos = position + Vector3.up * 0.5f;
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
-        StartCoroutine(DestroyPopup(_popup));
+            popup.GetComponent<RectTransform>().position = screenPos;
+            popup.GetComponent<TextMeshProUGUI>().text = $"+{amount} {item.itemName}";
+
+            StartCoroutine(DestroyPopup(popup));
+
+            yield return new WaitForSeconds(0.8f);
+        }
+
+        _processingQueue = false;
     }
 
     IEnumerator DestroyPopup(GameObject popup)

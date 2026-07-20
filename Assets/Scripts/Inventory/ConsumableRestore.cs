@@ -12,7 +12,7 @@ public class ConsumableRestore : MonoBehaviour
 
     public bool ConsumeItem(ConsumableItems item)
     {
-        if (playerStatus.GetCurrentHealth() == playerStatus.GetMaxHealth()) return false;
+        if (playerStatus.GetCurrentHealth() == playerStatus.GetMaxHealth() && playerStatus.GetCurrentHunger()==playerStatus.GetMaxHunger()) return false;
 
         playerStatus.SetCurrentHealth(playerStatus.GetCurrentHealth() + item.hpRestored);
         playerStatus.SetCurrentHunger(playerStatus.GetCurrentHunger() + item.hungerRestored);
