@@ -19,5 +19,6 @@ public enum ResourceType
     Toolkit,
     Chicken,
     Beef,
-    Apple
+    Apple,
+    Spices
 }

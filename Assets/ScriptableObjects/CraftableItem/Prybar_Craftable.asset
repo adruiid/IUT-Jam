@@ -23,5 +23,8 @@ MonoBehaviour:
   requirements:
   - resourceType: 5
     amount: 5
+  - resourceType: 1
+    amount: 8
+  - resourceType: 7
+    amount: 2
   resultingItem: {fileID: 11400000, guid: 3d23671eb255c6042b9380f666c5a2a7, type: 2}
-  resourceType: 0
