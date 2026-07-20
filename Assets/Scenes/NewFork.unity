@@ -7218,6 +7218,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1583902672}
     m_Modifications:
     - target: {fileID: 2769679513042033691, guid: 53eb5cbb79036b1498e017371c43f735, type: 3}
+      propertyPath: dayMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 583ea1437f3497841abafed8b723d7b1, type: 3}
+    - target: {fileID: 2769679513042033691, guid: 53eb5cbb79036b1498e017371c43f735, type: 3}
+      propertyPath: nightMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 0de6356018889bb438d9ae871af6a7d8, type: 3}
+    - target: {fileID: 2769679513042033691, guid: 53eb5cbb79036b1498e017371c43f735, type: 3}
       propertyPath: spawnManager
       value: 
       objectReference: {fileID: 1766132233}
@@ -7225,6 +7233,14 @@ PrefabInstance:
       propertyPath: directionalLight
       value: 
       objectReference: {fileID: 2114283754330233425}
+    - target: {fileID: 2769679513042033691, guid: 53eb5cbb79036b1498e017371c43f735, type: 3}
+      propertyPath: onBecameNight.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2769679513042033691, guid: 53eb5cbb79036b1498e017371c43f735, type: 3}
+      propertyPath: onBecameNight.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5169757050438258960, guid: 53eb5cbb79036b1498e017371c43f735, type: 3}
       propertyPath: m_Name
       value: TimeManager
@@ -11055,7 +11071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603607163599226601, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 906600.4
+      value: 1108437.9
       objectReference: {fileID: 0}
     - target: {fileID: 8009578785768280475, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_Pivot.x
@@ -16717,6 +16733,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1590531309765061986, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5568726536192001634, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19206,6 +19230,26 @@ PrefabInstance:
       propertyPath: reactions.Array.data[0].toolPrefab
       value: 
       objectReference: {fileID: 1416516515}
+    - target: {fileID: 5370848266281106192, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1754137337}
+    - target: {fileID: 5370848266281106192, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: hungerEmptySfx
+      value: 
+      objectReference: {fileID: 8300000, guid: ee39f8cc58662c34ebdf36a1114bb9f3, type: 3}
+    - target: {fileID: 5370848266281106192, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: hungerRestoreSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 7275c9611b0f3264d9d0213b55083610, type: 3}
+    - target: {fileID: 5370848266281106192, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: hungerLowThreshold
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896685202644803438, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7896685202644803438, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
       propertyPath: cameraObject
       value: 
@@ -25054,7 +25098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603437207767757354, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 37352364
+      value: 37546864
       objectReference: {fileID: 0}
     - target: {fileID: 6613745555896641206, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -41757,6 +41801,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa43837ec9a07804190c292b492f90ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerEmote
+--- !u!82 &1754137337 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3868897824163370637, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+  m_PrefabInstance: {fileID: 829998169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1755564083 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4550400373828275750, guid: c3b46a0cae4889549b3b49a8814aeee4, type: 3}

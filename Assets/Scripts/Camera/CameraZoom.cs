@@ -1,6 +1,7 @@
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// Mouse-wheel zoom for a Cinemachine 3rd-Person-Follow camera. Version-agnostic: it
@@ -49,10 +50,8 @@ public class CameraZoom : MonoBehaviour
         }
 
         if (_body == null)
-            Debug.LogWarning($"[CameraZoom DIAG] no component with a float 'CameraDistance' found under '{go.name}'. " +
+            Debug.LogWarning($"CameraZoom: no component with a float 'CameraDistance' found under '{go.name}'. " +
                              "Put this on the vcam (PlayerFollowCamera) or set Camera Object to it.", this);
-        else
-            Debug.Log($"[CameraZoom DIAG] using '{((MonoBehaviour)_body).GetType().Name}' on '{((MonoBehaviour)_body).gameObject.name}'", this);
     }
 
     private void Start()
@@ -64,14 +63,19 @@ public class CameraZoom : MonoBehaviour
     {
         if (_body == null || Mouse.current == null) return;
 
-        float scroll = Mouse.current.scroll.ReadValue().y; // ~120 per notch on Windows
-        if (Mathf.Abs(scroll) > 0.01f)
+        // Ignore scroll while the cursor is over UI (inventory, crafting, cooking, etc.).
+        bool overUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+        if (!overUI)
         {
-            float dir = Mathf.Sign(scroll) * (scrollUpZoomsIn ? -1f : 1f);
-            _target = Mathf.Clamp(_target + dir * zoomStep, minDistance, maxDistance);
-            Debug.Log($"[CameraZoom DIAG] scroll={scroll}, target={_target:F2}, dist={GetDistance():F2}", this);
+            float scroll = Mouse.current.scroll.ReadValue().y; // ~120 per notch on Windows
+            if (Mathf.Abs(scroll) > 0.01f)
+            {
+                float dir = Mathf.Sign(scroll) * (scrollUpZoomsIn ? -1f : 1f);
+                _target = Mathf.Clamp(_target + dir * zoomStep, minDistance, maxDistance);
+            }
         }
 
+        // Always keep easing so an in-progress zoom finishes even if you move onto UI.
         SetDistance(Mathf.SmoothDamp(GetDistance(), _target, ref _vel, smoothTime));
     }
 
