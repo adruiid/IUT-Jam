@@ -263,6 +263,13 @@ public class PlayerCombat : MonoBehaviour
         if (!wantFire || _weapon == null) return;
 
         if (_weapon.CurrentAmmo <= 0) { StartReload(); return; } // auto-reload on empty
+        if (!_weapon.CanFire) return;                            // rate limited this frame
+
+        // Snap the gun to the shoot mount FIRST so the bullet leaves the shoot-pose muzzle,
+        // then fire the same frame (the transform updates synchronously before TryFire reads it).
+        _shootUntil = Time.time + shootDuration;   // movement pause + holds gun at shoot mount
+        _equipUntil = Time.time + equipDuration;   // keep gun in hand
+        AttachGun(shootMount != null ? shootMount : gunHandMount);
 
         if (_weapon.TryFire(aimPoint))
         {
@@ -270,8 +277,6 @@ public class PlayerCombat : MonoBehaviour
         playerStatus.GetCurrentHunger() - shootHungerCost);
 
             if (animator != null && !string.IsNullOrEmpty(fireTrigger)) animator.SetTrigger(fireTrigger);
-            _shootUntil = Time.time + shootDuration;   // movement pause
-            _equipUntil = Time.time + equipDuration;   // keep gun in hand
         }
     }
 

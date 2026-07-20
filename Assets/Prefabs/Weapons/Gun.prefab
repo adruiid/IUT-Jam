@@ -361,7 +361,7 @@ MonoBehaviour:
   audioSource: {fileID: 580166198859119120}
   fireSfx: {fileID: 8300000, guid: 754ad1e6ec4ca594bb6b48107a175d31, type: 3}
   reloadSfx: {fileID: 8300000, guid: 6d0f0c7045734204184288e83f75b7cf, type: 3}
-  muzzleFlash: {fileID: 19800006, guid: c888f0c922d622147bbdbe2ca794142b, type: 3}
+  muzzleFlash: {fileID: 7980029976762078213, guid: 1f58a1dea6bbd9347843e4935585e6a2, type: 3}
   onAmmoChanged:
     m_PersistentCalls:
       m_Calls: []

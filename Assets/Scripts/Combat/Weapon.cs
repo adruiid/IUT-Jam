@@ -41,6 +41,8 @@ public class Weapon : MonoBehaviour
     public int CurrentAmmo { get; private set; }
     public int MagSize => magSize;
     public bool IsFull => CurrentAmmo >= magSize;
+    /// <summary>True if a shot would fire right now (has ammo and off cooldown).</summary>
+    public bool CanFire => CurrentAmmo > 0 && Time.time >= _nextFireTime;
 
     private float _nextFireTime;
 
