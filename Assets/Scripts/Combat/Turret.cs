@@ -45,6 +45,11 @@ public class Turret : MonoBehaviour
     private int _currentAmmo;
     private float _nextFireTime;
 
+    // Locked target — held until it dies or leaves range (not swapped for a newly-closer one).
+    private Transform _target;
+    private IDamageable _targetDamageable;
+    private EnemyHealth _targetHealth;
+
     private Transform Pivot => rotationPivot != null ? rotationPivot : transform;
 
     /// <summary>Wire this to the base's RepairableStructure.onRepaired event.</summary>
@@ -61,17 +66,41 @@ public class Turret : MonoBehaviour
         // Full magazine every time it comes online (after a repair).
         _currentAmmo = maxAmmo;
         _nextFireTime = 0f;
+        ClearTarget();
     }
 
     private void Update()
     {
-        Transform target = FindClosestEnemy();
-        if (target == null) return;
+        // Only pick a NEW target when the current one is gone/dead/out of range.
+        if (!TargetValid()) AcquireTarget();
+        if (_target == null) return;
 
-        AimAt(target);
+        AimAt(_target);
 
-        if (Time.time >= _nextFireTime && IsAimedAt(target))
-            Fire(target);
+        if (Time.time >= _nextFireTime && IsAimedAt(_target))
+            Fire();
+    }
+
+    // Keep the locked target until it dies or leaves range — ignore closer newcomers.
+    private bool TargetValid()
+    {
+        if (_target == null) return false;                            // destroyed
+        if (_targetHealth != null && _targetHealth.IsDead) return false; // dying/dead
+        return (_target.position - Pivot.position).sqrMagnitude <= range * range; // still in range
+    }
+
+    private void AcquireTarget()
+    {
+        _target = FindClosestEnemy();
+        _targetDamageable = _target != null ? _target.GetComponentInParent<IDamageable>() : null;
+        _targetHealth = _target != null ? _target.GetComponentInParent<EnemyHealth>() : null;
+    }
+
+    private void ClearTarget()
+    {
+        _target = null;
+        _targetDamageable = null;
+        _targetHealth = null;
     }
 
     private void AimAt(Transform target)
@@ -92,13 +121,12 @@ public class Turret : MonoBehaviour
         return Quaternion.Angle(Pivot.rotation, Quaternion.LookRotation(dir)) <= aimTolerance;
     }
 
-    private void Fire(Transform target)
+    private void Fire()
     {
         _nextFireTime = Time.time + 1f / Mathf.Max(0.01f, fireRate);
 
-        // Direct damage to the target (no projectile).
-        var damageable = target.GetComponentInParent<IDamageable>();
-        if (damageable != null) damageable.TakeDamage(damage);
+        // Direct damage to the locked target (no projectile).
+        if (_targetDamageable != null) _targetDamageable.TakeDamage(damage);
 
         if (muzzleFlash != null) muzzleFlash.Play();
         if (fireSfx != null && audioSource != null) audioSource.PlayOneShot(fireSfx);
@@ -128,7 +156,7 @@ public class Turret : MonoBehaviour
         return best;
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere((rotationPivot != null ? rotationPivot : transform).position, range);

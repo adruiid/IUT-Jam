@@ -39,4 +39,14 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             Died?.Invoke();
         }
     }
+
+    /// <summary>Kill instantly (e.g. daybreak purge). Fires the normal death events.</summary>
+    public void Kill()
+    {
+        if (IsDead) return;
+        Current = 0f;
+        IsDead = true;
+        onDied?.Invoke();
+        Died?.Invoke();
+    }
 }

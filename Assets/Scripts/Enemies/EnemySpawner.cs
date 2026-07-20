@@ -36,6 +36,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float navSampleRadius = 4f;
     [SerializeField] private int placementAttempts = 8;
 
+    [Header("No-spawn zones")]
+    [Tooltip("Layers of keep-out volumes (put colliders over the base / barn / hut on this layer). " +
+             "Candidate points inside one are rejected. Leave empty to disable.")]
+    [SerializeField] private LayerMask noSpawnMask;
+    [Tooltip("Overlap radius checked at each candidate against the no-spawn zones.")]
+    [SerializeField] private float noSpawnCheckRadius = 0.5f;
+
     private Transform _player;
     private int _alive;
     private float _nextSpawn;
@@ -102,6 +109,11 @@ public class EnemySpawner : MonoBehaviour
 
             if (NavMesh.SamplePosition(candidate, out NavMeshHit hit, navSampleRadius, NavMesh.AllAreas))
             {
+                // Reject points inside a keep-out zone (base / barn / hut); try another spot.
+                if (noSpawnMask.value != 0 &&
+                    Physics.CheckSphere(hit.position, noSpawnCheckRadius, noSpawnMask, QueryTriggerInteraction.Collide))
+                    continue;
+
                 result = hit.position;
                 return true;
             }
@@ -122,4 +134,20 @@ public class EnemySpawner : MonoBehaviour
 
     // Frees a slot at death (during the death animation), so the horde keeps flowing.
     private void OnEnemyDied() => _alive = Mathf.Max(0, _alive - 1);
+
+    // Show the spawn ring around the player in the editor: red = min, blue = max.
+    private void OnDrawGizmos()
+    {
+        Vector3 center = transform.position;
+        if (!string.IsNullOrEmpty(playerTag))
+        {
+            var p = GameObject.FindGameObjectWithTag(playerTag);
+            if (p != null) center = p.transform.position;
+        }
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(center, minRadius);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(center, maxRadius);
+    }
 }
