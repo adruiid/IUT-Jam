@@ -483,7 +483,7 @@ public class PlayerInteractor : MonoBehaviour
     private Shopkeeper currentShop;
     private bool isShopping;
 
-    [SerializeField] private float shoppingExitDistance = 2f;
+    [SerializeField] private float shoppingExitDistance = 5f;
 
     public void BeginShopping(Shopkeeper shop)
     {
