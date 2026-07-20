@@ -53,6 +53,14 @@ public class DayNightController : MonoBehaviour
     [Tooltip("Fired the morning after the final night — the player survived. Hook your game-over/win screen.")]
     [SerializeField] private UnityEvent onSurvived;
 
+    [Header("Music")]
+    [Tooltip("AudioSource that plays the day/night tracks (set to loop).")]
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioClip dayMusic;
+    [SerializeField] private AudioClip nightMusic;
+    [Tooltip("Seconds of silence at the START and END of each phase (music only plays in between).")]
+    [SerializeField] private float musicSilenceSeconds = 10f;
+
     /// <summary>Universal flag — read from anywhere: DayNightController.IsNight.</summary>
     public static bool IsNight { get; private set; }
     /// <summary>Fired on every phase boundary; argument is the new isNight value.</summary>
@@ -71,6 +79,12 @@ public class DayNightController : MonoBehaviour
     private float _hour;
     private bool _isNight;
     private bool _ended;
+    private float _phaseStartTime;     // real time the current phase began
+    private float _phaseDurationReal;  // real seconds the current phase lasts
+
+    private float RealSecondsPerHour => dayLengthSeconds / 24f;
+    private float DayHours => nightStartHour - dayStartHour;            // e.g. 14
+    private float NightHours => 24f - (nightStartHour - dayStartHour);  // e.g. 10
 
     private void Start()
     {
@@ -83,6 +97,14 @@ public class DayNightController : MonoBehaviour
         if (spawnManager != null) spawnManager.enabled = _isNight;
 
         ApplyLight(DayFactor(_hour));
+
+        // Music phase timing — account for starting partway through a phase.
+        float hoursIn = _isNight
+            ? (_hour >= nightStartHour ? _hour - nightStartHour : _hour + (24f - nightStartHour))
+            : (_hour - dayStartHour);
+        _phaseDurationReal = (_isNight ? NightHours : DayHours) * RealSecondsPerHour;
+        _phaseStartTime = Time.time - hoursIn * RealSecondsPerHour;
+        if (musicSource != null) musicSource.loop = true;
     }
 
     private void Update()
@@ -104,6 +126,8 @@ public class DayNightController : MonoBehaviour
             IsNight = night;
             if (night) EnterNight(); else EnterDay();
         }
+
+        UpdateMusic();
     }
 
     // --- Optional manual control (jumps the clock to that phase) -------------
@@ -117,6 +141,9 @@ public class DayNightController : MonoBehaviour
         if (spawnManager != null) spawnManager.enabled = true;
         onBecameNight?.Invoke();
         PhaseChanged?.Invoke(true);
+
+        _phaseStartTime = Time.time;
+        _phaseDurationReal = NightHours * RealSecondsPerHour;
     }
 
     private void EnterDay()
@@ -127,6 +154,7 @@ public class DayNightController : MonoBehaviour
             _ended = true;
             if (spawnManager != null) spawnManager.enabled = false;
             KillAllMonsters();
+            SetMusic(null); // silence on the win screen
             onSurvived?.Invoke(); // game-over / win screen
             return;
         }
@@ -136,6 +164,37 @@ public class DayNightController : MonoBehaviour
         KillAllMonsters();
         onBecameDay?.Invoke();
         PhaseChanged?.Invoke(false);
+
+        _phaseStartTime = Time.time;
+        _phaseDurationReal = DayHours * RealSecondsPerHour;
+    }
+
+    // Plays the phase track, but stays silent for the first/last musicSilenceSeconds of the phase.
+    private void UpdateMusic()
+    {
+        if (musicSource == null) return;
+
+        float elapsed = Time.time - _phaseStartTime;
+        float remaining = _phaseDurationReal - elapsed;
+        bool silent = elapsed < musicSilenceSeconds || remaining < musicSilenceSeconds;
+
+        SetMusic(silent ? null : (_isNight ? nightMusic : dayMusic));
+    }
+
+    private void SetMusic(AudioClip clip)
+    {
+        if (musicSource == null) return;
+
+        if (clip == null)
+        {
+            if (musicSource.isPlaying) musicSource.Stop();
+            return;
+        }
+        if (musicSource.clip != clip || !musicSource.isPlaying)
+        {
+            musicSource.clip = clip;
+            musicSource.Play();
+        }
     }
 
     private bool IsNightAt(float h) => h >= nightStartHour || h < dayStartHour;

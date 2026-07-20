@@ -46,8 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d231b665dd9bbb34989461e6cac7ec30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartingGear
-  startingGears:
-  - {fileID: 11400000, guid: 3d23671eb255c6042b9380f666c5a2a7, type: 2}
+  startingGears: []
 --- !u!82 &5568726536192001634
 AudioSource:
   m_ObjectHideFlags: 0
@@ -55,7 +54,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097356784614648311}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -2830680140063221531, guid: ba51347e37e274246aaf536950a53afd, type: 2}
   m_audioClip: {fileID: 0}
@@ -152,7 +151,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097356784614648311}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b4ecff6a4590f648a6ed3e832caf41f, type: 3}
   m_Name: 

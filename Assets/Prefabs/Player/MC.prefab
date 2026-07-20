@@ -927,25 +927,25 @@ MonoBehaviour:
   reactions:
   - type: 0
     animatorTrigger: Log
-    sfx: {fileID: 0}
+    sfx: {fileID: 8300000, guid: e193ca90f087c974aa022002dc0b8282, type: 3}
     requiredTool: {fileID: 11400000, guid: 2399de4b62c547c41972c7b796f70b9a, type: 2}
     toolPrefab: {fileID: 0}
     hungerCost: 10
   - type: 2
     animatorTrigger: Repair
-    sfx: {fileID: 0}
+    sfx: {fileID: 8300000, guid: 33afe5f849a537f498c76d5ae0024172, type: 3}
     requiredTool: {fileID: 11400000, guid: 1e8371d1413cca0489fce9496b927f67, type: 2}
     toolPrefab: {fileID: 0}
     hungerCost: 10
   - type: 1
     animatorTrigger: Repair
-    sfx: {fileID: 0}
+    sfx: {fileID: 8300000, guid: 1b751aefb9e2c0746a4105f9ffca2687, type: 3}
     requiredTool: {fileID: 11400000, guid: 950c977f54c5249418f25fb8b4991c64, type: 2}
     toolPrefab: {fileID: 12497306346252605, guid: 895313d0335f04b41bfc5f20aec56c78, type: 3}
     hungerCost: 10
   - type: 4
     animatorTrigger: Dig
-    sfx: {fileID: 0}
+    sfx: {fileID: 8300000, guid: 90c982d98d577664da6a6a17e1316782, type: 3}
     requiredTool: {fileID: 11400000, guid: 950c977f54c5249418f25fb8b4991c64, type: 2}
     toolPrefab: {fileID: 0}
     hungerCost: 0
@@ -957,7 +957,7 @@ MonoBehaviour:
     hungerCost: 0
   - type: 6
     animatorTrigger: 
-    sfx: {fileID: 0}
+    sfx: {fileID: 8300000, guid: bc4ff0fc3648cec418ad547777ff2e36, type: 3}
     requiredTool: {fileID: 0}
     toolPrefab: {fileID: 0}
     hungerCost: 0
@@ -1055,7 +1055,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039707510980740749}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87a9fd769d946654abb2fb6257dbe47c, type: 3}
   m_Name: 
