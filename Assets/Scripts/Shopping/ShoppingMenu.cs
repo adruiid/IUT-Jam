@@ -21,7 +21,7 @@ public class ShoppingMenu : MonoBehaviour
     public void ShopMenuStatus()
     {
         shopMenuActive = !shopMenuActive;
-        CraftMenuOpenClose.instance.CraftMenuStatus(!shopMenuActive);
+        if (CraftMenuOpenClose.instance.craftMenuActive) CraftMenuOpenClose.instance.CraftMenuStatus(!shopMenuActive);
         CraftMenuOpenClose.instance.CraftMenuBlock = shopMenuActive;
         shoppingCanvas.GetComponent<Canvas>().enabled = shopMenuActive;
 
@@ -31,7 +31,7 @@ public class ShoppingMenu : MonoBehaviour
     public void ShopMenuStatus(bool status)
     {
         shopMenuActive = status;
-        CraftMenuOpenClose.instance.CraftMenuStatus(!status);
+        if (CraftMenuOpenClose.instance.craftMenuActive) CraftMenuOpenClose.instance.CraftMenuStatus(!status);
         CraftMenuOpenClose.instance.CraftMenuBlock = shopMenuActive;
         shoppingCanvas.GetComponent<Canvas>().enabled = shopMenuActive;
 

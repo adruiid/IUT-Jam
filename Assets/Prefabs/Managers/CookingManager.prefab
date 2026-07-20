@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CookingManager
   cookingSlots:
   - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &5646498413390676176
 MonoBehaviour:
   m_ObjectHideFlags: 0

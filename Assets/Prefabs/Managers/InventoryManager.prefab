@@ -63,6 +63,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   inventoryItemPrefab: {fileID: 735341651187481150, guid: 318995a45a671184c95171336031231a, type: 3}
   descriptionBox: {fileID: 0}
   itemName: {fileID: 0}

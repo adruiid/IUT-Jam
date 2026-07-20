@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 191945431793379777, guid: dc41ed757a1174540aad14bc008b947f, type: 3}
       propertyPath: m_Name
-      value: CookingSlot (1) Variant
+      value: CookingSlot
       objectReference: {fileID: 0}
     - target: {fileID: 1491564196601018379, guid: dc41ed757a1174540aad14bc008b947f, type: 3}
       propertyPath: typeText
@@ -116,8 +116,66 @@ PrefabInstance:
       propertyPath: m_margin.z
       value: -1.5429535
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1491564196601018379, guid: dc41ed757a1174540aad14bc008b947f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 191945431793379777, guid: dc41ed757a1174540aad14bc008b947f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5605155185207363920}
   m_SourcePrefab: {fileID: 100100000, guid: dc41ed757a1174540aad14bc008b947f, type: 3}
+--- !u!114 &1064671804284842318 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1805575249466887646, guid: dc41ed757a1174540aad14bc008b947f, type: 3}
+  m_PrefabInstance: {fileID: 1713839844132895888}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!1 &1540553334312539473 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 191945431793379777, guid: dc41ed757a1174540aad14bc008b947f, type: 3}
+  m_PrefabInstance: {fileID: 1713839844132895888}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5605155185207363920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540553334312539473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7b3a38423df174d956ddb6662c1fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CookingSlot
+  holdingItem: {fileID: 11400000, guid: f8fd29065a6a11843baaef8b16fd0d78, type: 2}
+  image: {fileID: 1064671804284842318}
+  nameText: {fileID: 2516595945319957597}
+  requirementText: {fileID: 8704107744428273238}
+--- !u!114 &2516595945319957597 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3829316355338778829, guid: dc41ed757a1174540aad14bc008b947f, type: 3}
+  m_PrefabInstance: {fileID: 1713839844132895888}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &8704107744428273238 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7999514038862877382, guid: dc41ed757a1174540aad14bc008b947f, type: 3}
+  m_PrefabInstance: {fileID: 1713839844132895888}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI

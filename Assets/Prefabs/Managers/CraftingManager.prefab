@@ -68,3 +68,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CraftMenuOpenClose
   craftingCanvas: {fileID: 0}
+  craftMenuActive: 0
+  CraftMenuBlock: 0

@@ -57,10 +57,14 @@ MonoBehaviour:
     weight: 3
   playerTag: Player
   maxAlive: 30
-  startInterval: 5
+  startInterval: 2
   minInterval: 1.5
   rampDuration: 120
-  minRadius: 15
-  maxRadius: 25
+  minRadius: 30
+  maxRadius: 50
   navSampleRadius: 4
   placementAttempts: 8
+  noSpawnMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  noSpawnCheckRadius: 0.5

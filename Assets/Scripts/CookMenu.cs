@@ -17,7 +17,7 @@ public class CookMenu : MonoBehaviour
     public void CookMenuStatus()
     {
         cookMenuActive = !cookMenuActive;
-        CraftMenuOpenClose.instance.CraftMenuStatus(!cookMenuActive);
+        if (CraftMenuOpenClose.instance.craftMenuActive) CraftMenuOpenClose.instance.CraftMenuStatus(!cookMenuActive);
         CraftMenuOpenClose.instance.CraftMenuBlock = cookMenuActive;
         cookingCanvas.GetComponent<Canvas>().enabled = cookMenuActive;
     }
@@ -25,7 +25,7 @@ public class CookMenu : MonoBehaviour
     public void CraftMenuStatus(bool status)
     {
         cookMenuActive = status;
-        CraftMenuOpenClose.instance.CraftMenuStatus(!status);
+        if (CraftMenuOpenClose.instance.craftMenuActive) CraftMenuOpenClose.instance.CraftMenuStatus(!status);
         CraftMenuOpenClose.instance.CraftMenuBlock = cookMenuActive;
         cookingCanvas.GetComponent<Canvas>().enabled = cookMenuActive;
     }

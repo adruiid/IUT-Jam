@@ -4,7 +4,7 @@ public class CraftMenuOpenClose : MonoBehaviour
 {
     [SerializeField] private GameObject craftingCanvas;
 
-    private bool craftMenuActive = false;
+    public bool craftMenuActive = false;
 
     public static CraftMenuOpenClose instance;
 
@@ -27,6 +27,8 @@ public class CraftMenuOpenClose : MonoBehaviour
     public void CraftMenuStatus()
     {
         if (CraftMenuBlock) return;
+
+        if (MapMenu.instance.MapMenuActive) MapMenu.instance.MapMenuStatus(false);
 
         craftMenuActive = !craftMenuActive;
         craftingCanvas.GetComponent<Canvas>().enabled =craftMenuActive;
