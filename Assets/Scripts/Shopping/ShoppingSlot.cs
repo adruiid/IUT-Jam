@@ -50,6 +50,7 @@ public class ShoppingSlot : MonoBehaviour
 
     public void NotPresent()
     {
+        StopAllCoroutines();
         StartCoroutine(Shake());
     }
 

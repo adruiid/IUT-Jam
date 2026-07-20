@@ -54,6 +54,7 @@ public class CraftingSlot : MonoBehaviour
 
     public void NotPresent()
     {
+        StopAllCoroutines();
         StartCoroutine(Shake());
     }
 

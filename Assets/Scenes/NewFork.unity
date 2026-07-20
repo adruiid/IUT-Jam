@@ -11691,7 +11691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603607163599226601, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6194714.5
+      value: 6256787
       objectReference: {fileID: 0}
     - target: {fileID: 7125597268627422835, guid: 5f6447cf28ec306439dcee4e25273a2c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -18200,11 +18200,23 @@ PrefabInstance:
       propertyPath: fadeGroup
       value: 
       objectReference: {fileID: 1041625608}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4963978831830602821, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
+--- !u!114 &727275058 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 277078177965011151, guid: 3af84022e2643b84d91b9a7a5bccbabc, type: 3}
+  m_PrefabInstance: {fileID: 727275057}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da975f1bc119b8344b91233d32505118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameOverManager
 --- !u!1 &727342390
 GameObject:
   m_ObjectHideFlags: 0
@@ -21028,6 +21040,34 @@ PrefabInstance:
     - target: {fileID: 4755065799464063930, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
       propertyPath: shootHungerCost
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5370848266281106192, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5370848266281106192, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5370848266281106192, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 727275058}
+    - target: {fileID: 5370848266281106192, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5370848266281106192, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GameOver
+      objectReference: {fileID: 0}
+    - target: {fileID: 5370848266281106192, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameOverManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5370848266281106192, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
+      propertyPath: onGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7896685202644803438, guid: d331d0beb8f8da24f8ea235951132ccd, type: 3}
       propertyPath: cameraObject
@@ -26099,7 +26139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 722474719088277184, guid: 89052838563a50b4fa69b0af9fbcfb2a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6135417.5
+      value: 6197490
       objectReference: {fileID: 0}
     - target: {fileID: 871964644210730067, guid: 89052838563a50b4fa69b0af9fbcfb2a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -27564,7 +27604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603437207767757354, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 42308644
+      value: 42370308
       objectReference: {fileID: 0}
     - target: {fileID: 6613745555896641206, guid: 3939a2abb7e0d6143ad66735c1e4fa2d, type: 3}
       propertyPath: m_AnchorMax.y

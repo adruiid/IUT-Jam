@@ -51,6 +51,7 @@ public class CookingSlot : MonoBehaviour
 
     public void NotPresent()
     {
+        StopAllCoroutines();
         StartCoroutine(Shake());
     }
 
