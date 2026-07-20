@@ -22,6 +22,5 @@ MonoBehaviour:
   hpUpgade: 0
   requirements:
   - resourceType: 5
-    amount: 1
+    amount: 2
   resultingItem: {fileID: 11400000, guid: a826b92be5e9f6b4bbcb8ee6b74ae784, type: 2}
-  resourceType: 0
