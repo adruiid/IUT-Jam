@@ -16,7 +16,10 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: ca1f38db3f227464da1d0b3651960554, type: 3}
   type: 0
   stackable: 1
-  description: 'Drug used for relieving pain. Restores <color=red>+10</color> hp. '
+  description: 'Drug used for relieving pain. Restores <color=red>+30</color> hp. '
   durabillity: 0
-  hpRestored: 10
+  speedBoost: 0
+  hpUpgade: 0
+  hpRestored: 30
   hungerRestored: 0
+  resourceType: 0

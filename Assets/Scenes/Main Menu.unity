@@ -42093,7 +42093,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ashfall
+  m_text: NIGHTFALL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e7d3b0afe521b854a9bba8cda36259fb, type: 2}
   m_sharedMaterial: {fileID: -8049397787884148638, guid: e7d3b0afe521b854a9bba8cda36259fb, type: 2}

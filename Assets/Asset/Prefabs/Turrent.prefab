@@ -138,10 +138,10 @@ MonoBehaviour:
   type: 2
   prompt: Repair
   costs:
-  - resource: {fileID: 11400000, guid: 1a5581fceb3b69149968c18eec6801d4, type: 2}
-    amount: 2
-  - resource: {fileID: 11400000, guid: 37943324ff9469b4fa339209c656636e, type: 2}
-    amount: 2
+  - resource: {fileID: 11400000, guid: a826b92be5e9f6b4bbcb8ee6b74ae784, type: 2}
+    amount: 5
+  - resource: {fileID: 11400000, guid: b3d5f5f4684a6a14e906adc2bad3fc9d, type: 2}
+    amount: 5
   needsRepair: 1
   onRepaired:
     m_PersistentCalls:
@@ -236,7 +236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8425526018779442118
 Transform:
   m_ObjectHideFlags: 0
