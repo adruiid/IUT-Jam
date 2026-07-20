@@ -33,8 +33,10 @@ public class Turret : MonoBehaviour
     [SerializeField] private int maxAmmo = 30;
 
     [Header("Feedback")]
-    [Tooltip("Muzzle-flash particle system (played per shot).")]
-    [SerializeField] private ParticleSystem muzzleFlash;
+    [Tooltip("Muzzle-flash VFX object — set active while firing, turned off shortly after.")]
+    [SerializeField] private GameObject muzzleVfx;
+    [Tooltip("How long the muzzle VFX stays on after the last shot.")]
+    [SerializeField] private float vfxDuration = 0.3f;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip fireSfx;
 
@@ -44,6 +46,8 @@ public class Turret : MonoBehaviour
 
     private int _currentAmmo;
     private float _nextFireTime;
+    private float _vfxOffTime;
+    private bool _vfxOn;
 
     // Locked target — held until it dies or leaves range (not swapped for a newly-closer one).
     private Transform _target;
@@ -67,10 +71,16 @@ public class Turret : MonoBehaviour
         _currentAmmo = maxAmmo;
         _nextFireTime = 0f;
         ClearTarget();
+
+        if (muzzleVfx != null) muzzleVfx.SetActive(false);
+        _vfxOn = false;
+        _vfxOffTime = 0f;
     }
 
     private void Update()
     {
+        if (Time.time >= _vfxOffTime) SetVfx(false); // muzzle VFX turns off shortly after firing stops
+
         // Only pick a NEW target when the current one is gone/dead/out of range.
         if (!TargetValid()) AcquireTarget();
         if (_target == null) return;
@@ -128,16 +138,20 @@ public class Turret : MonoBehaviour
         // Direct damage to the locked target (no projectile).
         if (_targetDamageable != null) _targetDamageable.TakeDamage(damage);
 
-        if (muzzleFlash != null)
-        {
-            muzzleFlash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            muzzleFlash.Play(true);
-        }
+        _vfxOffTime = Time.time + vfxDuration; // keep the muzzle VFX on while firing
+        SetVfx(true);
 
         if (fireSfx != null && audioSource != null) audioSource.PlayOneShot(fireSfx);
 
         _currentAmmo--;
         if (_currentAmmo <= 0) Deplete();
+    }
+
+    private void SetVfx(bool on)
+    {
+        if (muzzleVfx == null || on == _vfxOn) return;
+        _vfxOn = on;
+        muzzleVfx.SetActive(on);
     }
 
     private void Deplete()

@@ -487,7 +487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   playerTag: Player
-  moveSpeed: 4
+  moveSpeed: 5
   repathInterval: 0.2
   attackRange: 1.8
   attackDamage: 10
